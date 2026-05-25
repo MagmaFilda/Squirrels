@@ -4,7 +4,10 @@ body {
     min-height: 100vh;
     overflow: hidden;
     animation: pixelSlideLoad 1s steps(4) forwards;
-
+    font-family: "Pixelify Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./../images/background.png') no-repeat center center/cover;
 }
 
@@ -158,7 +161,7 @@ html, body, img, .item-slot, .back-btn {
     grid-template-rows: repeat(3, 1fr);
     gap: 12px;
     width: 100%;
-    max-width: 1500px;
+    max-width: 1400px;
     margin: 0 ;
     padding: 0;
     height: 60vh; 
@@ -166,37 +169,32 @@ html, body, img, .item-slot, .back-btn {
 
 /* Kompaktnější sloty, aby se vešly na výšku */
 .item-slot {
-    background: rgba(255, 255, 255, 0.1);
-    border: 3px solid #5c3a21;
+    background: url('./../images/back.png') no-repeat center center/150px 150px; /* Sem hoď to prázdné dřevěné pozadí karty s rámečkem */
     border-radius: 0px;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0;
-    transition: transform 0.15s ease, background-color 0.15s ease;
-    height: 80%;
+    transition: background-color 0.15s ease;
+    height: 100%;
     width: auto;
 }
 
-.item-slot:hover {
-    transform: scale(1.05);
-    background: rgba(255, 255, 255, 0.25);
-}
+
 
 .item-slot img {
-    max-height: 75%;
-    max-width: 75%;
+    max-height: 80%;
+    max-width: 80%;
     object-fit: contain;
 }
 
-/* --- STYL PRO RETRO PIXEL BARY --- */
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.75);
+    width: 98%;
+    height: 95%;
+    background: rgba(0, 0, 0, 0.9);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -204,22 +202,31 @@ html, body, img, .item-slot, .back-btn {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.2s ease;
+    margin: 0; 
+    padding: 0;
+        border: 15px solid #5c3a21;
+
 }
 
 .modal-overlay.active {
     opacity: 1;
     pointer-events: all;
+    animation: pixelSlideLoad 0.5s steps(4) forwards;
+    animation: pixelSlideLoad 1s steps(4) backwards;
+
+
 }
 
 .modal-content {
     background: #f4eccf;
     border: 4px solid #5c3a21;
-    padding: 20px;
-    width: 90%;
-    max-width: 360px;
+    padding: 30px;
+    width: 100%;
+    max-width: 660px;
     text-align: center;
     position: relative;
     box-shadow: 0 0 0 4px #000, 0 10px 20px rgba(0,0,0,0.6);
+    
 }
 
 .close-btn {
@@ -233,22 +240,24 @@ html, body, img, .item-slot, .back-btn {
 }
 
 .modal-body img {
-    max-height: 80px;
+    max-height: 200px;
     width: auto;
     margin-bottom: 5px;
 }
 
 .modal-body h2 {
     color: #5c3a21;
-    font-size: 1.5rem;
+    font-size: 50px;
     margin-bottom: 2px;
     text-transform: uppercase;
 }
 
 .modal-body p {
     color: #7a583c;
-    font-size: 0.9rem;
+    font-size: 15px;
     margin-bottom: 15px;
+    text-transform: uppercase;
+
 }
 
 .stats-container {
@@ -264,14 +273,13 @@ html, body, img, .item-slot, .back-btn {
 }
 
 .stat-label {
-    font-size: 0.85rem;
+    font-size: 15px;
     font-weight: bold;
     color: #5c3a21;
     display: block;
     margin-bottom: 3px;
 }
 
-/* PIXELOVÝ UKAZATEL */
 .pixel-bar {
     width: 100%;
     height: 14px;
@@ -281,10 +289,10 @@ html, body, img, .item-slot, .back-btn {
     overflow: hidden;
 }
 
+
 .pixel-bar-fill {
     height: 100%;
     width: 0%;
-    transition: width 0.4s cubic-bezier(0.1, 0.8, 0.3, 1);
 }
 
 .str-color { background-color: #ff4444; }
@@ -299,6 +307,12 @@ html, body, img, .item-slot, .back-btn {
 
 .sell-text {
     color: #fff;
-    font-size: 1rem;
+    font-size: 20PX;
     font-weight: bold;
+}
+
+.sell-container:hover {
+    background: #7a583c;
+    transform: scale(1.05);
+    cursor: pointer;
 }
