@@ -1,0 +1,150 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow: hidden;
+    animation: pixelSlideLoad 1s steps(4) forwards;
+
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./../images/background.png') no-repeat center center/cover;
+}
+
+@keyframes pixelSlideLoad {
+    0% {
+        opacity: 0;
+        transform: translateY(-40px);
+        filter: brightness(60%);
+    }
+    33% {
+        opacity: 0.5;
+        transform: translateY(-25px);
+    }
+    66% {
+        opacity: 0.8;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: brightness(100%);
+    }
+}
+
+html, body, img, .item-slot, .back-btn {
+    image-rendering: pixelated !important;
+    image-rendering: crisp-edges !important;
+}
+
+
+.inventory-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    height: 120px;
+}
+
+.mini-logo {
+    width: 200px;
+}
+.mini-logo img {
+    width: 100%;
+    height: auto;
+}
+
+.page-title {
+    max-height: 500px;
+}
+.page-title img {
+    height: 150px;
+    width: auto;
+}
+
+.back-btn {
+    display: block;
+    width: 140px;
+    height: 55px;
+    background: url('./../images/back-button.png') no-repeat center center/contain; /* Sem dej své dřevěné BACK tlačítko */
+    transition: transform 0.15s ease;
+}
+.back-btn:hover {
+    transform: scale(1.05);
+}
+
+.nav-btn:hover {
+    transform: scale(1.05);
+}
+
+
+.inventory-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 40px 40px 40px; 
+}
+
+.inventory-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 0; 
+    
+    width: 1500px;
+    
+    height: 80vh; 
+}
+
+.item-slot {
+    background: url('./../images/back.png') no-repeat center center/135px 130px; /* Sem hoď to prázdné dřevěné pozadí karty s rámečkem */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+}
+
+.item-slot:hover {
+    transform: scale(1.03);
+    filter: brightness(1.1);
+}
+
+.item-slot img {
+    max-width: 75%;
+    max-height: 75%;
+    object-fit: contain;
+}
+
+.nav-btn, .foot-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('./../images/button.png') no-repeat center center/contain;
+    text-decoration: none;
+    color: #63372C;
+    text-shadow: 2px 2px 0px #C97D60; 
+    font-weight: bold;
+    text-align: center;
+    transition: transform 0.15s ease;
+    
+    image-rendering: pixelated; 
+    margin: 0;
+}
+
+
+.nav-btn {
+    width: 260px; 
+    height: 185px;
+    font-size: 24px;
+}
+
+.nav-btn img {
+    width: 40%; 
+    height: auto;
+    object-fit: contain; 
+    display: block;
+    image-rendering: pixelated;
+}

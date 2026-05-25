@@ -1,0 +1,150 @@
+body {
+    animation: pixelSlideLoad 1s steps(4) forwards;
+    position: relative;
+}
+
+@keyframes pixelSlideLoad {
+    0% {
+        opacity: 0;
+        transform: translateY(-40px);
+        filter: brightness(60%);
+    }
+    33% {
+        opacity: 0.5;
+        transform: translateY(-25px);
+    }
+    66% {
+        opacity: 0.8;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: brightness(100%);
+    }
+}
+
+html, body, img {
+    image-rendering: pixelated !important;
+    image-rendering: crisp-edges !important;
+}
+
+body img {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: url('./../images/background.png') no-repeat center center/cover;
+    font-family: 'Press Start 2P', monospace;    
+    overflow-x: hidden;
+}
+
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between; 
+    
+    position: absolute; 
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 120px;
+}
+
+.main-logo {
+    width: 1000px; 
+    max-width: 100%;
+}
+
+.main-logo img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center; 
+    gap: 25px; 
+    padding-bottom: 40px; 
+    z-index: 10;
+}
+
+.nav-btn, .foot-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('./../images/button.png') no-repeat center center/contain;
+    text-decoration: none;
+    color: #63372C;
+    text-shadow: 2px 2px 0px #C97D60; 
+    font-weight: bold;
+    text-align: center;
+    transition: transform 0.15s ease;
+    
+    image-rendering: pixelated; 
+    margin: 0;
+}
+
+
+.nav-btn {
+    width: 360px; 
+    height: 185px;
+    font-size: 24px;
+}
+
+.nav-btn img {
+    width: 40%; 
+    height: auto;
+    object-fit: contain; 
+    display: block;
+    image-rendering: pixelated;
+}
+
+.foot-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 420px; 
+    height: 225px;  
+    
+    background: url('./../images/button.png') no-repeat center center / 100% 100%;
+    text-decoration: none;
+    
+}
+
+.foot-btn img {
+    width: 50%; 
+    height: auto;
+    object-fit: contain; 
+    display: block;
+    image-rendering: pixelated;
+}
+
+
+
+.nav-btn:hover, .foot-btn:hover {
+    transform: scale(1.05);
+}
