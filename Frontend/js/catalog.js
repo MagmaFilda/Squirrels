@@ -74,7 +74,7 @@ function openModal(data) {
     modal.classList.add('active');
 }
 
-// Zavírání okna///
+// Zavírání okna///1111
 closeBtn.addEventListener('click', () => modal.classList.remove('active'));
 modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
    
