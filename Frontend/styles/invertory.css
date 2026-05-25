@@ -148,3 +148,18 @@ html, body, img, .item-slot, .back-btn {
     display: block;
     image-rendering: pixelated;
 }
+
+/* počet veverek */
+.item-slot {
+    position: relative;
+}
+
+.item-count {
+    position: absolute;
+    right: 8px;
+    bottom: 6px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px black;
+}
