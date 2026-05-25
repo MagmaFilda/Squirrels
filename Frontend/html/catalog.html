@@ -1,0 +1,126 @@
+<!-- <!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Squirrels Game - Catalog</title>
+    <link rel="stylesheet" href="./../styles/catalog.css">
+</head>
+<body>
+
+    <header class="catalog-header">
+        <a href="./../html/index.html" class="mini-logo">
+            <img src="./../images/logo.png" alt="Squirrels Mini Logo">
+        </a>
+
+        <div class="page-title">
+            <img src="./../images/catalogtext.png" alt="Catalog">
+        </div>
+
+        <a href="./../html/index.html" class="nav-btn">
+            <img src="./../images/backtext.png" alt="Back">
+        </a>
+    </header>
+
+    <main class="catalog-container">
+        <div class="catalog-grid">
+            <div class="item-slot"><img src="./../images/veverka.png" alt="Veverka"></div>
+            <div class="item-slot"></div>
+            <div class="item-slot"></div>
+            <div class="item-slot"></div>
+            <div class="item-slot"></div>
+            <div class="item-slot"></div>
+
+            <div class="item-slot"><img src="./../images/veverka.png" alt="Veverka"></div>
+            <div class="item-slot"></div>
+            <div class="item-slot"></div>
+            <div class="item-slot"></div>
+            <div class="item-slot"></div>
+            <div class="item-slot"></div>
+
+            <div class="item-slot"></div>
+            <div class="item-slot"><img src="./../images/veverka.png" alt="Veverka"></div>
+            <div class="item-slot"></div>
+            <div class="item-slot"></div>
+            <div class="item-slot"></div>
+            <div class="item-slot"></div>
+
+            <div class="item-slot"><img src="./../images/veverka.png" alt="Veverka"></div>
+            <div class="item-slot"></div>
+            <div class="item-slot"></div>
+
+
+        </div>
+    </main>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Squirrels Game - Catalog</title>
+    <link rel="stylesheet" href="./../styles/catalog.css">
+</head>
+<body>
+
+    <header class="catalog-header">
+        <a href="./../html/index.html" class="mini-logo">
+            <img src="./../images/logo.png" alt="Squirrels Mini Logo">
+        </a>
+
+        <div class="page-title">
+            <img src="./../images/catalogtext.png" alt="Catalog">
+        </div>
+
+        <a href="./../html/index.html" class="nav-btn">
+            <img src="./../images/backtext.png" alt="Back">
+        </a>
+    </header>
+
+    <main class="catalog-container">
+        <div class="catalog-grid" id="catalog-grid"></div>
+    </main>
+
+    <div id="info-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            
+            <div class="modal-body">
+                <img id="modal-img" src="" alt="Veverka">
+                <h2 id="modal-title">Jméno</h2>
+                <p id="modal-desc">Popis</p>
+                
+                <div class="stats-container">
+                    <div class="stat-row">
+                        <span class="stat-label">STRENGHT</span>
+                        <div class="pixel-bar">
+                            <div id="bar-str" class="pixel-bar-fill str-color"></div>
+                        </div>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">SPEED</span>
+                        <div class="pixel-bar">
+                            <div id="bar-spd" class="pixel-bar-fill spd-color"></div>
+                        </div>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">DURABILITY</span>
+                        <div class="pixel-bar">
+                            <div id="bar-dur" class="pixel-bar-fill dur-color"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sell-container">
+                    <span class="sell-text">Cena prodeje: <strong id="modal-price">0</strong> 🌰</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./../js/catalog.js"></script>
+</body>
+</html>
