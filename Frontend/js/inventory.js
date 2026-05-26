@@ -1,19 +1,40 @@
 const inventoryGrid = document.getElementById('inventoryGrid');
 
 const squirrelDisplayNames = {
-    hvezdnyrytir: "Hvězdný Rytíř",
-    ohnivaveverka: "Ohnivá Veverka",
+    nutty: "Nutty",
+    grumpy: "Grumpy",
+    scout: "Scout",
+    peanut: "Peanut",
+    twiggy: "Twiggy",
+    blossom: "Blossom",
+    tailor: "Tailor",
+    bubbles: "Bubbles",
+    berry: "Berry",
+    chippy: "Chippy",
+    rogue: "Rogue",
+    chef: "Chef",
+    explorer: "Explorer",
+    gamer: "Gamer",
+    knight: "Knight",
+    phoenix: "Phoenix",
+    kingmidas: "King Midas",
+    druid: "Druid",
+    blizzard: "Blizzard",
+    angel: "Angel",
+    inferno: "Inferno"
 };
 
 async function loadInventory() {
     try {
-        const response = await fetch("https://localhost:5001/api/inventory");
+        const response = await fetch("https://localhost:7179/api/squirrels/1");
 
         if (!response.ok) {
             throw new Error("Nepodařilo se načíst inventář.");
         }
 
         const squirrels = await response.json();
+
+        console.log(squirrels);
 
         inventoryGrid.innerHTML = "";
 
@@ -27,16 +48,11 @@ async function loadInventory() {
             img.src = `./../images/${squirrel.name}.png`;
             img.alt = displayName;
 
-            const name = document.createElement("p");
-            name.classList.add("item-name");
-            name.textContent = displayName;
-
             const count = document.createElement("span");
             count.classList.add("item-count");
             count.textContent = squirrel.count;
 
             slot.appendChild(img);
-            slot.appendChild(name);
             slot.appendChild(count);
 
             inventoryGrid.appendChild(slot);
@@ -45,6 +61,7 @@ async function loadInventory() {
     } catch (error) {
         console.error("Chyba:", error);
     }
-}
 
+    
+}
 loadInventory();
