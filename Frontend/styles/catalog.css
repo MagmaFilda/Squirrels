@@ -166,7 +166,7 @@ html, body, img, .item-slot, .back-btn {
     height: 60vh; 
 }
 
-.item-slot {
+.item-slot.common {
     background: url('./../images/back.png') no-repeat center center/150px 150px; 
     border-radius: 0px;
     display: flex;
@@ -177,6 +177,52 @@ html, body, img, .item-slot, .back-btn {
     height: 100%;
     width: auto;
 }
+
+.item-slot.rare {
+    background: url('./../images/back-rare.png') no-repeat center center/150px 150px; 
+    border-radius: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    transition: background-color 0.15s ease;
+    height: 100%;
+    width: auto;
+}
+
+.item-slot.epic {
+    background: url('./../images/back-epic.png') no-repeat center center/150px 150px; 
+    border-radius: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.item-slot.legendary {
+    background: url('./../images/back-legendary.png') no-repeat center center/150px 150px; 
+    border-radius: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    transition: background-color 0.15s ease;
+    height: 100%;
+    width: auto;
+}
+
+/* .item-slot {
+    background: url('./../images/back.png') no-repeat center center/150px 150px; 
+    border-radius: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    transition: background-color 0.15s ease;
+    height: 100%;
+    width: auto;
+} */
+
+
 
 
 
