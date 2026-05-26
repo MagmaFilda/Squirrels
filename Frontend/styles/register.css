@@ -48,7 +48,7 @@ html, body, img, .item-slot, .back-btn {
 }
 
 /* Header */
-.login-header {
+.register-header {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -72,8 +72,8 @@ html, body, img, .item-slot, .back-btn {
 .nav-btn:hover { transform: scale(1.05); }
 .nav-btn img { width: 40%; height: auto; }
 
-/* LOGIN CONTAINER */
-.login-container {
+/* register CONTAINER */
+.register-container {
     flex: 1;
     display: flex;
     justify-content: center;
@@ -82,7 +82,7 @@ html, body, img, .item-slot, .back-btn {
 }
 
 /* Dřevěná deska */
-.login-board {
+.register-board {
     position: relative;
     width: 280vh;
     height: 100vh;
@@ -106,14 +106,14 @@ html, body, img, .item-slot, .back-btn {
     padding: 24px 40px;
 }
 
-.login-title {
+.register-title {
     font-size: 68px;
     color: #312116;
     margin-bottom: -2px;
     letter-spacing: 1px;
 }
 
-.login-form {
+.register-form {
     width: 100%;
     max-width: 440px;
 }
@@ -211,8 +211,8 @@ html, body, img, .item-slot, .back-btn {
     font-weight: bold;
 }
 
-/* Dřevěné LOGIN tlačítko */
-.login-submit-btn {
+/* Dřevěné register tlačítko */
+.register-submit-btn {
     display: block;
     width: 180px;
     height: 48px;
@@ -228,13 +228,13 @@ html, body, img, .item-slot, .back-btn {
     transition: transform 0.1s ease;
 }
 
-.login-submit-btn:hover {
+.register-submit-btn:hover {
     transform: scale(1.03);
     filter: brightness(1.1);
 }
 
 /* Odkazy */
-.login-footer-links {
+.register-footer-links {
     margin-top: auto;
     text-align: center;
 }

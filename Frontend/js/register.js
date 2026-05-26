@@ -1,0 +1,47 @@
+const registerForm = document.getElementById("registerForm");
+const message = document.getElementById("message");
+
+registerForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const username = document.getElementById("username").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const passwordAgain = document.getElementById("password-again").value;
+
+    const userData = {
+        username: username,
+        password: password,
+        email: email
+    }
+
+    if(password !== passwordAgain) {
+        message.textContent = "Passwords do not match.";
+        return;
+    }
+
+    try {
+        const response = await fetch("https://localhost:7179/api/squirrels/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(userData)
+        });
+
+        console.log(response);
+
+        if (!response.ok) {
+            throw new Error("Registration failed.");
+        }
+        
+        const result = await response.json();
+
+        console.log(result);
+        message.textContent = "User was successfully registered.";
+
+    } catch (error) {
+        console.error("Chyba:", error);
+        message.textContent = "An error occurred during registration.";
+    }
+});
