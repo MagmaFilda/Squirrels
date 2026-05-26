@@ -16,13 +16,6 @@ namespace SquirrelsBackend.Controllers
             dbData = context;
         }
 
-        [HttpGet("allUsers")]
-        public async Task<IActionResult> AllUsers()
-        {
-            var users = await dbData.Users.Include(u => u.Squirrels).ToListAsync();
-
-            return Ok(dbData.Users);
-        }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetInventory(int id)
         {
@@ -39,19 +32,27 @@ namespace SquirrelsBackend.Controllers
                 Squirrel squirrel = await dbData.Squirrels.FindAsync(item.SquirrelId);
                 ReturnInventory returnSquirrel = new ReturnInventory(squirrel.Name, item.Count);
                 returnData.Add(returnSquirrel);
-            }
+            } 
 
             return Ok(returnData);
         }
+
         [HttpPost("register")]
         public async Task<IActionResult> Register(string username, string password, string email)
         {
+            var checkingUsername = await dbData.Users.FirstOrDefaultAsync(u => u.Name == username);
+
+            if (checkingUsername != null)
+            {
+                return BadRequest("Username exists!");
+            }          
+
             User newUser = new User(username, password, email);
 
             dbData.Users.Add(newUser);
             await dbData.SaveChangesAsync();
 
-            return Ok(newUser);
+            return Ok("User added!");
         }
         [HttpPost("login")]
         public async Task<IActionResult> Login(string username, string password)
@@ -66,7 +67,7 @@ namespace SquirrelsBackend.Controllers
                 return BadRequest("Wrong Password");
             } 
 
-            return Ok(user);
+            return Ok("User is now log!");
         }
         [HttpPost("getSquirrel")]
         public async Task<IActionResult> GetSquirrel(int squirrelId, int userId)
@@ -91,7 +92,7 @@ namespace SquirrelsBackend.Controllers
             }
             await dbData.SaveChangesAsync();
 
-            return Ok(user);
+            return Ok("Squirrel added to the inventory ");
         }
     }
 }
