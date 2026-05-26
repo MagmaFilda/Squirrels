@@ -15,7 +15,7 @@ namespace SquirrelsBackend.Data
         public DbSet<UserSquirrel> UserSquirrels { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserSquirrel>().HasKey(ui => new { ui.UserId, ui.SquirrelId });
+            modelBuilder.Entity<UserSquirrel>().HasKey(us => new { us.UserId, us.SquirrelId });
         }
         public DbSet<Siska> Sisky { get; set; }
     }

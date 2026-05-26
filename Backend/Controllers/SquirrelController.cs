@@ -26,7 +26,6 @@ namespace SquirrelsBackend.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetInventory(int id)
         {
-            List<UserSquirrel> allSquirrels = new List<UserSquirrel>();
             var users = await dbData.Users.Include(u => u.Squirrels).ToListAsync();
             var user = users.Find(u => u.Id == id);
             if (user == null)
@@ -34,11 +33,9 @@ namespace SquirrelsBackend.Controllers
                 return NotFound();
             }
 
-            allSquirrels = user.Squirrels;
             List<ReturnInventory> returnData = new List<ReturnInventory>();
-            foreach (var item in allSquirrels)
+            foreach (var item in user.Squirrels)
             {
-                int test = 0;
                 Squirrel squirrel = await dbData.Squirrels.FindAsync(item.SquirrelId);
                 ReturnInventory returnSquirrel = new ReturnInventory(squirrel.Name, item.Count);
                 returnData.Add(returnSquirrel);
