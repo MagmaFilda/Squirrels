@@ -98,17 +98,7 @@ html, body, img, .item-slot, .back-btn {
     height: 80vh; 
 }
 
-.item-slot {
-    background: url('./../images/back.png') no-repeat center center/135px 130px; /* Sem hoď to prázdné dřevěné pozadí karty s rámečkem */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    transition: transform 0.1s ease, box-shadow 0.1s ease;
-    cursor: pointer;
-    margin: 0;
-    padding: 0;
-}
+
 
 .item-slot:hover {
     transform: scale(1.03);
@@ -199,7 +189,7 @@ html, body, img, .item-slot, .back-btn {
 }
 
 .item-slot.legendary {
-    background: url('./../images/back-legendary.png') no-repeat center center/150px 150px; 
+    background: url('./../images/back-legendary1.png') no-repeat center center/150px 150px; 
     border-radius: 0px;
     display: flex;
     justify-content: center;
