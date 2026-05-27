@@ -36,6 +36,31 @@ namespace SquirrelsBackend.Controllers
 
             return Ok(returnData);
         }
+        [HttpGet("readMoney/{id}")]
+        public async Task<IActionResult> ReadMoney(int id)
+        {
+            var user = await dbData.Users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            string returningMoney = "0";
+            if (user.Money < 10000)
+            {
+                returningMoney = user.Money.ToString();
+            }
+            else if (user.Money < 100000)
+            {
+                returningMoney = MathF.Round(user.Money / 1000) + "K";
+            }
+            else if (user.Money >= 1000000)
+            {
+                returningMoney = MathF.Round(user.Money / 1000000) + "M";
+            }
+
+            return Ok(returningMoney);
+        }
 
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterRequest registerData)
@@ -67,10 +92,10 @@ namespace SquirrelsBackend.Controllers
                 return BadRequest();
             }
 
-            return Ok();
+            return Ok(user.Id);
         }
-        [HttpPost("getSquirrel")]
-        public async Task<IActionResult> GetSquirrel(int squirrelId, int userId)
+        [HttpPost("obtainSquirrel")]
+        public async Task<IActionResult> ObtainSquirrel(int squirrelId, int userId)
         {
             var user = await dbData.Users.FindAsync(userId);
             if (user == null)
