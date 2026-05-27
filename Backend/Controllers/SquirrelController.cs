@@ -32,9 +32,34 @@ namespace SquirrelsBackend.Controllers
                 Squirrel squirrel = await dbData.Squirrels.FindAsync(item.SquirrelId);
                 ReturnInventory returnSquirrel = new ReturnInventory(squirrel.Name, item.Count);
                 returnData.Add(returnSquirrel);
-            } 
+            }
 
             return Ok(returnData);
+        }
+        [HttpGet("readMoney/{id}")]
+        public async Task<IActionResult> ReadMoney(int id)
+        {
+            var user = await dbData.Users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            string returningMoney = "0";
+            if (user.Money < 10000)
+            {
+                returningMoney = user.Money.ToString();
+            }
+            else if (user.Money < 100000)
+            {
+                returningMoney = MathF.Round(user.Money / 1000) + "K";
+            }
+            else if (user.Money >= 1000000)
+            {
+                returningMoney = MathF.Round(user.Money / 1000000) + "M";
+            }
+
+            return Ok(returningMoney);
         }
 
         [HttpPost("register")]
@@ -44,33 +69,33 @@ namespace SquirrelsBackend.Controllers
 
             if (checkingUsername != null)
             {
-                return BadRequest("Username exists!");
-            }          
+                return BadRequest();
+            }
 
             User newUser = new User(registerData.Username, registerData.Password, registerData.Email);
 
             dbData.Users.Add(newUser);
             await dbData.SaveChangesAsync();
 
-            return Ok("User added!");
+            return Ok();
         }
         [HttpPost("login")]
-        public async Task<IActionResult> Login(string username, string password)
+        public async Task<IActionResult> Login(LoginRequest loginData)
         {
-            var user = await dbData.Users.FirstOrDefaultAsync(u => u.Name == username);
+            var user = await dbData.Users.FirstOrDefaultAsync(u => u.Name == loginData.Username);
             if (user == null)
             {
                 return NotFound();
             }
-            if (user.Password != password)
+            if (user.Password != loginData.Password)
             {
-                return BadRequest("Wrong Password");
-            } 
+                return BadRequest();
+            }
 
-            return Ok("User is now log!");
+            return Ok(user.Id);
         }
-        [HttpPost("getSquirrel")]
-        public async Task<IActionResult> GetSquirrel(int squirrelId, int userId)
+        [HttpPost("obtainSquirrel")]
+        public async Task<IActionResult> ObtainSquirrel(int squirrelId, int userId)
         {
             var user = await dbData.Users.FindAsync(userId);
             if (user == null)
@@ -92,7 +117,7 @@ namespace SquirrelsBackend.Controllers
             }
             await dbData.SaveChangesAsync();
 
-            return Ok("Squirrel added to the inventory ");
+            return Ok();
         }
     }
 }
