@@ -1,0 +1,372 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Pixelify Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+}
+
+
+@keyframes pixelSlideLoad {
+    0% {
+        opacity: 0;
+        transform: translateY(-40px);
+        filter: brightness(60%);
+    }
+    33% {
+        opacity: 0.5;
+        transform: translateY(-25px);
+    }
+    66% {
+        opacity: 0.8;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: brightness(100%);
+    }
+}
+
+html, body, img, .item-slot, .back-btn {
+    image-rendering: pixelated !important;
+    image-rendering: crisp-edges !important;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./../images/background.png') no-repeat center center/cover;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    animation: pixelSlideLoad 1s steps(4) forwards;
+
+}
+
+.shop-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    height: 140px;
+}
+
+.mini-logo {
+    width: 200px;
+}
+.mini-logo img {
+    width: 100%;
+    height: auto;
+}
+
+.page-title {
+    max-height: 300px;
+}
+.page-title img {
+    height: 130px;
+    width: auto;
+    margin-left: 10%;  
+}
+
+.back-btn {
+    display: block;
+    width: 140px;
+    height: 55px;
+    background: url('./../images/button.png') no-repeat center center/contain; /* Sem dej své dřevěné BACK tlačítko */
+    transition: transform 0.15s ease;
+}
+.back-btn:hover {
+    transform: scale(1.05);
+}
+
+.nav-btn, .foot-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('./../images/button.png') no-repeat center center/contain;
+    text-decoration: none;
+    color: #63372C;
+    text-shadow: 2px 2px 0px #C97D60; 
+    font-weight: bold;
+    text-align: center;
+    transition: transform 0.15s ease;
+    
+    image-rendering: pixelated; 
+    margin: 0;
+}
+
+
+.nav-btn {
+    width: 260px; 
+    height: 185px;
+    font-size: 24px;
+}
+
+.nav-btn img {
+    width: 40%; 
+    height: auto;
+    object-fit: contain; 
+    display: block;
+    image-rendering: pixelated;
+}
+
+.back-btn:hover {
+    transform: scale(1.05);
+}
+
+.nav-btn:hover {
+    transform: scale(1.05);
+}   
+
+
+/* --- OKNO OBCHODU --- */
+.shop-container {
+    width: 100%;
+    height: calc(100vh - 90px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.shop-window {
+    background: #eedcb5;
+    border: 5px solid #5c3a21;
+    width: 100%;
+    max-width: 1020px;
+    padding: 30px 20px 20px 20px;
+    position: relative;
+    box-shadow: 0 0 0 5px #000, 0 15px 25px rgba(0,0,0,0.6);
+    height: 75vh;
+    margin-bottom: 5%;
+}
+
+.exchange-title {
+    text-align: center;
+    color: #5c3a21;
+    font-size: 40px;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+}
+
+/* INDIKÁTOR OŘÍŠKŮ */
+.player-currency {
+    position: absolute;
+    top: -18px;
+    left: 30px;
+    background: #f4eccf;
+    padding: 4px 12px;
+    border: 2px solid #5c3a21;
+    box-shadow: -2px 0 #5c3a21, 2px 0 #5c3a21, 0 -2px #5c3a21, 0 2px #5c3a21;
+}
+
+.currency-label {
+    font-size: 15px;
+    color: #7a583c;
+    font-weight: bold;
+    display: block;
+}
+
+.currency-value {
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+}
+
+/* MŘÍŽKA KARET */
+.cones-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+/* ZÁKLADNÍ KARTA OBCHODU */
+.cone-card {
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 420px; 
+    padding: 25px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative; /* Nutné pro přišpendlení BUY tlačítka dolů */
+}
+
+/* ====================================================================
+   ZDE SI NAVAŽ SVÉ TŘI ROZDÍLNÉ OBRÁZKY RÁMEČKŮ Z IMAGES
+   ==================================================================== */
+.frame-common { background-image: url('./../images/basic-frame.png'); }
+.frame-uncommon { background-image: url('./../images/silver-frame.png'); }
+.frame-rare { background-image: url('./../images/gold-frame.png'); }
+
+
+.cone-card h3 {
+    font-size: 30px;
+    color: #3d210a;
+    margin-top: 5px;
+}
+
+.rarity {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.common { color: #8b5a2b; }
+.uncommon { color: #828483; }
+.rare { color: #cd7f32; }
+
+/* VNITŘNÍ PROSTOR PRO ŠIŠKU */
+.cone-display {
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.cone-img {
+    max-height: 280px;
+    width: auto;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+}
+
+.cone-img:hover {
+    transform: scale(1.06);
+}
+
+.price-tag {
+    background: #dbcaa1;
+    border: 1px solid #000;
+    box-shadow: -1px 0 #000, 1px 0 #000, 0 -1px #000, 0 1px #000;
+    padding: 3px 10px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #5c3a21;
+    margin-bottom: 25px; /* Nechává místo pro tlačítko */
+}
+
+/* TLAČÍTKO VÍCÍCÍ NA SPODNÍ HRANĚ TVÉHO RÁMEČKU */
+.buy-btn {
+    position: absolute;
+    bottom: 15px; 
+    left: 50%;
+    transform: translateX(-50%);
+    
+    background: #a0522d;
+    color: #fff;
+    padding: 4px 40px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border: 2px solid #000;
+    box-shadow: -2px 0 #000, 2px 0 #000, 0 -2px #000, 0 2px #000;
+    z-index: 10;
+}
+
+.buy-btn:active {
+    transform: translateX(-50%) translateY(4px);
+    box-shadow: none;
+}
+
+.hatch-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.hatch-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.hatch-content {
+    background: #f4eccf;
+    border: 4px solid #5c3a21;
+    border-radius: 16px;
+    padding: 25px;
+    text-align: center;
+    max-width: 540px;
+    height: 450px;
+    width: 100%;
+    box-shadow: 0 0 0 4px #000, 0 10px 20px rgba(0,0,0,0.5);
+}
+
+.hatch-content h2 {
+    color: #5c3a21;
+    font-size: 40px;
+    margin-bottom: 4px;
+}
+
+#hatch-clicks-left {
+    font-weight: bold;
+    color: #bc2a1d;
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+.hatch-stage {
+    width: 380px;
+    height: 300px;
+    margin: 0 auto 15px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hatch-stage img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+.modal-done-btn {
+    background: #2e8b57;
+    color: #fff;
+    padding: 6px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: 2px solid #000;
+    box-shadow: -2px 0 #000, 2px 0 #000, 0 -2px #000, 0 2px #000;
+    cursor: pointer;
+}
+
+/* ANIMACE TŘESENÍ */
+.shake-animation {
+    animation: shake 0.4s ease-in-out;
+}
+@keyframes shake {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(-8deg); }
+    50% { transform: rotate(16deg); }
+    75% { transform: rotate(-8deg); }
+    100% { transform: rotate(0deg); }
+}
+
+/* ANIMACE VYLÍHNUTÍ */
+.squirrel-revealed-animation {
+    animation: popOut 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+@keyframes popOut {
+    0% { transform: scale(0.4); opacity: 0; }
+    70% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
