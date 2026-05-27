@@ -32,7 +32,7 @@ namespace SquirrelsBackend.Controllers
                 Squirrel squirrel = await dbData.Squirrels.FindAsync(item.SquirrelId);
                 ReturnInventory returnSquirrel = new ReturnInventory(squirrel.Name, item.Count);
                 returnData.Add(returnSquirrel);
-            } 
+            }
 
             return Ok(returnData);
         }
@@ -45,7 +45,7 @@ namespace SquirrelsBackend.Controllers
             if (checkingUsername != null)
             {
                 return BadRequest();
-            }          
+            }
 
             User newUser = new User(registerData.Username, registerData.Password, registerData.Email);
 
@@ -55,17 +55,17 @@ namespace SquirrelsBackend.Controllers
             return Ok();
         }
         [HttpPost("login")]
-        public async Task<IActionResult> Login(string username, string password)
+        public async Task<IActionResult> Login(LoginRequest loginData)
         {
-            var user = await dbData.Users.FirstOrDefaultAsync(u => u.Name == username);
+            var user = await dbData.Users.FirstOrDefaultAsync(u => u.Name == loginData.Username);
             if (user == null)
             {
                 return NotFound();
             }
-            if (user.Password != password)
+            if (user.Password != loginData.Password)
             {
                 return BadRequest();
-            } 
+            }
 
             return Ok();
         }
