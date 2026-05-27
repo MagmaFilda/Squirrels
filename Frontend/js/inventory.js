@@ -1,6 +1,12 @@
 const loggedUser = getLoggedUser();
 const inventoryGrid = document.getElementById('inventoryGrid');
 
+if (!loggedUser) {
+    inventoryGrid.innerHTML = "<p>You must log in to see your inventory.</p>";
+} else {
+    loadInventory();
+}
+
 const squirrelDisplayNames = {
     nutty: "Nutty",
     grumpy: "Grumpy",
@@ -62,7 +68,4 @@ async function loadInventory() {
     } catch (error) {
         console.error("Chyba:", error);
     }
-
-    
 }
-loadInventory();
