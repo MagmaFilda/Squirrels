@@ -10,10 +10,12 @@ namespace SquirrelsBackend.Controllers
     public class SquirrelsController : ControllerBase
     {
         private readonly AppDbContext dbData;
+        private Services services;
 
         public SquirrelsController(AppDbContext context)
         {
             dbData = context;
+            services = new Services();
         }
 
         [HttpGet("{id}")]
@@ -94,30 +96,48 @@ namespace SquirrelsBackend.Controllers
 
             return Ok(user.Id);
         }
-        [HttpPost("obtainSquirrel")]
-        public async Task<IActionResult> ObtainSquirrel(int squirrelId, int userId)
+        [HttpPost("openSiska/{siskaId}/{userId}")]
+        public async Task<IActionResult> OpenSiska(int siskaId, int userId)
         {
             var user = await dbData.Users.FindAsync(userId);
-            if (user == null)
+            var openingSiska = await dbData.Sisky.FindAsync(siskaId);
+            if (openingSiska == null || user == null)
             {
                 return NotFound();
             }
-            var squirrelInInventory = await dbData.UserSquirrels.FindAsync(userId, squirrelId);
-
-            if (squirrelInInventory == null)
+            if (openingSiska.Cost <= user.Money)
             {
-                squirrelInInventory = new UserSquirrel(userId, squirrelId);
-                dbData.UserSquirrels.Add(squirrelInInventory);
+                Rarity openedRarity = services.GetRandomRarity(openingSiska);
+                Squirrel[] raritySquirrels = await dbData.Squirrels.Where(s => s.Rarity == openedRarity).ToArrayAsync();
 
-                user.Squirrels.Add(squirrelInInventory);
+                Random random = new Random();
+                int generatedSquirrelId = random.Next(0, raritySquirrels.Length);
+                int realSquirrelId = raritySquirrels[generatedSquirrelId].Id;
+                var squirrelInInventory = await dbData.UserSquirrels.FindAsync(userId, realSquirrelId);
+
+                if (squirrelInInventory == null)
+                {
+                    squirrelInInventory = new UserSquirrel(userId, realSquirrelId);
+                    dbData.UserSquirrels.Add(squirrelInInventory);
+
+                    user.Squirrels.Add(squirrelInInventory);
+                }
+                else
+                {
+                    squirrelInInventory.Count++;
+                }
+                var returningSquirrel = await dbData.Squirrels.FindAsync(realSquirrelId);
+                user.Money -= openingSiska.Cost;
+                await dbData.SaveChangesAsync();
+
+                return Ok(returningSquirrel.Name);
             }
             else
             {
-                squirrelInInventory.Count++;
+                return BadRequest();
             }
-            await dbData.SaveChangesAsync();
 
-            return Ok();
+            
         }
     }
 }
