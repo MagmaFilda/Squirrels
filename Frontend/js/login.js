@@ -30,7 +30,7 @@ loginForm.addEventListener("submit", async function (event) {
         const result = await response.json();
 
         localStorage.setItem("loggedUser", JSON.stringify({
-            id: result.id,
+            id: result,
             username: username
         }));
         
