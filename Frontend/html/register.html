@@ -42,7 +42,7 @@
 </head>
 <body>
 
-    <header class="login-header">
+    <header class="register-header">
         <a href="./../html/index.html" class="mini-logo">
             <img src="./../images/logo.png" alt="Squirrels Mini Logo">
         </a>
@@ -52,8 +52,8 @@
         </a>
     </header>
 
-    <main class="login-container">
-        <div class="login-board">
+    <main class="register-container">
+        <div class="register-board">
             
             <div class="pixel-decor bubbles-left" ><img src="./../images/bubbles.png" alt="Squirrels Mini Logo"></div>
             <div class="pixel-decor bubbles-right"></div>
@@ -61,9 +61,9 @@
             <div class="pixel-decor acorn-right"><img src="./../images/knight.png" alt="Squirrels Mini Logo"></div>
 
             <div class="scroll-paper">
-                <h1 class="login-title">REGISTER</h1>
+                <h1 class="register-title">REGISTER</h1>
 
-                <form class="login-form">
+                <form class="register-form" id="registerForm">
                     <div class="input-group">
                         <label for="username">USERNAME</label>
                         <div class="input-field">
@@ -86,16 +86,15 @@
                         <label for="password">AGAIN PASSWORD</label>
                         <div class="input-field">
                             <div class="input-icon icon-password">🔒</div>
-                            <input type="password" id="password" placeholder="••••••••" required>
+                            <input type="password" id="password-again" placeholder="••••••••" required>
                         </div>
                     </div>
 
-                   
-                
+                    <button type="submit" class="register-submit-btn">REGISTER</button>
 
-                    <button type="submit" class="login-submit-btn">REGISTER</button>
+                    <p id="message"></p>
                 </form>
-                <div class="login-footer-links">
+                <div class="register-footer-links">
                     <a href="./../html/login.html" class="signup-link">Already have an account? <span>LOGIN</span></a>
                 </div>
 
@@ -104,6 +103,6 @@
 
         </div>
     </main>
-
+<script src="./../js/register.js"></script>
 </body>
 </html>

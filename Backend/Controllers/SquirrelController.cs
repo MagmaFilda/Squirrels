@@ -38,16 +38,16 @@ namespace SquirrelsBackend.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(string username, string password, string email)
+        public async Task<IActionResult> Register(RegisterRequest registerData)
         {
-            var checkingUsername = await dbData.Users.FirstOrDefaultAsync(u => u.Name == username);
+            var checkingUsername = await dbData.Users.FirstOrDefaultAsync(u => u.Name == registerData.Username);
 
             if (checkingUsername != null)
             {
                 return BadRequest("Username exists!");
             }          
 
-            User newUser = new User(username, password, email);
+            User newUser = new User(registerData.Username, registerData.Password, registerData.Email);
 
             dbData.Users.Add(newUser);
             await dbData.SaveChangesAsync();
