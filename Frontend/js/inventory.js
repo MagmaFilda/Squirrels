@@ -1,3 +1,4 @@
+const loggedUser = getLoggedUser();
 const inventoryGrid = document.getElementById('inventoryGrid');
 
 const squirrelDisplayNames = {
@@ -26,7 +27,7 @@ const squirrelDisplayNames = {
 
 async function loadInventory() {
     try {
-        const response = await fetch("https://localhost:7179/api/squirrels/1");
+        const response = await fetch(`https://localhost:7179/api/squirrels/${loggedUser.id}`);
 
         if (!response.ok) {
             throw new Error("Nepodařilo se načíst inventář.");

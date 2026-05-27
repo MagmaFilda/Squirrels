@@ -26,6 +26,13 @@ loginForm.addEventListener("submit", async function (event) {
         if (!response.ok) {
             throw new Error("Bad username or password.");
         }
+
+        const result = await response.json();
+
+        localStorage.setItem("loggedUser", JSON.stringify({
+            id: result.id,
+            username: username
+        }));
         
         window.location.href = "./../html/index.html";
 
