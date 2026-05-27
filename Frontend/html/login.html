@@ -1,34 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="cs">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Squirrels Game - Login</title>
-    <link rel="stylesheet" href="./../styles/login.css">
-</head>
-<body>
-
-    <header class="inventory-header">
-        <a href="./../html/index.html" class="mini-logo">
-            <img src="./../images/logo.png" alt="Squirrels Mini Logo">
-        </a>
-
-        
-
-        <a href="./../html/index.html" class="nav-btn">
-            <img src="./../images/backtext.png" alt="Back">
-        </a>
-    </header>
-
-    <main class="inventory-container">
-        <div class="inventory-grid" id="inventoryGrid">
-
-        </div>
-    </main>
-
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="cs">
 <head>
@@ -63,7 +32,7 @@
             <div class="scroll-paper">
                 <h1 class="login-title">LOG IN</h1>
 
-                <form class="login-form">
+                <form class="login-form" id="loginForm">
                     <div class="input-group">
                         <label for="username">USERNAME</label>
                         <div class="input-field">
@@ -90,6 +59,9 @@
                 
 
                     <button type="submit" class="login-submit-btn">LOGIN</button>
+
+                    <p id="message"></p>
+
                 </form>
                 <div class="login-footer-links">
                     <a href="./../html/register.html" class="signup-link">Don't have an account? <span>REGISTER</span></a>
@@ -100,6 +72,6 @@
 
         </div>
     </main>
-
+    <script src="./../js/login.js"></script>
 </body>
 </html>
