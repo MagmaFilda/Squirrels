@@ -44,7 +44,7 @@ namespace SquirrelsBackend.Controllers
 
             if (checkingUsername != null)
             {
-                return BadRequest("Username exists!");
+                return BadRequest();
             }          
 
             User newUser = new User(registerData.Username, registerData.Password, registerData.Email);
@@ -52,7 +52,7 @@ namespace SquirrelsBackend.Controllers
             dbData.Users.Add(newUser);
             await dbData.SaveChangesAsync();
 
-            return Ok("User added!");
+            return Ok();
         }
         [HttpPost("login")]
         public async Task<IActionResult> Login(string username, string password)
@@ -64,10 +64,10 @@ namespace SquirrelsBackend.Controllers
             }
             if (user.Password != password)
             {
-                return BadRequest("Wrong Password");
+                return BadRequest();
             } 
 
-            return Ok("User is now log!");
+            return Ok();
         }
         [HttpPost("getSquirrel")]
         public async Task<IActionResult> GetSquirrel(int squirrelId, int userId)
@@ -92,7 +92,7 @@ namespace SquirrelsBackend.Controllers
             }
             await dbData.SaveChangesAsync();
 
-            return Ok("Squirrel added to the inventory ");
+            return Ok();
         }
     }
 }

@@ -32,16 +32,19 @@ registerForm.addEventListener("submit", async function (event) {
         console.log(response);
 
         if (!response.ok) {
-            throw new Error("Registration failed.");
+            throw new Error("Bad username.");
         }
         
-        const result = await response.json();
-
-        console.log(result);
+        // const result = await response.json();
+        // console.log(result);
         message.textContent = "User was successfully registered.";
 
     } catch (error) {
         console.error("Chyba:", error);
+        if(error.message === "Bad username.") {
+            message.textContent = "Username already exists.";
+            return;
+        }
         message.textContent = "An error occurred during registration.";
     }
 });
