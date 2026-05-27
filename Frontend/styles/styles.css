@@ -60,6 +60,8 @@ body {
     z-index: 10;
 }
 
+
+
 .main-content {
     flex: 1;
     display: flex;
@@ -112,6 +114,10 @@ body {
     width: 360px; 
     height: 185px;
     font-size: 24px;
+}
+
+.navbar .nav-btn:last-child {
+    margin-left: auto;
 }
 
 .nav-btn img {

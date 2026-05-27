@@ -38,6 +38,7 @@ registerForm.addEventListener("submit", async function (event) {
         // const result = await response.json();
         // console.log(result);
         message.textContent = "User was successfully registered.";
+        window.location.href = "./../html/index.html";
 
     } catch (error) {
         console.error("Chyba:", error);

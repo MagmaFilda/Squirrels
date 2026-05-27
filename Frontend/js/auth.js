@@ -2,9 +2,13 @@ function getLoggedUser() {
     const user = localStorage.getItem("loggedUser");
 
     if (!user) {
-        window.location.href = "login.html";
         return null;
     }
 
     return JSON.parse(user);
+}
+
+function logout() {
+    localStorage.removeItem("loggedUser");
+    window.location.href = "./../html/index.html";
 }
