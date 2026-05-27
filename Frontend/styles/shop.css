@@ -56,10 +56,10 @@ body {
 }
 
 .mini-logo {
-    width: 200px;
+    width: 150px;
 }
 .mini-logo img {
-    width: 100%;
+    width: 80%;
     height: auto;
 }
 
@@ -137,7 +137,7 @@ body {
     background: #eedcb5;
     border: 5px solid #5c3a21;
     width: 100%;
-    max-width: 1020px;
+    max-width: 1120px;
     padding: 30px 20px 20px 20px;
     position: relative;
     box-shadow: 0 0 0 5px #000, 0 15px 25px rgba(0,0,0,0.6);
@@ -148,8 +148,8 @@ body {
 .exchange-title {
     text-align: center;
     color: #5c3a21;
-    font-size: 40px;
-    margin-bottom: 25px;
+    font-size: 45px;
+    margin-bottom: 10px;
     text-transform: uppercase;
 }
 
@@ -215,7 +215,7 @@ body {
 .rarity {
     font-size: 20px;
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: -20px;
 }
 .common { color: #8b5a2b; }
 .uncommon { color: #828483; }
@@ -250,7 +250,7 @@ body {
     font-size: 0.85rem;
     font-weight: bold;
     color: #5c3a21;
-    margin-bottom: 25px; /* Nechává místo pro tlačítko */
+    margin-bottom: -35px; /* Nechává místo pro tlačítko */
 }
 
 /* TLAČÍTKO VÍCÍCÍ NA SPODNÍ HRANĚ TVÉHO RÁMEČKU */

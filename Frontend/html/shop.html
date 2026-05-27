@@ -7,14 +7,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
     <title>Squirrels Game - Shop</title>
-    <link rel="icon" type="image/png" href="./../images/logo.png">
+    <link rel="icon" type="image/png" href="./../images/kingmidas.png">
     <link rel="stylesheet" href="./../styles/shop.css">
 </head>
 <body>
 
     <header class="shop-header">
         <a href="./../html/index.html" class="mini-logo">
-            <img src="./../images/logo.png" alt="Squirrels Mini Logo">
+            <img src="./../images/shop.png" alt="Squirrels Mini Logo">
         </a>
 
         <div class="page-title">
@@ -30,7 +30,7 @@
         <div class="shop-window">
             
             <div class="player-currency">
-                <span class="currency-label">Hráčovy oříšky:</span>
+                <span class="currency-label">PLAYER NUTS:</span>
                 <div class="currency-value">🌰 <span id="nut-count">742</span></div>
             </div>
 
@@ -45,7 +45,7 @@
                         <img src="./../images/basic-pi.png" alt="Common Cone" class="cone-img">
                     </div>
                     <div class="price-tag">🌰 100 </div>
-                    <button class="buy-btn" onclick="startHatching(1, 50)">BUY</button>
+                    <button class="buy-btn" onclick="startHatching(1, 100)">BUY</button>
                 </div>
 
                 <div class="cone-card frame-uncommon" id="card-2">
@@ -55,7 +55,7 @@
                         <img src="./../images/silver-pi.png" alt="Uncommon Cone" class="cone-img">
                     </div>
                     <div class="price-tag">🌰 200 </div>
-                    <button class="buy-btn" onclick="startHatching(2, 150)">BUY</button>
+                    <button class="buy-btn" onclick="startHatching(2, 200)">BUY</button>
                 </div>
 
                 <div class="cone-card frame-rare" id="card-3">
@@ -65,7 +65,7 @@
                         <img src="./../images/golden-pi.png" alt="Rare Cone" class="cone-img">
                     </div>
                     <div class="price-tag">🌰 500</div>
-                    <button class="buy-btn" onclick="startHatching(3, 350)">BUY</button>
+                    <button class="buy-btn" onclick="startHatching(3, 500)">BUY</button>
                 </div>
 
             </div>
@@ -75,7 +75,7 @@
     <div id="hatch-modal" class="hatch-overlay">
         <div class="hatch-content">
             <h2 id="hatch-status-text">CLICK TO HATCH!</h2>
-            <p id="hatch-clicks-left">LAST CLICKS: 4</p>
+            <p id="hatch-clicks-left">CLICKS: 4</p>
             
             <div class="hatch-stage">
                 <img id="hatching-item" src="" alt="Líhnutí" onclick="registerHatchClick()">
@@ -90,29 +90,27 @@
         let currentConeId = 0;
         let playerNuts = 742;
 
-        // ====================================================================
-        //  SEM SI DAJ NÁZVY SVÝCH OBRÁZKŮ PRO KAŽDOU FÁZI (4 = začátek, 0 = konec)
-        // ====================================================================
+        
         const hatchingStages = {
             1: { 
                 4: "./../images/basic-pi-0.png",        
                 3: "./../images/basic-pi-1.png", 
                 2: "./../images/basic-pi-2.png",
-                1: "./../images/basic-pi-2.png", 
+                1: "./../images/basic-pi-3.png", 
                 0: "./../images/nutty.png"      
             },
             2: { 
-                4: "./../images/silver-pi.png",
-                3: "./../images/silver-pi.png",
-                2: "./../images/silver-pi.png",
-                1: "./../images/silver-pi.png",
+                4: "./../images/silver-pi-0.png",
+                3: "./../images/silver-pi-1.png",
+                2: "./../images/silver-pi-2.png",
+                1: "./../images/silver-pi-3.png",
                 0: "./../images/rogue.png"
             },
             3: { 
-                4: "./../images/golden-pi.png",
-                3: "./../images/golden-pi.png",
-                2: "./../images/golden-pi.png",
-                1: "./../images/golden-pi.png",
+                4: "./../images/golden-pi-0.png",
+                3: "./../images/golden-pi-1.png",
+                2: "./../images/golden-pi-2.png",
+                1: "./../images/golden-pi-3.png",
                 0: "./../images/angel.png"
             }
         };
@@ -141,7 +139,7 @@
 
             hatchStatusText.innerText = "CLICK TO HATCH!";
             hatchClicksLeft.style.display = "block";
-            hatchClicksLeft.innerText = `LAST CLICKS: ${currentClicks}`;
+            hatchClicksLeft.innerText = `CLICKS: ${currentClicks}`;
             modalCloseBtn.style.display = "none";
 
             hatchModal.classList.add('active');
@@ -157,7 +155,7 @@
 
                 if (currentClicks > 0) {
                     hatchingItem.src = hatchingStages[currentConeId][currentClicks];
-                    hatchClicksLeft.innerText = `LAST CLICKS: ${currentClicks}`;
+                    hatchClicksLeft.innerText = `CLICKS: ${currentClicks}`;
                 } else {
                     revealSquirrel();
                 }
