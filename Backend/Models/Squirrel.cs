@@ -11,6 +11,8 @@
         public int Strength { get; private set; }
         public int Speed { get; private set; }
         public int Durability { get; private set; } // "health"
+        // Sell
+        public int Cost { get; private set; }
 
         public Squirrel() { }
     }
