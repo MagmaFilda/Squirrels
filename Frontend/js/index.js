@@ -31,3 +31,27 @@ logoutBtn.addEventListener("click", function (event) {
     event.preventDefault();
     logout();
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const bgMusic = document.getElementById("bgMusic");
+    const volumeSlider = document.getElementById("volumeSlider");
+
+    if (bgMusic && volumeSlider) {
+        
+        bgMusic.volume = volumeSlider.value;
+
+        volumeSlider.addEventListener("input", function () {
+            bgMusic.volume = volumeSlider.value;
+        });
+
+        function spustitHudbuPoKliknuti() {
+            bgMusic.play().then(() => {
+                document.removeEventListener("click", spustitHudbuPoKliknuti);
+            }).catch(error => {
+                console.log("Prohlížeč ještě blokuje audio, čekám na kliknutí.");
+            });
+        }
+
+        document.addEventListener("click", spustitHudbuPoKliknuti);
+    }
+});
