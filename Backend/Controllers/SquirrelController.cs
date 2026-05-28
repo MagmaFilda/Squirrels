@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SquirrelsBackend.Data;
 using SquirrelsBackend.Models;
@@ -11,11 +13,13 @@ namespace SquirrelsBackend.Controllers
     {
         private readonly AppDbContext dbData;
         private Services services;
+        private PasswordHasher<User> hasher;
 
         public SquirrelsController(AppDbContext context)
         {
             dbData = context;
             services = new Services();
+            hasher = new();
         }
 
         [HttpGet("inventory/{userId}")]
@@ -67,9 +71,9 @@ namespace SquirrelsBackend.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterRequest registerData)
         {
-            var checkingUsername = await dbData.Users.FirstOrDefaultAsync(u => u.Name == registerData.Username);
+            var checkingUser = await dbData.Users.FirstOrDefaultAsync(u => u.Name == registerData.Username);
 
-            if (checkingUsername != null)
+            if (checkingUser != null || registerData.Username.Length < 3 || registerData.Username.Length > 12)
             {
                 return BadRequest();
             }
@@ -89,12 +93,15 @@ namespace SquirrelsBackend.Controllers
             {
                 return NotFound();
             }
-            if (user.Password != loginData.Password)
+            var result = hasher.VerifyHashedPassword(user, user.Password, loginData.Password);
+            if (result == PasswordVerificationResult.Success)
+            {
+                return Ok(user.Id);
+            }
+            else
             {
                 return BadRequest();
-            }
-
-            return Ok(user.Id);
+            }               
         }
         [HttpPost("openSiska/{siskaId}/{userId}")]
         public async Task<IActionResult> OpenSiska(int siskaId, int userId)
