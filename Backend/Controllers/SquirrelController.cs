@@ -52,7 +52,7 @@ namespace SquirrelsBackend.Controllers
             {
                 returningMoney = user.Money.ToString();
             }
-            else if (user.Money < 100000)
+            else if (user.Money < 1000000)
             {
                 returningMoney = MathF.Round(user.Money / 1000) + "K";
             }
