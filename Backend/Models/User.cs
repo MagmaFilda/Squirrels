@@ -1,4 +1,6 @@
-﻿namespace SquirrelsBackend.Models
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace SquirrelsBackend.Models
 {
     public class User
     {
@@ -18,6 +20,15 @@
             Money = 0;
 
             Squirrels = new List<UserSquirrel>();
+
+            HashPassword();
+        }
+        private void HashPassword()
+        {
+            PasswordHasher<User> hasher = new();
+
+            string hashedPassword = hasher.HashPassword(this, Password);
+            Password = hashedPassword;
         }
     }
 }
