@@ -33,6 +33,46 @@
         </div>
     </main>
 
+    <div id="info-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            
+            <div class="modal-body">
+                <img id="modal-img" src="" alt="Squirrel">
+                <h2 id="modal-title">Name</h2>
+                <p id="modal-desc">Description</p>
+
+                <div class="stats-container">
+                    <div class="stat-row">
+                        <span class="stat-label">STRENGHT</span>
+                        <div class="pixel-bar">
+                            <div id="bar-str" class="pixel-bar-fill str-color"></div>
+                        </div>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">SPEED</span>
+                        <div class="pixel-bar">
+                            <div id="bar-spd" class="pixel-bar-fill spd-color"></div>
+                        </div>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">DURABILITY</span>
+                        <div class="pixel-bar">
+                            <div id="bar-dur" class="pixel-bar-fill dur-color"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sell-container">
+                    <span class="sell-text">PRICE: <strong id="modal-price">0</strong> 🌰</span>
+                    <button class="sell-btn" id="sell-one-btn">SELL 1</button>
+                    <button class="sell-btn" id="sell-ten-btn">SELL 10</button>
+                    <button class="sell-btn" id="sell-all-btn">SELL ALL</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="./../js/auth.js"></script>
     <script src="./../js/inventory.js"></script>
     
