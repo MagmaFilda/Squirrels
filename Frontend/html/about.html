@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Squirrels Game - About</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./../styles/login.css">
+    <link rel="stylesheet" href="./../styles/about.css">
+    <link rel="icon" type="image/png" href="./../images/gamer.png">
+</head>
+<body>
+
+    <audio id="bgMusic" src="./../sounds/music.mp3" loop></audio>
+
+    <header class="login-header">
+        <a href="./../html/index.html" class="mini-logo">
+            <img src="./../images/logo.png" alt="Squirrels Mini Logo">
+        </a>
+        <a href="./../html/index.html" class="nav-btn">
+            <img src="./../images/backtext.png" alt="Back">
+        </a>
+    </header>
+
+    <main class="login-container about-main">
+        
+        <div class="about-tabs">
+            <button class="tab-btn active" data-section="inventory">
+                <img src="./../images/invtext.png" alt="Inventory">
+            </button>
+            <button class="tab-btn" data-section="catalog">
+                <img src="./../images/catalogtext.png" alt="Catalog">
+            </button>
+            <button class="tab-btn" data-section="shop">
+                <img src="./../images/shoptext.png" alt="Shop">
+            </button>
+        </div>
+
+        <div class="login-board about-board">
+            
+            <div class="pixel-decor bubbles-left"><img src="./../images/nutty.png" alt="Veverka vlevo"></div>
+            <div class="pixel-decor bubbles-right"></div>
+            <div class="pixel-decor acorn-left"></div>
+            <div class="pixel-decor acorn-right"><img src="./../images/gamer.png" alt="Veverka vpravo"></div>
+
+            <div class="scroll-paper">
+                <div class="about-text-container" id="aboutContent">
+                    <h2>INVENTORY</h2>
+                    <p>This is your personal storage! Here you can check out all the unique squirrels you have successfully gathered on your journey. Manage your squirrel empire, review your resource stockpiles, and plan your next big move in the forest!</p>
+                    <img id="aboutSectionImage" src="./../images/rogue.png" alt="Section Icon" style="margin-top: 20px; max-height: 60px; width: auto; display: inline-block;">
+                    </div>
+                </div>
+            </div>  
+
+        </div>
+    </main>
+
+    
+
+    <script src="./../js/about.js"></script>
+</body>
+</html>
