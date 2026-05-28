@@ -2,7 +2,7 @@ const loggedUser = getLoggedUser();
 const inventoryGrid = document.getElementById('inventoryGrid');
 
 if (!loggedUser) {
-    inventoryGrid.innerHTML = '<p>You must <a href="login.html">log in</a> to see your inventory.</p>';
+    inventoryGrid.innerHTML = '<p>You must <a href="login.html?redirect=invertory.html">log in</a> to see your inventory.</p>';
 } else {
     loadInventory();
 }
