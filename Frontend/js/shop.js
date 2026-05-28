@@ -95,6 +95,13 @@ function registerHatchClick() {
         if (currentClicks > 0) {
             hatchingItem.src = hatchingStages[currentConeId][currentClicks];
             hatchClicksLeft.innerText = `CLICKS: ${currentClicks}`;
+
+            // --- NOVÉ: Výběr a přehrání zvuku podle aktuální fáze ---
+            let aktualniZvuk = crackSounds[currentClicks];
+            if (aktualniZvuk) {
+                aktualniZvuk.currentTime = 0; // Umožní rychlé klikání za sebou
+                aktualniZvuk.play();
+            }
         } else {
             revealSquirrel();
         }
@@ -102,6 +109,10 @@ function registerHatchClick() {
 }
 
 function revealSquirrel() {
+    // --- NOVÉ: Přehrání zvuku vylíhnutí veverky ---
+    hatchSound.currentTime = 0;
+    hatchSound.play();
+
     hatchClicksLeft.style.display = "none";
     hatchStatusText.innerText = `YOU GOT A ${squirrelName.replaceAll("_", " ").toUpperCase()}!`;
     
@@ -131,4 +142,41 @@ async function readMoney() {
     }
 }
 
+
+
+
+// ZVUKY
+// --- NOVÉ: Načtení různých zvuků pro každou fázi praskání ---
+// Indexy 3, 2, 1 odpovídají počtu zbývajících kliknutí do vylíhnutí
+const crackSounds = {
+    3: new Audio("./../sounds/pip.mp3"),  // První jemné křupnutí (při změně ze 4 na 3)
+    2: new Audio("./../sounds/pep.mp3"), // Silnější křupnutí (při změně ze 3 na 2)
+    1: new Audio("./../sounds/pop.mp3")   // Pořádná rána těsně před prasknutím (při změně ze 2 na 1)
+};
+// Zvuk pro finální vylíhnutí veverky (při změně z 1 na 0)
+const hatchSound = new Audio("./../sounds/open.mp3");
+
+document.addEventListener("DOMContentLoaded", function () {
+    const bgMusic = document.getElementById("bgMusic");
+    const volumeSlider = document.getElementById("volumeSlider");
+
+    if (bgMusic && volumeSlider) {
+        
+        bgMusic.volume = volumeSlider.value;
+
+        volumeSlider.addEventListener("input", function () {
+            bgMusic.volume = volumeSlider.value;
+        });
+
+        function spustitHudbuPoKliknuti() {
+            bgMusic.play().then(() => {
+                document.removeEventListener("click", spustitHudbuPoKliknuti);
+            }).catch(error => {
+                console.log("Prohlížeč ještě blokuje audio, čekám na kliknutí.");
+            });
+        }
+
+        document.addEventListener("click", spustitHudbuPoKliknuti);
+    }
+});
 
