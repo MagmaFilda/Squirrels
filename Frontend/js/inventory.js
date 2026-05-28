@@ -2,51 +2,28 @@ const loggedUser = getLoggedUser();
 const inventoryGrid = document.getElementById('inventoryGrid');
 
 if (!loggedUser) {
-    inventoryGrid.innerHTML = "<p>You must log in to see your inventory.</p>";
+    inventoryGrid.innerHTML = '<p>You must <a href="login.html">log in</a> to see your inventory.</p>';
 } else {
     loadInventory();
 }
 
-const squirrelDisplayNames = {
-    nutty: "Nutty",
-    grumpy: "Grumpy",
-    scout: "Scout",
-    peanut: "Peanut",
-    twiggy: "Twiggy",
-    blossom: "Blossom",
-    tailor: "Tailor",
-    bubbles: "Bubbles",
-    berry: "Berry",
-    chippy: "Chippy",
-    rogue: "Rogue",
-    chef: "Chef",
-    explorer: "Explorer",
-    gamer: "Gamer",
-    knight: "Knight",
-    phoenix: "Phoenix",
-    kingmidas: "King Midas",
-    druid: "Druid",
-    blizzard: "Blizzard",
-    angel: "Angel",
-    inferno: "Inferno"
-};
-
 async function loadInventory() {
     try {
-        const response = await fetch(`https://localhost:7179/api/squirrels/${loggedUser.id}`);
+        const response = await fetch(`https://localhost:7179/api/squirrels/inventory/${loggedUser.id}`);
 
         if (!response.ok) {
-            throw new Error("Nepodařilo se načíst inventář.");
+            throw new Error("Failed to load inventory.");
         }
 
         const squirrels = await response.json();
 
-        console.log(squirrels);
-
         inventoryGrid.innerHTML = "";
 
         squirrels.forEach(squirrel => {
-            const displayName = squirrelDisplayNames[squirrel.name] || squirrel.name;
+            const displayName = squirrel.name
+                .split("_")
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                .join(" ");
 
             const slot = document.createElement("div");
             slot.classList.add("item-slot");

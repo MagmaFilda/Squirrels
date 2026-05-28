@@ -20,7 +20,7 @@ const squirrelsData = [
     { id: 18, name: "Rogue",      desc: "Strikes from the shadows with a sharpened twig, leaving no trace behind.",       str: 75, spd: 65, dur: 70, price: 240, img: "./../images/rogue.png", rarity: "rare" }, // [cite: 18, 27, 28]
 
     // 3x EPIC
-    { id: 9,  name: "King Midas",      desc: "Sitting atop an endless pile of gold, his royal rule is as solid as his crown.", str: 50, spd: 60, dur: 65, price: 300, img: "./../images/kingmidas.png", rarity: "epic" }, // [cite: 9, 28]
+    { id: 9,  name: "King Midas",      desc: "Sitting atop an endless pile of gold, his royal rule is as solid as his crown.", str: 50, spd: 60, dur: 65, price: 300, img: "./../images/king_midas.png", rarity: "epic" }, // [cite: 9, 28]
     { id: 20, name: "Druid",        desc: "Half-machine and half-nature, guarding the forest with an enhanced cybernetic eye.",str: 55, spd: 55, dur: 70, price: 130, img: "./../images/druid.png", rarity: "epic" }, // [cite: 20, 28, 29]
     { id: 19, name: "Blizzard",     desc: "Born from absolute zero, this frozen creature radiates a chilling, mystical aura.",        str: 80, spd: 80, dur: 80, price: 400, img: "./../images/blizzard.png", rarity: "epic" }, // [cite: 19, 29, 30]
 

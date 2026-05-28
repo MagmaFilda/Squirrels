@@ -6,6 +6,11 @@ body {
     animation: pixelSlideLoad 1s steps(4) forwards;
 
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./../images/background.png') no-repeat center center/cover;
+
+    font-family: "Pixelify Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
 }
 
 @keyframes pixelSlideLoad {
@@ -47,6 +52,7 @@ html, body, img, .item-slot, .back-btn {
 .mini-logo {
     width: 200px;
 }
+
 .mini-logo img {
     width: 100%;
     height: auto;
@@ -95,6 +101,21 @@ html, body, img, .item-slot, .back-btn {
     height: 80vh; 
 }
 
+.inventory-grid p {
+    grid-column: 1 / -1; 
+    text-align: center;
+    font-size: 24px;
+    color: white;
+}
+.inventory-grid p a {
+    color: #C97D60;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.5s ease;
+}
+.inventory-grid p a:hover {
+    text-decoration: underline;
+}
 .item-slot {
     background: url('./../images/back.png') no-repeat center center/135px 130px; /* Sem hoď to prázdné dřevěné pozadí karty s rámečkem */
     display: flex;

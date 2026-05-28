@@ -18,11 +18,11 @@ namespace SquirrelsBackend.Controllers
             services = new Services();
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetInventory(int id)
+        [HttpGet("inventory/{userId}")]
+        public async Task<IActionResult> GetInventory(int userId)
         {
             var users = await dbData.Users.Include(u => u.Squirrels).ToListAsync();
-            var user = users.Find(u => u.Id == id);
+            var user = users.Find(u => u.Id == userId);
             if (user == null)
             {
                 return NotFound();
@@ -38,10 +38,10 @@ namespace SquirrelsBackend.Controllers
 
             return Ok(returnData);
         }
-        [HttpGet("readMoney/{id}")]
-        public async Task<IActionResult> ReadMoney(int id)
+        [HttpGet("readMoney/{userId}")]
+        public async Task<IActionResult> ReadMoney(int userId)
         {
-            var user = await dbData.Users.FindAsync(id);
+            var user = await dbData.Users.FindAsync(userId);
             if (user == null)
             {
                 return NotFound();
@@ -52,7 +52,7 @@ namespace SquirrelsBackend.Controllers
             {
                 returningMoney = user.Money.ToString();
             }
-            else if (user.Money < 100000)
+            else if (user.Money < 1000000)
             {
                 returningMoney = MathF.Round(user.Money / 1000) + "K";
             }
@@ -138,6 +138,38 @@ namespace SquirrelsBackend.Controllers
             }
 
             
+        }
+        [HttpDelete("sell/{userId}/{squirrelId}/{count}")]
+        public async Task<IActionResult> SellSquirrel(int userId, int squirrelId, int count)
+        {
+            var user = await dbData.Users.FindAsync(userId);
+            var squirrel = await dbData.Squirrels.FindAsync(squirrelId);
+            var inventorySlot = await dbData.UserSquirrels.FindAsync(userId, squirrelId);
+            if (user == null || squirrel  == null || inventorySlot == null)
+            {
+                return NotFound();
+            }
+            
+            if (count <= inventorySlot.Count)
+            {
+                if (inventorySlot.Count == count)
+                {
+                    dbData.UserSquirrels.Remove(inventorySlot);
+                }
+                else
+                {
+                    inventorySlot.Count -= count;
+                }
+                user.Money += squirrel.Cost;
+
+                await dbData.SaveChangesAsync();
+
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
     }
 }
