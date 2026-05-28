@@ -1,6 +1,8 @@
 const loginForm = document.getElementById("loginForm");
 const message = document.getElementById("message");
 
+
+
 loginForm.addEventListener("submit", async function (event) {
     event.preventDefault();
 
@@ -33,8 +35,11 @@ loginForm.addEventListener("submit", async function (event) {
             id: result,
             username: username
         }));
+
+        const params = new URLSearchParams(window.location.search);
+        const redirectPage = params.get("redirect") || "index.html";
         
-        window.location.href = "./../html/index.html";
+        window.location.href = redirectPage;
 
     } catch (error) {
         console.error("Chyba:", error);

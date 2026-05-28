@@ -418,3 +418,21 @@ body {
         cursor: pointer;
         box-shadow: inset -2px -2px 0px #995500;
     }
+
+
+
+#shopWindow p {
+    grid-column: 1 / -1; 
+    text-align: center;
+    font-size: 24px;
+    color: white;
+}
+#shopWindow p a {
+    color: #C97D60;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.5s ease;
+}
+#shopWindow p a:hover {
+    text-decoration: underline;
+}

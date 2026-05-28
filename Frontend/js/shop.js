@@ -1,8 +1,12 @@
 const loggedUser = getLoggedUser();
 const nutsCount = document.getElementById("nut-count");
+const shopWindow = document.getElementById("shopWindow");
+const shopContainer = document.querySelector(".shop-container");
 
 if (!loggedUser) {
-    inventoryGrid.innerHTML = '<p>You must <a href="login.html">log in</a> to see shop.</p>';
+    shopWindow.innerHTML = '<p>You must <a href="login.html?redirect=shop.html">log in</a> to see shop.</p>';
+    shopWindow.classList.remove("shop-window");
+    shopContainer.style.alignItems = "flex-start";
 } else {
     readMoney();
 }
