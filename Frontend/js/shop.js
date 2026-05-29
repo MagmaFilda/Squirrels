@@ -189,3 +189,22 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+
+    document.addEventListener("DOMContentLoaded", function() {
+        function retroCisla(uzel) {
+            if (uzel.nodeType === Node.TEXT_NODE) {
+                const hledat = /([0-9%]+)/g;
+                if (uzel.nodeValue.match(hledat)) {
+                    const span = document.createElement('span');
+                    span.innerHTML = uzel.nodeValue.replace(hledat, '<span class="game-number">$1</span>');
+                    uzel.parentNode.insertBefore(span, uzel);
+                    uzel.parentNode.removeChild(uzel);
+                }
+            } else if (uzel.nodeType === Node.ELEMENT_NODE && uzel.nodeName !== 'SCRIPT' && uzel.nodeName !== 'STYLE') {
+                for (let i = uzel.childNodes.length - 1; i >= 0; i--) {
+                    retroCisla(uzel.childNodes[i]);
+                }
+            }
+        }
+        retroCisla(document.body);
+    });

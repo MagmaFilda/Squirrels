@@ -1,12 +1,28 @@
+@font-face {
+    font-family: "GameGlobalNumbers";
+    src: url('https://fonts.gstatic.com/s/dotgothic16/v9/blAnKFY0adpX7tcUtHdfbCdbK1M.woff2') format('woff2');
+    unicode-range: U+0030-0039, U+0025; 
+    font-weight: 900;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Pixelify Sans", sans-serif;
+    
+    font-family: "GameGlobalNumbers", "Pixelify Sans", sans-serif;
+    
     font-optical-sizing: auto;
-    font-weight: 800;
+    font-weight: 800; 
     font-style: normal;
     user-select: none; 
+}
+.game-number {
+    font-family: "DotGothic16", sans-serif !important;
+    letter-spacing: 1px;
+    font-weight: bold;
+    font-size: 12px;
+
 }
 
 
@@ -222,7 +238,6 @@ body {
 .uncommon { color: #828483; }
 .rare { color: #cd7f32; }
 
-/* VNITŘNÍ PROSTOR PRO ŠIŠKU */
 .cone-display {
     width: 100%;
     flex-grow: 1;
@@ -230,6 +245,7 @@ body {
     justify-content: center;
     align-items: center;
     margin-bottom: 30px;
+    position: relative; 
 }
 
 .cone-img {
@@ -237,10 +253,63 @@ body {
     width: auto;
     cursor: pointer;
     transition: transform 0.15s ease;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .cone-img:hover {
     transform: scale(1.06);
+}
+
+.cone-display .egg-info-box {
+    display: none;
+    position: absolute;
+    bottom: 90%; 
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 99;
+    width: 140px; 
+    background-color: #6d6d6c;
+    border: 4px solid #111111;
+    padding: 10px;
+    color: #ffffff;
+    text-align: left;
+    box-shadow: 0 4px 0px rgba(0,0,0,0.3);
+    -webkit-user-select: none;
+    user-select: none;
+
+}
+
+
+
+.cone-display:hover .egg-info-box {
+    display: block;
+}
+
+.egg-info-box h4 {
+    margin: 0 0 4px 0;
+    font-size: 15px;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.egg-info-box hr {
+    border: none;
+    border-top: 2px solid #111111;
+    margin: 4px 0 6px 0;
+}
+
+.egg-info-box ul {
+    list-style: none; 
+    padding: 0;
+    margin: 0;
+    font-size: 15px;
+}
+
+.egg-info-box li {
+    margin-bottom: 4px;
 }
 
 .price-tag {

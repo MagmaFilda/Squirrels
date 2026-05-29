@@ -15,8 +15,6 @@ async function loadInventory() {
             throw new Error("Failed to load inventory.");
         }
 
-        console.log(await response.json());
-
         const squirrels = await response.json();
 
         inventoryGrid.innerHTML = "";
