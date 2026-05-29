@@ -3,6 +3,8 @@ const nutsCount = document.getElementById("nut-count");
 const shopWindow = document.getElementById("shopWindow");
 const shopContainer = document.querySelector(".shop-container");
 
+let isOpening = false;
+
 if (!loggedUser) {
     shopWindow.innerHTML = '<p>You must <a href="login.html?redirect=shop.html">log in</a> to see shop.</p>';
     shopWindow.classList.remove("shop-window");
@@ -46,6 +48,9 @@ const modalCloseBtn = document.getElementById('modal-close-btn');
 const nutCountDisplay = document.getElementById('nut-count');
 
 async function startHatching(coneId) {
+    if (isOpening) return;
+    isOpening = true;
+    
     try {
         const response = await fetch(`https://localhost:7179/api/squirrels/openSiska/${coneId}/${loggedUser.id}`, {
             method: "POST",
