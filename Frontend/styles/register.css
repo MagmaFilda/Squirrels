@@ -6,6 +6,7 @@
     padding: 0;
     image-rendering: pixelated !important;
     image-rendering: crisp-edges !important;
+    user-select: none; 
 }
 
 body {
@@ -84,14 +85,13 @@ html, body, img, .item-slot, .back-btn {
 /* Dřevěná deska */
 .register-board {
     position: relative;
-    width: 280vh;
-    height: 100vh;
+    width: 210vh;
+    height: 80vh;
     background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('./../images/paper.png') no-repeat center center/cover;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 50px;
-    margin-top: -80px;
 }
 
 

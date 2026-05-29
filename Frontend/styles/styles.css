@@ -1,6 +1,7 @@
 body {
     animation: pixelSlideLoad 1s steps(4) forwards;
     position: relative;
+    user-select: none; 
 }
 
 @keyframes pixelSlideLoad {
