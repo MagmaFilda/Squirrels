@@ -72,8 +72,17 @@ async function startHatching(coneId) {
         
 
     } catch (error) {
+        isOpening = false;
         console.error("Chyba:", error);
-        alert("NOT ENOUGH NUTS! 🌰");
+        
+        const alertBox = document.getElementById("custom-alert");
+        
+        alertBox.classList.add("alert-show");
+        
+        setTimeout(() => {
+            alertBox.classList.remove("alert-show");
+        }, 2000);
+
         return;
     }
 
@@ -105,10 +114,9 @@ function registerHatchClick() {
             hatchingItem.src = hatchingStages[currentConeId][currentClicks];
             hatchClicksLeft.innerText = `CLICKS: ${currentClicks}`;
 
-            // --- NOVÉ: Výběr a přehrání zvuku podle aktuální fáze ---
             let aktualniZvuk = crackSounds[currentClicks];
             if (aktualniZvuk) {
-                aktualniZvuk.currentTime = 0; // Umožní rychlé klikání za sebou
+                aktualniZvuk.currentTime = 0; 
                 aktualniZvuk.play();
             }
         } else {
@@ -119,7 +127,6 @@ function registerHatchClick() {
 }
 
 function revealSquirrel() {
-    // --- NOVÉ: Přehrání zvuku vylíhnutí veverky ---
     hatchSound.currentTime = 0;
     hatchSound.play();
 
@@ -155,13 +162,11 @@ async function readMoney() {
 
 
 
-// ZVUKY
-// --- NOVÉ: Načtení různých zvuků pro každou fázi praskání ---
-// Indexy 3, 2, 1 odpovídají počtu zbývajících kliknutí do vylíhnutí
+
 const crackSounds = {
-    3: new Audio("./../sounds/pip.mp3"),  // První jemné křupnutí (při změně ze 4 na 3)
-    2: new Audio("./../sounds/pep.mp3"), // Silnější křupnutí (při změně ze 3 na 2)
-    1: new Audio("./../sounds/pop.mp3")   // Pořádná rána těsně před prasknutím (při změně ze 2 na 1)
+    3: new Audio("./../sounds/pip.mp3"),  
+    2: new Audio("./../sounds/pep.mp3"), 
+    1: new Audio("./../sounds/pop.mp3")   
 };
 // Zvuk pro finální vylíhnutí veverky (při změně z 1 na 0)
 const hatchSound = new Audio("./../sounds/open.mp3");
@@ -208,4 +213,49 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
         retroCisla(document.body);
+    });
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const regexCisla = /([0-9%]+)/g;
+
+        function zpracujTextovyUzel(uzel) {
+            if (uzel.nodeType === Node.TEXT_NODE) {
+                if (uzel.nodeValue.match(regexCisla) && uzel.parentNode && !uzel.parentNode.classList.contains('game-number')) {
+                    const span = document.createElement('span');
+                    span.innerHTML = uzel.nodeValue.replace(regexCisla, '<span class="game-number">$1</span>');
+                    uzel.parentNode.insertBefore(span, uzel);
+                    uzel.parentNode.removeChild(uzel);
+                }
+            } else if (uzel.nodeType === Node.ELEMENT_NODE && uzel.nodeName !== 'SCRIPT' && uzel.nodeName !== 'STYLE') {
+                for (let i = uzel.childNodes.length - 1; i >= 0; i--) {
+                    zpracujTextovyUzel(uzel.childNodes[i]);
+                }
+            }
+        }
+
+        zpracujTextovyUzel(document.body);
+
+        const hlidacZmen = new MutationObserver(function(mutace) {
+            mutace.forEach(function(mutace) {
+                mutace.addedNodes.forEach(function(uzel) {
+                    zpracujTextovyUzel(uzel);
+                });
+                if (mutace.type === 'characterData') {
+                    const rodic = mutace.target.parentNode;
+                    if (rodic && !rodic.classList.contains('game-number')) {
+                        const nejblizsiElement = rodic.closest('div, span, p, li, td');
+                        if (nejblizsiElement) {
+                            zpracujTextovyUzel(nejblizsiElement);
+                        }
+                    }
+                }
+            });
+        });
+
+        hlidacZmen.observe(document.body, {
+            childList: true,
+            subtree: true,
+            characterData: true
+        });
     });
