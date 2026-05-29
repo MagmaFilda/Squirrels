@@ -76,3 +76,48 @@ function openModal(data) { // [cite: 34]
 closeBtn.addEventListener('click', () => modal.classList.remove('active')); // [cite: 35]
 
 modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); }); // [cite: 36]
+
+
+document.addEventListener("DOMContentLoaded", function() {
+        const regexCisla = /([0-9%]+)/g;
+
+        function zpracujTextovyUzel(uzel) {
+            if (uzel.nodeType === Node.TEXT_NODE) {
+                if (uzel.nodeValue.match(regexCisla) && uzel.parentNode && !uzel.parentNode.classList.contains('game-number')) {
+                    const span = document.createElement('span');
+                    span.innerHTML = uzel.nodeValue.replace(regexCisla, '<span class="game-number">$1</span>');
+                    uzel.parentNode.insertBefore(span, uzel);
+                    uzel.parentNode.removeChild(uzel);
+                }
+            } else if (uzel.nodeType === Node.ELEMENT_NODE && uzel.nodeName !== 'SCRIPT' && uzel.nodeName !== 'STYLE') {
+                for (let i = uzel.childNodes.length - 1; i >= 0; i--) {
+                    zpracujTextovyUzel(uzel.childNodes[i]);
+                }
+            }
+        }
+
+        zpracujTextovyUzel(document.body);
+
+        const hlidacZmen = new MutationObserver(function(mutace) {
+            mutace.forEach(function(mutace) {
+                mutace.addedNodes.forEach(function(uzel) {
+                    zpracujTextovyUzel(uzel);
+                });
+                if (mutace.type === 'characterData') {
+                    const rodic = mutace.target.parentNode;
+                    if (rodic && !rodic.classList.contains('game-number')) {
+                        const nejblizsiElement = rodic.closest('div, span, p, li, td');
+                        if (nejblizsiElement) {
+                            zpracujTextovyUzel(nejblizsiElement);
+                        }
+                    }
+                }
+            });
+        });
+
+        hlidacZmen.observe(document.body, {
+            childList: true,
+            subtree: true,
+            characterData: true
+        });
+    });
