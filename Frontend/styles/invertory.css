@@ -116,16 +116,50 @@ html, body, img, .item-slot, .back-btn {
 .inventory-grid p a:hover {
     text-decoration: underline;
 }
-.item-slot {
-    background: url('./../images/back.png') no-repeat center center/135px 130px; /* Sem hoď to prázdné dřevěné pozadí karty s rámečkem */
+
+
+.item-slot.common {
+    background: url('./../images/back.png') no-repeat center center/150px 150px; 
+    border-radius: 0px;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
-    transition: transform 0.1s ease, box-shadow 0.1s ease;
-    cursor: pointer;
-    margin: 0;
     padding: 0;
+    transition: background-color 0.15s ease;
+    height: 100%;
+    width: auto;
+}
+
+.item-slot.rare {
+    background: url('./../images/back-rare.png') no-repeat center center/150px 150px; 
+    border-radius: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    transition: background-color 0.15s ease;
+    height: 100%;
+    width: auto;
+}
+
+.item-slot.epic {
+    background: url('./../images/back-epic.png') no-repeat center center/150px 150px; 
+    border-radius: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.item-slot.legendary {
+    background: url('./../images/back-legendary1.png') no-repeat center center/150px 150px; 
+    border-radius: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    transition: background-color 0.15s ease;
+    height: 100%;
+    width: auto;
 }
 
 .item-slot:hover {
