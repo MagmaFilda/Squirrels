@@ -1,8 +1,8 @@
 @font-face {
     font-family: "GameGlobalNumbers";
-    src: url('https://fonts.gstatic.com/s/dotgothic16/v9/blAnKFY0adpX7tcUtHdfbCdbK1M.woff2') format('woff2');
+    src: url('https://fonts.gstatic.com/s/jersey10/v1/7cHpv4Z8mS2v3LAdyKOScltY.woff2') format('woff2');
     unicode-range: U+0030-0039, U+0025; 
-    font-weight: 900;
+    font-weight: 100 900; 
 }
 
 * {
@@ -16,12 +16,17 @@
     font-weight: 800; 
     font-style: normal;
     user-select: none; 
+
+    font-variant-numeric: tabular-nums lining-nums;
+    -moz-font-feature-settings: "tnum", "lnum";
+    -webkit-font-feature-settings: "tnum", "lnum";
 }
+
 .game-number {
-    font-family: "DotGothic16", sans-serif !important;
+    font-family: "Jersey 10", sans-serif !important;
     letter-spacing: 1px;
-    font-weight: bold;
-    font-size: 12px;
+    font-weight: normal; 
+    
 
 }
 
@@ -189,7 +194,7 @@ body {
 }
 
 .currency-value {
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
     color: #000;
 }
@@ -317,7 +322,7 @@ body {
     border: 1px solid #000;
     box-shadow: -1px 0 #000, 1px 0 #000, 0 -1px #000, 0 1px #000;
     padding: 3px 10px;
-    font-size: 0.85rem;
+    font-size: 16px;
     font-weight: bold;
     color: #5c3a21;
     margin-bottom: -35px; /* Nechává místo pro tlačítko */
@@ -506,4 +511,40 @@ body {
 }
 #shopWindow p a:hover {
     text-decoration: underline;
+}
+
+#custom-alert {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease; 
+}
+
+.alert-content {
+    background: #2c1a10; 
+    border: 4px solid #da863e; 
+    padding: 20px 40px;
+    text-align: center;
+    box-shadow: 0 8px 0 #150d08;
+}
+
+.alert-content p {
+    font-family: "Pixelify Sans", sans-serif;
+    color: #ffeedd;
+    font-size: 24px;
+    margin: 0;
+}
+
+#custom-alert.alert-show {
+    opacity: 1;
+    pointer-events: auto;
 }
