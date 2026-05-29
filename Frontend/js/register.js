@@ -1,8 +1,12 @@
 const registerForm = document.getElementById("registerForm");
 const message = document.getElementById("message");
+const registerButton = document.getElementById("RegisterButton");
 
 registerForm.addEventListener("submit", async function (event) {
     event.preventDefault();
+
+    registerButton.disabled = true;
+    registerButton.textContent = "Waiting...";
 
     const username = document.getElementById("username").value;
     const email = document.getElementById("email").value;
@@ -35,8 +39,6 @@ registerForm.addEventListener("submit", async function (event) {
             throw new Error("Bad username.");
         }
         
-        // const result = await response.json();
-        // console.log(result);
         message.textContent = "User was successfully registered.";
         window.location.href = "./../html/index.html";
 

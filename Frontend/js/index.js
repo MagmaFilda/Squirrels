@@ -11,6 +11,11 @@ if (loggedUser) {
     usernameText.textContent = loggedUser.username;
     usernameText.classList.add("username-text");
 
+    const length = usernameText.textContent.length;
+    const fontSize = Math.max(12, Math.min(24, 36 - length * 2));
+
+    usernameText.style.fontSize = `${fontSize}px`;
+
     loginBtn.appendChild(usernameText);
 
     // aby username nebylo klikací na login
