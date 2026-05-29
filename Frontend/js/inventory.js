@@ -28,6 +28,8 @@ async function loadInventory() {
                 .join(" ");
 
             const slot = document.createElement("div");
+
+            slot.style.cursor = 'pointer';
             
             if(squirrel.returningSquirrel.rarity === 0) {
                 slot.classList.add("item-slot", "common");
