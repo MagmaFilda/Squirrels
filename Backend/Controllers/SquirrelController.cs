@@ -22,6 +22,11 @@ namespace SquirrelsBackend.Controllers
             hasher = new();
         }
 
+        [HttpGet("catalog")]
+        public IActionResult ReadSquirrelsToCatalog()
+        {
+            return Ok(dbData.Squirrels);
+        }
         [HttpGet("inventory/{userId}")]
         public async Task<IActionResult> GetInventory(int userId)
         {
@@ -36,7 +41,7 @@ namespace SquirrelsBackend.Controllers
             foreach (var item in user.Squirrels)
             {
                 Squirrel squirrel = await dbData.Squirrels.FindAsync(item.SquirrelId);
-                ReturnInventory returnSquirrel = new ReturnInventory(squirrel.Name, item.Count);
+                ReturnInventory returnSquirrel = new ReturnInventory(squirrel, item.Count);
                 returnData.Add(returnSquirrel);
             }
 
@@ -71,6 +76,11 @@ namespace SquirrelsBackend.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterRequest registerData)
         {
+            if (registerData == null)
+            {
+                return NotFound();
+            }
+
             var checkingUser = await dbData.Users.FirstOrDefaultAsync(u => u.Name == registerData.Username);
 
             if (checkingUser != null || registerData.Username.Length < 3 || registerData.Username.Length > 12)
