@@ -3,11 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Squirrels Game - Shop</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
-    <title>Squirrels Game - Shop</title>
-    <link rel="icon" type="image/png" href="./../images/kingmidas.png">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pixelify+Sans:wght@400..700&family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tiny5&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pixelify+Sans:wght@400..700&family=Tiny5&family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DotGothic16&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pixelify+Sans:wght@400..700&family=Tiny5&family=VT323&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/png" href="./../images/king_midas.png">
     <link rel="stylesheet" href="./../styles/shop.css">
 </head>
 <body>
@@ -50,9 +55,20 @@
                 <div class="cone-card frame-common" id="card-1">
                     <h3>FOREST FIND</h3>
                     <span class="rarity common">BASIC</span>
+                    
                     <div class="cone-display">
-                        <img src="./../images/basic-pi.png" alt="Common Cone" class="cone-img">
+                        <img src="./../images/basic-pi.png" alt="Common Cone" class="cone-img" draggable="false">
+                        
+                        <div class="egg-info-box">
+                            <h4>CHANCE:</h4>
+                            <hr>
+                            <ul>
+                                <li>COMMON: 85%</li>
+                                <li>RARE: 15%</li>
+                            </ul>
+                        </div>
                     </div>
+                    
                     <div class="price-tag"> FREE </div>
                     <button class="buy-btn" onclick="startHatching(1)">BUY</button>
                 </div>
@@ -62,6 +78,16 @@
                     <span class="rarity uncommon">SILVER</span>
                     <div class="cone-display">
                         <img src="./../images/silver-pi.png" alt="Uncommon Cone" class="cone-img">
+                    
+                        <div class="egg-info-box">
+                            <h4>CHANCE:</h4>
+                            <hr>
+                            <ul>
+                                <li>COMMON: 58%</li>
+                                <li>RARE: 37%</li>
+                                <li>EPIC: 5%</li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="price-tag">🌰 60 </div>
                     <button class="buy-btn" onclick="startHatching(2)">BUY</button>
@@ -72,6 +98,16 @@
                     <span class="rarity rare">GOLD</span>
                     <div class="cone-display">
                         <img src="./../images/golden-pi.png" alt="Rare Cone" class="cone-img">
+                    
+                        <div class="egg-info-box">
+                            <h4>CHANCE:</h4>
+                            <hr>
+                            <ul>
+                                <li>RARE: 68%</li>
+                                <li>EPIC: 29%</li>
+                                <li>LEGENDARY: 3%</li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="price-tag">🌰 200</div>
                     <button class="buy-btn" onclick="startHatching(3)">BUY</button>

@@ -1,10 +1,18 @@
+@font-face {
+    font-family: "GameGlobalNumbers";
+    src: url('https://fonts.gstatic.com/s/dotgothic16/v9/blAnKFY0adpX7tcUtHdfbCdbK1M.woff2') format('woff2');
+    unicode-range: U+0030-0039, U+0025; 
+    font-weight: 900;
+}       
+
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     overflow: hidden;
     animation: pixelSlideLoad 1s steps(4) forwards;
-    font-family: "Pixelify Sans", sans-serif;
+    font-family: "GameGlobalNumbers", "Pixelify Sans", sans-serif;
+
     font-optical-sizing: auto;
     font-weight: 800;
     font-style: normal;
