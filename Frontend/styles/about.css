@@ -2,11 +2,11 @@
 .about-main {
     flex-direction: column; 
     justify-content: flex-start; 
-    margin-top: -100px;
+    margin-top: -0px;
 }
 
 .about-board {
-    margin-top: 100px;
+    margin-top: 75px;
 }
 
 /* Kontejner pro tlačítka nad papírem */
@@ -15,7 +15,7 @@
     justify-content: center;
     gap: 20px;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1300px;
     margin-bottom: -150px;
     z-index: 10;
 }
@@ -31,6 +31,7 @@
     border: none;
     cursor: pointer;
     transition: transform 0.15s ease, filter 0.15s ease;
+    margin-top: -70px;
 }
 
 .tab-btn:hover {
