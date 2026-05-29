@@ -112,6 +112,7 @@ function registerHatchClick() {
                 aktualniZvuk.play();
             }
         } else {
+            isOpening = false;
             revealSquirrel();
         }
     }
