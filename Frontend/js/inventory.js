@@ -18,29 +18,29 @@ async function loadInventory() {
         }
 
         const squirrels = await response.json();
-
+        //console.log(squirrels);
         inventoryGrid.innerHTML = "";
 
         squirrels.forEach(squirrel => {
-            const displayName = squirrel.name
+            const displayName = squirrel.returningSquirrel.name
                 .split("_")
                 .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
                 .join(" ");
 
             const slot = document.createElement("div");
             
-            if(squirrel.rarity === 0) {
+            if(squirrel.returningSquirrel.rarity === 0) {
                 slot.classList.add("item-slot", "common");
-            } else if(squirrel.rarity === 1) {
+            } else if(squirrel.returningSquirrel.rarity === 1) {
                 slot.classList.add("item-slot", "rare");
-            } else if(squirrel.rarity === 2) {
+            } else if(squirrel.returningSquirrel.rarity === 2) {
                 slot.classList.add("item-slot", "epic");
-            } else if(squirrel.rarity === 3) {
+            } else if(squirrel.returningSquirrel.rarity === 3) {
                 slot.classList.add("item-slot", "legendary");
             }
 
             const img = document.createElement("img");
-            img.src = `./../images/${squirrel.name}.png`;
+            img.src = `./../images/${squirrel.returningSquirrel.name}.png`;
             img.alt = displayName;
 
             const count = document.createElement("span");
@@ -51,15 +51,15 @@ async function loadInventory() {
             slot.appendChild(count);
 
             const modalData = {
-                squirrelId: squirrel.id,
+                squirrelId: squirrel.returningSquirrel.id,
                 name: displayName,
-                desc: squirrel.description,
-                str: squirrel.strength,
-                spd: squirrel.speed,
-                dur: squirrel.durability,
-                price: squirrel.cost,
-                img: `./../images/${squirrel.name}.png`,
-                rarity: squirrel.rarity,
+                desc: squirrel.returningSquirrel.description,
+                str: squirrel.returningSquirrel.strength,
+                spd: squirrel.returningSquirrel.speed,
+                dur: squirrel.returningSquirrel.durability,
+                price: squirrel.returningSquirrel.cost,
+                img: `./../images/${squirrel.returningSquirrel.name}.png`,
+                rarity: squirrel.returningSquirrel.rarity,
                 count: squirrel.count
             }
 
@@ -92,6 +92,7 @@ const closeBtn = document.querySelector('.close-btn'); // [cite: 33]
 
 function openModal(data) { // [cite: 34]
     selectedSquirrelId = data.squirrelId;
+    selectedSquirrelCount = data.count;
     modalTitle.innerText = data.name; // [cite: 34]
     modalDesc.innerText = data.desc; // [cite: 34]
     modalPrice.innerText = data.price; // [cite: 34]
@@ -112,8 +113,60 @@ const sellOneBtn = document.getElementById('sell-one-btn');
 const sellAllBtn = document.getElementById('sell-all-btn');
 const sellTenBtn = document.getElementById('sell-ten-btn');
 
-sellOneBtn.addEventListener('click', function() {
-    const response = await fetch(`https://localhost:7179/api/squirrels/sell/${loggedUser.id}/${selectedSquirrelId}/1`, {
-        method: "DELETE",
-    });
-});
+sellOneBtn.addEventListener("click", sellOneSquirrel);
+sellTenBtn.addEventListener("click", sellTenSquirrel);
+sellAllBtn.addEventListener("click", sellAllSquirrels);
+
+async function sellOneSquirrel() {
+    try {
+        const response = await fetch(`https://localhost:7179/api/squirrels/sell/${loggedUser.id}/${selectedSquirrelId}/1`, {
+            method: "DELETE",
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to sell one squirrel.");
+        }
+
+        modal.classList.remove("active");
+        loadInventory();
+
+    } catch (error) {
+        console.error("Chyba:", error);
+    }
+}
+
+async function sellTenSquirrel() {
+    try {
+        const response = await fetch(`https://localhost:7179/api/squirrels/sell/${loggedUser.id}/${selectedSquirrelId}/10`, {
+            method: "DELETE",
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to sell ten squirrels.");
+        }
+
+        modal.classList.remove("active");
+        loadInventory();
+
+    } catch (error) {
+        console.error("Chyba:", error);
+    }
+}
+
+async function sellAllSquirrels() {
+    try {
+        const response = await fetch(`https://localhost:7179/api/squirrels/sell/${loggedUser.id}/${selectedSquirrelId}/${selectedSquirrelCount}`, {
+            method: "DELETE",
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to sell all squirrels.");
+        }
+
+        modal.classList.remove("active");
+        loadInventory();
+
+    } catch (error) {
+        console.error("Chyba:", error);
+    }
+}

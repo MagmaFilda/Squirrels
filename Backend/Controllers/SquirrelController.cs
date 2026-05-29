@@ -177,7 +177,7 @@ namespace SquirrelsBackend.Controllers
                 {
                     inventorySlot.Count -= count;
                 }
-                user.Money += squirrel.Cost;
+                user.Money += squirrel.Cost*count;
 
                 await dbData.SaveChangesAsync();
 
