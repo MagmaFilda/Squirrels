@@ -1,5 +1,7 @@
 const loggedUser = getLoggedUser();
 const inventoryGrid = document.getElementById('inventoryGrid');
+    
+let selectedSquirrelId = null;
 
 if (!loggedUser) {
     inventoryGrid.innerHTML = '<p>You must <a href="login.html?redirect=invertory.html">log in</a> to see your inventory.</p>';
@@ -15,8 +17,6 @@ async function loadInventory() {
             throw new Error("Failed to load inventory.");
         }
 
-        console.log(await response.json());
-
         const squirrels = await response.json();
 
         inventoryGrid.innerHTML = "";
@@ -29,14 +29,14 @@ async function loadInventory() {
 
             const slot = document.createElement("div");
             
-            if(squirrel.rarity === "common") {
-                slot.classList.add("item-slot.common");
-            } else if(squirrel.rarity === "rare") {
-                slot.classList.add("item-slot.rare");
-            } else if(squirrel.rarity === "epic") {
-                slot.classList.add("item-slot.epic");
-            } else if(squirrel.rarity === "legendary") {
-                slot.classList.add("item-slot.legendary");
+            if(squirrel.rarity === 0) {
+                slot.classList.add("item-slot", "common");
+            } else if(squirrel.rarity === 1) {
+                slot.classList.add("item-slot", "rare");
+            } else if(squirrel.rarity === 2) {
+                slot.classList.add("item-slot", "epic");
+            } else if(squirrel.rarity === 3) {
+                slot.classList.add("item-slot", "legendary");
             }
 
             const img = document.createElement("img");
@@ -51,16 +51,20 @@ async function loadInventory() {
             slot.appendChild(count);
 
             const modalData = {
+                squirrelId: squirrel.id,
                 name: displayName,
                 desc: squirrel.description,
-                str: squirrel.Errorstrength,
+                str: squirrel.strength,
                 spd: squirrel.speed,
                 dur: squirrel.durability,
                 price: squirrel.cost,
                 img: `./../images/${squirrel.name}.png`,
-                rarity: squirrel.rarity
+                rarity: squirrel.rarity,
+                count: squirrel.count
             }
+
             slot.addEventListener("click", () => {
+                
                 if (modalData) {
                     openModal(modalData);
                 }
@@ -87,6 +91,7 @@ const barDur = document.getElementById('bar-dur'); // [cite: 33]
 const closeBtn = document.querySelector('.close-btn'); // [cite: 33]
 
 function openModal(data) { // [cite: 34]
+    selectedSquirrelId = data.squirrelId;
     modalTitle.innerText = data.name; // [cite: 34]
     modalDesc.innerText = data.desc; // [cite: 34]
     modalPrice.innerText = data.price; // [cite: 34]
@@ -107,8 +112,8 @@ const sellOneBtn = document.getElementById('sell-one-btn');
 const sellAllBtn = document.getElementById('sell-all-btn');
 const sellTenBtn = document.getElementById('sell-ten-btn');
 
-// sellOneBtn.addEventListener('click', function() {
-//     const response = await fetch(`https://localhost:7179/api/squirrels/sell/${loggedUser.id}`, {
-//         method: "DELETE",
-//     });
-// });
+sellOneBtn.addEventListener('click', function() {
+    const response = await fetch(`https://localhost:7179/api/squirrels/sell/${loggedUser.id}/${selectedSquirrelId}/1`, {
+        method: "DELETE",
+    });
+});
