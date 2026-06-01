@@ -1,0 +1,23 @@
+services:
+  # ── Backend: .NET Web Service (Docker) ───────────────────────
+  - type: web
+    name: squirrels-backend
+    runtime: docker
+    rootDir: Backend
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: ConnectionStrings__DefaultConnection
+        fromDatabase:
+          name: squirrels-db
+          property: connectionString
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: CORS_ORIGIN
+        value: "https://squirrels-frontend.onrender.com"   # 🔴 Změníte s týmem až po nasazení frontendu
+
+# ── Database: PostgreSQL ───────────────────────────────────────
+databases:
+  - name: squirrels-db
+    plan: free
+    ipAllowList: []
