@@ -1,5 +1,6 @@
 const loggedUser = getLoggedUser();
 const inventoryGrid = document.getElementById('inventoryGrid');
+const nutsCount = document.getElementById("nut-count");
     
 let selectedSquirrelId = null;
 
@@ -7,6 +8,21 @@ if (!loggedUser) {
     inventoryGrid.innerHTML = '<p>You must <a href="login.html?redirect=invertory.html">log in</a> to see your inventory.</p>';
 } else {
     loadInventory();
+    readMoney();
+}
+
+async function readMoney() {
+    try {
+        const response = await fetch(`https://localhost:7179/api/squirrels/readMoney/${loggedUser.id}`);
+
+        if (!response.ok) {
+            throw new Error("Failed to load money.");
+        }
+
+        nutsCount.innerText = await response.text();
+    } catch (error) {
+        console.error("Chyba:", error);
+    }
 }
 
 async function loadInventory() {
@@ -131,6 +147,7 @@ async function sellOneSquirrel() {
 
         modal.classList.remove("active");
         loadInventory();
+        readMoney();
 
     } catch (error) {
         console.error("Chyba:", error);
@@ -149,6 +166,7 @@ async function sellTenSquirrel() {
 
         modal.classList.remove("active");
         loadInventory();
+        readMoney();
 
     } catch (error) {
         console.error("Chyba:", error);
@@ -167,6 +185,7 @@ async function sellAllSquirrels() {
 
         modal.classList.remove("active");
         loadInventory();
+        readMoney();
 
     } catch (error) {
         console.error("Chyba:", error);
