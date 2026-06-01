@@ -145,7 +145,6 @@ body {
 }   
 
 
-/* --- OKNO OBCHODU --- */
 .shop-container {
     width: 100%;
     height: calc(100vh - 90px);
@@ -220,9 +219,7 @@ body {
     position: relative; /* Nutné pro přišpendlení BUY tlačítka dolů */
 }
 
-/* ====================================================================
-   ZDE SI NAVAŽ SVÉ TŘI ROZDÍLNÉ OBRÁZKY RÁMEČKŮ Z IMAGES
-   ==================================================================== */
+
 .frame-common { background-image: url('./../images/basic-frame.png'); }
 .frame-uncommon { background-image: url('./../images/silver-frame.png'); }
 .frame-rare { background-image: url('./../images/gold-frame.png'); }
@@ -328,7 +325,6 @@ body {
     margin-bottom: -35px; /* Nechává místo pro tlačítko */
 }
 
-/* TLAČÍTKO VÍCÍCÍ NA SPODNÍ HRANĚ TVÉHO RÁMEČKU */
 .buy-btn {
     position: absolute;
     bottom: 15px; 
@@ -425,7 +421,6 @@ body {
     cursor: pointer;
 }
 
-/* ANIMACE TŘESENÍ */
 .shake-animation {
     animation: shake 0.4s ease-in-out;
 }
@@ -437,7 +432,6 @@ body {
     100% { transform: rotate(0deg); }
 }
 
-/* ANIMACE VYLÍHNUTÍ */
 .squirrel-revealed-animation {
     animation: popOut 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
@@ -547,4 +541,147 @@ body {
 #custom-alert.alert-show {
     opacity: 1;
     pointer-events: auto;
+}
+
+@media (max-width: 780px) {
+    .shop-container {
+    width: 100%;
+    height: calc(100vh - 90px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.shop-window {
+    background: #eedcb5;
+    border: 5px solid #5c3a21;
+    width: 100%;
+    max-width: 1120px;
+    padding: 30px 20px 20px 20px;
+    position: relative;
+    box-shadow: 0 0 0 5px #000, 0 15px 25px rgba(0,0,0,0.6);
+    height: 70vh;
+    margin-bottom: 5%;
+}
+
+.exchange-title {
+    text-align: center;
+    color: #5c3a21;
+    font-size: 45px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.player-currency {
+    position: absolute;
+    top: -18px;
+    left: 30px;
+    background: #f4eccf;
+    padding: 4px 12px;
+    border: 2px solid #5c3a21;
+    box-shadow: -2px 0 #5c3a21, 2px 0 #5c3a21, 0 -2px #5c3a21, 0 2px #5c3a21;
+}
+
+.currency-label {
+    font-size: 10px;
+    color: #7a583c;
+    font-weight: bold;
+    display: block;
+}
+
+.currency-value {
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+}
+
+.cones-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+.cone-card {
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: auto; 
+    padding: 25px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative; /* Nutné pro přišpendlení BUY tlačítka dolů */
+}
+
+
+.frame-common { background-image: url('./../images/basic-frame.png'); }
+.frame-uncommon { background-image: url('./../images/silver-frame.png'); }
+.frame-rare { background-image: url('./../images/gold-frame.png'); }
+
+
+.cone-card h3 {
+    font-size: 20px;
+    color: #3d210a;
+    margin-top: 5px;
+}
+
+.rarity {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: -20px;
+}
+.common { color: #8b5a2b; }
+.uncommon { color: #828483; }
+.rare { color: #cd7f32; }
+
+.cone-display {
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    position: relative; 
+}
+
+.cone-img {
+    max-height: 240px;
+    width: auto;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.cone-img:hover {
+    transform: scale(1.06);
+}
+
+.cone-display .egg-info-box {
+    display: none;
+    position: absolute;
+    bottom: 90%; 
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 99;
+    width: 140px; 
+    background-color: #6d6d6c;
+    border: 4px solid #111111;
+    padding: 10px;
+    color: #ffffff;
+    text-align: left;
+    box-shadow: 0 4px 0px rgba(0,0,0,0.3);
+    -webkit-user-select: none;
+    user-select: none;
+
+}
+
+.page-title img {
+    height: 100px;
+    width: auto;
+    margin-left: 10%;  
+}
 }

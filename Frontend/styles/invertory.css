@@ -391,3 +391,75 @@ html, body, img, .item-slot, .back-btn {
 .sell-btn:active {
     transform: scale(0.95);
 }
+
+@media (max-width: 780px) {
+    .page-title {
+    max-height: 500px;
+}
+.page-title img {
+    height: 90px;
+    width: auto;
+}
+.item-slot.common {
+    background: url('./../images/back.png') no-repeat center center/80px 80px; 
+    border-radius: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    transition: background-color 0.15s ease;
+    height: 100%;
+    width: auto;
+}
+
+.item-slot.rare {
+    background: url('./../images/back-rare.png') no-repeat center center/80px 80px; 
+    border-radius: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    transition: background-color 0.15s ease;
+    height: 100%;
+    width: auto;
+}
+
+.item-slot.epic {
+    background: url('./../images/back-epic.png') no-repeat center center/80px 80px; 
+    border-radius: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.item-slot.legendary {
+    background: url('./../images/back-legendary1.png') no-repeat center center/80px 80px; 
+    border-radius: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    transition: background-color 0.15s ease;
+    height: 100%;
+    width: auto;
+}
+.item-count {
+    position: absolute;
+    right: 0px;
+    bottom: -5px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px black;
+}
+.inventory-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 0; 
+    
+    width: 1500px;
+    
+    height: 50vh; 
+}
+}
