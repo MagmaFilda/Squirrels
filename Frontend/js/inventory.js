@@ -12,9 +12,10 @@ if (!isLoggedIn()) {
 
 async function readMoney() {
     try {
-        const response = await fetch(`https://localhost:7179/api/squirrels/readMoney`,
+        const response = await fetch(`https://squirrels-backend.onrender.com/readMoney`,
         {
             headers:
+
             {
                 "Authorization": `Bearer ${getToken()}`
             }
@@ -32,7 +33,7 @@ async function readMoney() {
 
 async function loadInventory() {
     try {
-        const response = await fetch(`https://localhost:7179/api/squirrels/inventory`,
+        const response = await fetch(`https://squirrels-backend.onrender.com/inventory`,
         {
             headers:
             {
@@ -148,7 +149,7 @@ sellAllBtn.addEventListener("click", sellAllSquirrels);
 
 async function sellOneSquirrel() {
     try {
-        const response = await fetch(`https://localhost:7179/api/squirrels/sell/${selectedSquirrelId}/1`, {
+        const response = await fetch(`https://squirrels-backend.onrender.com/sell/${selectedSquirrelId}/1`, {
             method: "DELETE",
             headers:
             {
@@ -171,7 +172,7 @@ async function sellOneSquirrel() {
 
 async function sellTenSquirrel() {
     try {
-        const response = await fetch(`https://localhost:7179/api/squirrels/sell/${selectedSquirrelId}/10`, {
+        const response = await fetch(`https://squirrels-backend.onrender.com/sell/${selectedSquirrelId}/10`, {
             method: "DELETE",
             headers:
             {
@@ -194,7 +195,7 @@ async function sellTenSquirrel() {
 
 async function sellAllSquirrels() {
     try {
-        const response = await fetch(`https://localhost:7179/api/squirrels/sell/${selectedSquirrelId}/${selectedSquirrelCount}`, {
+        const response = await fetch(`https://squirrels-backend.onrender.com/sell/${selectedSquirrelId}/${selectedSquirrelCount}`, {
             method: "DELETE",
             headers:
             {

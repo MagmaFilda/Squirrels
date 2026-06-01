@@ -19,7 +19,7 @@ loginForm.addEventListener("submit", async function (event) {
     }
 
     try {
-        const response = await fetch("https://localhost:7179/api/squirrels/login", {
+        const response = await fetch("https://squirrels-backend.onrender.com/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
