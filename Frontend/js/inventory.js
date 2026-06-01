@@ -1,10 +1,9 @@
-const loggedUser = getLoggedUser();
 const inventoryGrid = document.getElementById('inventoryGrid');
 const nutsCount = document.getElementById("nut-count");
     
 let selectedSquirrelId = null;
 
-if (!loggedUser) {
+if (!isLoggedIn()) {
     inventoryGrid.innerHTML = '<p>You must <a href="login.html?redirect=invertory.html">log in</a> to see your inventory.</p>';
 } else {
     loadInventory();
@@ -13,7 +12,13 @@ if (!loggedUser) {
 
 async function readMoney() {
     try {
-        const response = await fetch(`https://localhost:7179/api/squirrels/readMoney/${loggedUser.id}`);
+        const response = await fetch(`https://localhost:7179/api/squirrels/readMoney`,
+        {
+            headers:
+            {
+                "Authorization": `Bearer ${token}`
+            }
+        });
 
         if (!response.ok) {
             throw new Error("Failed to load money.");
@@ -27,7 +32,13 @@ async function readMoney() {
 
 async function loadInventory() {
     try {
-        const response = await fetch(`https://localhost:7179/api/squirrels/inventory/${loggedUser.id}`);
+        const response = await fetch(`https://localhost:7179/api/squirrels/inventory`,
+        {
+            headers:
+            {
+                "Authorization": `Bearer ${token}`
+            }
+        });
 
         if (!response.ok) {
             throw new Error("Failed to load inventory.");
@@ -137,8 +148,12 @@ sellAllBtn.addEventListener("click", sellAllSquirrels);
 
 async function sellOneSquirrel() {
     try {
-        const response = await fetch(`https://localhost:7179/api/squirrels/sell/${loggedUser.id}/${selectedSquirrelId}/1`, {
+        const response = await fetch(`https://localhost:7179/api/squirrels/sell/${selectedSquirrelId}/1`, {
             method: "DELETE",
+            headers:
+            {
+                "Authorization": `Bearer ${token}`
+            }
         });
 
         if (!response.ok) {
@@ -156,8 +171,12 @@ async function sellOneSquirrel() {
 
 async function sellTenSquirrel() {
     try {
-        const response = await fetch(`https://localhost:7179/api/squirrels/sell/${loggedUser.id}/${selectedSquirrelId}/10`, {
+        const response = await fetch(`https://localhost:7179/api/squirrels/sell/${selectedSquirrelId}/10`, {
             method: "DELETE",
+            headers:
+            {
+                "Authorization": `Bearer ${token}`
+            }
         });
 
         if (!response.ok) {
@@ -175,9 +194,14 @@ async function sellTenSquirrel() {
 
 async function sellAllSquirrels() {
     try {
-        const response = await fetch(`https://localhost:7179/api/squirrels/sell/${loggedUser.id}/${selectedSquirrelId}/${selectedSquirrelCount}`, {
+        const response = await fetch(`https://localhost:7179/api/squirrels/sell/${selectedSquirrelId}/${selectedSquirrelCount}`, {
             method: "DELETE",
+            headers:
+            {
+                "Authorization": `Bearer ${token}`
+            }
         });
+
 
         if (!response.ok) {
             throw new Error("Failed to sell all squirrels.");

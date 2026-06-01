@@ -33,10 +33,8 @@ loginForm.addEventListener("submit", async function (event) {
 
         const result = await response.json();
 
-        localStorage.setItem("loggedUser", JSON.stringify({
-            id: result,
-            username: username
-        }));
+        localStorage.setItem("token", result.token);
+        localStorage.setItem("username", username);
 
         const params = new URLSearchParams(window.location.search);
         const redirectPage = params.get("redirect") || "index.html";
