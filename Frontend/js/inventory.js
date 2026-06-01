@@ -70,7 +70,7 @@ async function loadInventory() {
             }
 
             const img = document.createElement("img");
-            img.src = `./../images/${squirrel.returningSquirrel.name}.png`;
+            img.src = `../images/${squirrel.returningSquirrel.name}.png`;
             img.alt = displayName;
 
             const count = document.createElement("span");
@@ -88,7 +88,7 @@ async function loadInventory() {
                 spd: squirrel.returningSquirrel.speed,
                 dur: squirrel.returningSquirrel.durability,
                 price: squirrel.returningSquirrel.cost,
-                img: `./../images/${squirrel.returningSquirrel.name}.png`,
+                img: `../images/${squirrel.returningSquirrel.name}.png`,
                 rarity: squirrel.returningSquirrel.rarity,
                 count: squirrel.count
             }

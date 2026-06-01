@@ -45,7 +45,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background: url('./../images/background.png') no-repeat center center/cover;
+    background: url('../images/background.png') no-repeat center center/cover;
     font-family: 'Press Start 2P', monospace;    
     overflow-x: hidden;
 }
@@ -98,7 +98,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url('./../images/button.png') no-repeat center center/contain;
+    background: url('../images/button.png') no-repeat center center/contain;
     text-decoration: none;
     color: #63372C;
     text-shadow: 2px 2px 0px #C97D60; 
@@ -137,7 +137,7 @@ body {
     width: 420px; 
     height: 225px;  
     
-    background: url('./../images/button.png') no-repeat center center / 100% 100%;
+    background: url('../images/button.png') no-repeat center center / 100% 100%;
     text-decoration: none;
     
 }
@@ -166,7 +166,7 @@ body {
         align-items: center;
         gap: 12px;
         z-index: 9999;
-        background: url('./../images/button.png') no-repeat center center / 190% 190%;
+        background: url('../images/button.png') no-repeat center center / 190% 190%;
         border: 2px solid #000000;  
         padding: 8px 12px;
         margin-top: -17px;
@@ -213,7 +213,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background: url('./../images/background.png') no-repeat center center/cover;
+    background: url('../images/background.png') no-repeat center center/cover;
     font-family: 'Press Start 2P', monospace;    
     overflow-x: hidden;
 }

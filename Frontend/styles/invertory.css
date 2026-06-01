@@ -12,7 +12,7 @@ body {
     overflow: hidden;
     animation: pixelSlideLoad 1s steps(4) forwards;
 
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./../images/background.png') no-repeat center center/cover;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/background.png') no-repeat center center/cover;
 
     font-family: "GameGlobalNumbers", "Pixelify Sans", sans-serif;
 
@@ -98,7 +98,7 @@ html, body, img, .item-slot, .back-btn {
     display: block;
     width: 140px;
     height: 55px;
-    background: url('./../images/back-button.png') no-repeat center center/contain; /* Sem dej své dřevěné BACK tlačítko */
+    background: url('../images/back-button.png') no-repeat center center/contain; /* Sem dej své dřevěné BACK tlačítko */
     transition: transform 0.15s ease;
 }
 .back-btn:hover {
@@ -147,7 +147,7 @@ html, body, img, .item-slot, .back-btn {
 
 
 .item-slot.common {
-    background: url('./../images/back.png') no-repeat center center/150px 150px; 
+    background: url('../images/back.png') no-repeat center center/150px 150px; 
     border-radius: 0px;
     display: flex;
     justify-content: center;
@@ -159,7 +159,7 @@ html, body, img, .item-slot, .back-btn {
 }
 
 .item-slot.rare {
-    background: url('./../images/back-rare.png') no-repeat center center/150px 150px; 
+    background: url('../images/back-rare.png') no-repeat center center/150px 150px; 
     border-radius: 0px;
     display: flex;
     justify-content: center;
@@ -171,7 +171,7 @@ html, body, img, .item-slot, .back-btn {
 }
 
 .item-slot.epic {
-    background: url('./../images/back-epic.png') no-repeat center center/150px 150px; 
+    background: url('../images/back-epic.png') no-repeat center center/150px 150px; 
     border-radius: 0px;
     display: flex;
     justify-content: center;
@@ -179,7 +179,7 @@ html, body, img, .item-slot, .back-btn {
 }
 
 .item-slot.legendary {
-    background: url('./../images/back-legendary1.png') no-repeat center center/150px 150px; 
+    background: url('../images/back-legendary1.png') no-repeat center center/150px 150px; 
     border-radius: 0px;
     display: flex;
     justify-content: center;
@@ -205,7 +205,7 @@ html, body, img, .item-slot, .back-btn {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url('./../images/button.png') no-repeat center center/contain;
+    background: url('../images/button.png') no-repeat center center/contain;
     text-decoration: none;
     color: #63372C;
     text-shadow: 2px 2px 0px #C97D60; 
@@ -429,7 +429,7 @@ html, body, img, .item-slot, .back-btn {
         width: auto;
     }
     .item-slot.common {
-        background: url('./../images/back.png') no-repeat center center/80px 80px; 
+        background: url('../images/back.png') no-repeat center center/80px 80px; 
         border-radius: 0px;
         display: flex;
         justify-content: center;
@@ -441,7 +441,7 @@ html, body, img, .item-slot, .back-btn {
     }
 
     .item-slot.rare {
-        background: url('./../images/back-rare.png') no-repeat center center/80px 80px; 
+        background: url('../images/back-rare.png') no-repeat center center/80px 80px; 
         border-radius: 0px;
         display: flex;
         justify-content: center;
@@ -453,7 +453,7 @@ html, body, img, .item-slot, .back-btn {
     }
 
     .item-slot.epic {
-        background: url('./../images/back-epic.png') no-repeat center center/80px 80px; 
+        background: url('../images/back-epic.png') no-repeat center center/80px 80px; 
         border-radius: 0px;
         display: flex;
         justify-content: center;
@@ -461,7 +461,7 @@ html, body, img, .item-slot, .back-btn {
     }
 
     .item-slot.legendary {
-        background: url('./../images/back-legendary1.png') no-repeat center center/80px 80px; 
+        background: url('../images/back-legendary1.png') no-repeat center center/80px 80px; 
         border-radius: 0px;
         display: flex;
         justify-content: center;

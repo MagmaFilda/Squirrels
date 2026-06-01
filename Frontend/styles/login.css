@@ -20,7 +20,7 @@ body {
     font-optical-sizing: auto;
     font-weight: 800;
     font-style: normal;
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./../images/background.png') no-repeat center center/cover;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/background.png') no-repeat center center/cover;
 }
 
 @keyframes pixelSlideLoad {
@@ -66,7 +66,7 @@ html, body, img, .item-slot, .back-btn {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url('./../images/button.png') no-repeat center center/contain;
+    background: url('../images/button.png') no-repeat center center/contain;
     width: 260px; 
     height: 185px;
     transition: transform 0.15s ease;
@@ -88,7 +88,7 @@ html, body, img, .item-slot, .back-btn {
     position: relative;
     width: 210vh;
     height: 80vh;
-    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('./../images/paper.png') no-repeat center center/cover;
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('../images/paper.png') no-repeat center center/cover;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -287,7 +287,7 @@ pixel-decor img {
     position: relative;
     width: 150vh;
     height: 90vh;
-    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('./../images/paper.png') no-repeat center center/cover;
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('../images/paper.png') no-repeat center center/cover;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -48,7 +48,7 @@ registerForm.addEventListener("submit", async function (event) {
             throw new Error("Bad username.");
         }
         
-        window.location.href = "./../html/index.html";
+        window.location.href = "../index.html";
 
     } catch (error) {
         console.error("Chyba:", error);

@@ -33,7 +33,7 @@ async function loadCatalog() {
             }
 
             const img = document.createElement("img");
-            img.src = `./../images/${squirrel.name}.png`;
+            img.src = `../images/${squirrel.name}.png`;
             img.alt = displayName;
 
             slot.appendChild(img);
@@ -46,7 +46,7 @@ async function loadCatalog() {
                 spd: squirrel.speed,
                 dur: squirrel.durability,
                 price: squirrel.cost,
-                img: `./../images/${squirrel.name}.png`,
+                img: `../images/${squirrel.name}.png`,
                 rarity: squirrel.rarity
             }
 

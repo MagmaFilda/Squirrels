@@ -20,7 +20,8 @@ function getAuthHeaders() {
 
 function logout() {
     localStorage.removeItem("token");
-    window.location.href = "./../html/index.html";
+    localStorage.removeItem("username");
+    window.location.href = "../index.html";
 }
 
 async function authFetch(url, options = {}) {
