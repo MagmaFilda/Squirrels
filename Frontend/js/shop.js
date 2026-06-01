@@ -55,7 +55,7 @@ async function startHatching(coneId) {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
+                "Authorization": `Bearer ${getToken()}`
             }
         });
         
@@ -151,7 +151,7 @@ async function readMoney() {
         {
             headers:
             {
-                "Authorization": `Bearer ${token}`
+                "Authorization": `Bearer ${getToken()}`
             }
         });
 

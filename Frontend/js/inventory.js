@@ -16,7 +16,7 @@ async function readMoney() {
         {
             headers:
             {
-                "Authorization": `Bearer ${token}`
+                "Authorization": `Bearer ${getToken()}`
             }
         });
 
@@ -36,7 +36,7 @@ async function loadInventory() {
         {
             headers:
             {
-                "Authorization": `Bearer ${token}`
+                "Authorization": `Bearer ${getToken()}`
             }
         });
 
@@ -152,7 +152,7 @@ async function sellOneSquirrel() {
             method: "DELETE",
             headers:
             {
-                "Authorization": `Bearer ${token}`
+                "Authorization": `Bearer ${getToken()}`
             }
         });
 
@@ -175,7 +175,7 @@ async function sellTenSquirrel() {
             method: "DELETE",
             headers:
             {
-                "Authorization": `Bearer ${token}`
+                "Authorization": `Bearer ${getToken()}`
             }
         });
 
@@ -198,7 +198,7 @@ async function sellAllSquirrels() {
             method: "DELETE",
             headers:
             {
-                "Authorization": `Bearer ${token}`
+                "Authorization": `Bearer ${getToken()}`
             }
         });
 
