@@ -1,4 +1,3 @@
-/* Úprava hlavního kontejneru pro stránku About */
 .about-main {
     flex-direction: column; 
     justify-content: flex-start; 
@@ -9,7 +8,6 @@
     margin-top: 75px;
 }
 
-/* Kontejner pro tlačítka nad papírem */
 .about-tabs {
     display: flex;
     justify-content: center;
@@ -20,7 +18,6 @@
     z-index: 10;
 }
 
-/* Styl tlačítek s tvým button.png */
 .tab-btn {
     display: flex;
     justify-content: center;
@@ -71,7 +68,6 @@
     font-weight: 700;
 }
 
-/* RETRO AUDIO POSUVNÍK */
 .volume-container {
     position: fixed;
     top: 25px;
@@ -147,4 +143,42 @@
     100% {
         transform: translateY(-6px); /* Obrázek se bude mírně vznášet nahoru a dolů */
     }
+}
+
+@media (max-width: 780px) {
+    .tab-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('./../images/button.png') no-repeat center center/contain;
+    width: 300px;
+    height: 200px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.15s ease, filter 0.15s ease;
+    margin-top: -40px;
+}
+.about-text-container {
+    width: 50%;
+    max-width: 650px;
+    text-align: center;
+    color: #312116;
+    font-family: inherit;
+    overflow-y: auto;
+    max-height: 45vh;
+    padding-right: 10px;
+    margin-top: 60px;
+}
+
+.about-text-container h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.about-text-container p {
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 700;
+}
 }
