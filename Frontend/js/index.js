@@ -1,14 +1,12 @@
-const loggedUser = getLoggedUser();
-
 const loginBtn = document.getElementById("loginBtn");
 const logoutBtn = document.getElementById("logoutBtn");
 
-if (loggedUser) {
+if (isLoggedIn()) {
     // místo login obrázku zobrazí username
     loginBtn.innerHTML = "";
 
     const usernameText = document.createElement("span");
-    usernameText.textContent = loggedUser.username;
+    usernameText.textContent = getLoggedUser();
     usernameText.classList.add("username-text");
 
     const length = usernameText.textContent.length;

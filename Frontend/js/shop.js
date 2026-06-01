@@ -1,11 +1,10 @@
-const loggedUser = getLoggedUser();
 const nutsCount = document.getElementById("nut-count");
 const shopWindow = document.getElementById("shopWindow");
 const shopContainer = document.querySelector(".shop-container");
 
 let isOpening = false;
 
-if (!loggedUser) {
+if (!isLoggedIn()) {
     shopWindow.innerHTML = '<p>You must <a href="login.html?redirect=shop.html">log in</a> to see shop.</p>';
     shopWindow.classList.remove("shop-window");
     shopContainer.style.alignItems = "flex-start";
@@ -52,10 +51,11 @@ async function startHatching(coneId) {
     isOpening = true;
     
     try {
-        const response = await fetch(`https://localhost:7179/api/squirrels/openSiska/${coneId}/${loggedUser.id}`, {
+        const response = await fetch(`https://localhost:7179/api/squirrels/openSiska/${coneId}`, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
             }
         });
         
@@ -147,7 +147,13 @@ function closeHatchModal() {
 
 async function readMoney() {
     try {
-        const response = await fetch(`https://localhost:7179/api/squirrels/readMoney/${loggedUser.id}`);
+        const response = await fetch(`https://localhost:7179/api/squirrels/readMoney`,
+        {
+            headers:
+            {
+                "Authorization": `Bearer ${token}`
+            }
+        });
 
         if (!response.ok) {
             throw new Error("Failed to load money.");

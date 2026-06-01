@@ -1,14 +1,41 @@
 function getLoggedUser() {
-    const user = localStorage.getItem("loggedUser");
+    return localStorage.getItem("username");
+}
 
-    if (!user) {
-        return null;
-    }
 
-    return JSON.parse(user);
+function getToken() {
+    return localStorage.getItem("token");
+}
+
+function isLoggedIn() {
+    return !!getToken();
+}
+
+function getAuthHeaders() {
+    return {
+        "Authorization": `Bearer ${getToken()}`,
+        "Content-Type": "application/json"
+    };
 }
 
 function logout() {
-    localStorage.removeItem("loggedUser");
+    localStorage.removeItem("token");
     window.location.href = "./../html/index.html";
+}
+
+async function authFetch(url, options = {}) {
+    const response = await fetch(url, {
+        ...options,
+        headers: {
+            ...getAuthHeaders(),
+            ...(options.headers || {})
+        }
+    });
+
+    if (response.status === 401) {
+        logout();
+        return;
+    }
+
+    return response;
 }
