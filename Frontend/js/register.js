@@ -1,6 +1,8 @@
 const registerForm = document.getElementById("registerForm");
 const message = document.getElementById("message");
 const registerButton = document.getElementById("RegisterButton");
+const alertBox = document.getElementById("custom-alert");
+const alertMessage = document.getElementById("alert-message");
 
 registerForm.addEventListener("submit", async function (event) {
     event.preventDefault();
@@ -20,7 +22,14 @@ registerForm.addEventListener("submit", async function (event) {
     }
 
     if(password !== passwordAgain) {
-        message.textContent = "Passwords do not match.";
+        alertMessage.textContent = "Passwords do not match.";
+        alertBox.classList.add("alert-show");
+            
+        setTimeout(() => {
+            alertBox.classList.remove("alert-show");
+            registerButton.disabled = false;
+            registerButton.textContent = "REGISTER";
+        }, 2000);
         return;
     }
 
@@ -39,15 +48,29 @@ registerForm.addEventListener("submit", async function (event) {
             throw new Error("Bad username.");
         }
         
-        message.textContent = "User was successfully registered.";
         window.location.href = "./../html/index.html";
 
     } catch (error) {
         console.error("Chyba:", error);
+        
         if(error.message === "Bad username.") {
-            message.textContent = "Username already exists.";
+            alertMessage.textContent = "Username already exists.";
+            alertBox.classList.add("alert-show");
+            
+            setTimeout(() => {
+                alertBox.classList.remove("alert-show");
+                registerButton.disabled = false;
+                registerButton.textContent = "REGISTER";
+            }, 2000);
             return;
         }
-        message.textContent = "An error occurred during registration.";
+        alertMessage.textContent = "An error occurred during registration.";
+        alertBox.classList.add("alert-show");
+        
+        setTimeout(() => {
+            alertBox.classList.remove("alert-show");
+            registerButton.disabled = false;
+            registerButton.textContent = "REGISTER";
+        }, 2000);
     }
 });
