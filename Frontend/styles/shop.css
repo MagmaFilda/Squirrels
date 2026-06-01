@@ -371,7 +371,7 @@ body {
 .hatch-content {
     background: #f4eccf;
     border: 4px solid #5c3a21;
-    border-radius: 16px;
+    border-radius: 6px;
     padding: 25px;
     text-align: center;
     max-width: 540px;
@@ -541,6 +541,14 @@ body {
 #custom-alert.alert-show {
     opacity: 1;
     pointer-events: auto;
+}
+
+.rarity-text {
+    display: none;
+    font-size: 25px;
+    font-weight: bold;
+    margin: 10px 0;
+    font-family: 'Pixelify Sans', sans-serif;
 }
 
 @media (max-width: 780px) {

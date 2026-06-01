@@ -86,7 +86,7 @@ async function startHatching(coneId) {
         return;
     }
 
-
+    document.getElementById("hatch-rarity-text").style.display = "none";
 
     currentConeId = coneId;
     currentClicks = 4; 
@@ -265,3 +265,39 @@ document.addEventListener("DOMContentLoaded", function () {
             characterData: true
         });
     });
+
+    function revealSquirrel() {
+    hatchSound.currentTime = 0;
+    hatchSound.play();
+
+    hatchClicksLeft.style.display = "none";
+    hatchStatusText.innerText = `YOU GOT A ${squirrelName.replaceAll("_", " ").toUpperCase()}!`;
+    
+    const rarityText = document.getElementById("hatch-rarity-text");
+    let rarityName = "COMMON";
+    let rarityColor = "#bf6c65"; 
+
+    const nameLower = squirrelName.toLowerCase();
+
+    if (nameLower === "king_midas" || nameLower === "druid" || nameLower === "blizzard") {
+        rarityName = "EPIC";
+        rarityColor = "#68419d"; 
+    } else if (nameLower === "angel" || nameLower === "inferno") {
+        rarityName = "LEGENDARY";
+        rarityColor = "#aaaf1b"; 
+    } else if (["rogue", "chef", "explorer", "gamer", "knight", "phoenix"].includes(nameLower)) {
+        rarityName = "RARE";
+        rarityColor = "#159cab"; 
+    }
+
+    if (rarityText) {
+        rarityText.innerText = `${rarityName}`;
+        rarityText.style.color = rarityColor;
+        rarityText.style.display = "block";
+    }
+
+    hatchingItem.src = squirrelPath;
+    hatchingItem.className = "squirrel-revealed-animation";
+
+    modalCloseBtn.style.display = "inline-block";
+}

@@ -398,13 +398,34 @@ html, body, img, .item-slot, .back-btn {
 .sell-btn:active {
     transform: scale(0.95);
 }
+.player-currency {
+    background: #f4eccf;
+    padding: 4px 12px;
+    border: 2px solid #5c3a21;
+    box-shadow: -2px 0 #5c3a21, 2px 0 #5c3a21, 0 -2px #5c3a21, 0 2px #5c3a21;
+    width: 7%;
+    margin-left: 4%;
+}
+
+.currency-label {
+    font-size: 15px;
+    color: #7a583c;
+    font-weight: bold;
+    display: block;
+}
+
+.currency-value {
+    font-size: 30px;
+    font-weight: bold;
+    color: #000;
+}
 
 @media (max-width: 780px) {
     .page-title {
     max-height: 500px;
     }
     .page-title img {
-        height: 90px;
+        height: 80px;
         width: auto;
     }
     .item-slot.common {
@@ -469,25 +490,14 @@ html, body, img, .item-slot, .back-btn {
         
         height: 50vh; 
     }
-}
-
-
-.player-currency {
+    .player-currency {
     background: #f4eccf;
     padding: 4px 12px;
     border: 2px solid #5c3a21;
     box-shadow: -2px 0 #5c3a21, 2px 0 #5c3a21, 0 -2px #5c3a21, 0 2px #5c3a21;
+    width: 14%;
+    margin-left: 4%;
+}
 }
 
-.currency-label {
-    font-size: 15px;
-    color: #7a583c;
-    font-weight: bold;
-    display: block;
-}
 
-.currency-value {
-    font-size: 30px;
-    font-weight: bold;
-    color: #000;
-}
