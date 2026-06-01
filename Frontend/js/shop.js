@@ -174,7 +174,6 @@ const crackSounds = {
     2: new Audio("./../sounds/pep.mp3"), 
     1: new Audio("./../sounds/pop.mp3")   
 };
-// Zvuk pro finální vylíhnutí veverky (při změně z 1 na 0)
 const hatchSound = new Audio("./../sounds/open.mp3");
 
 document.addEventListener("DOMContentLoaded", function () {
