@@ -51,7 +51,7 @@ async function startHatching(coneId) {
     isOpening = true;
     
     try {
-        const response = await fetch(`https://localhost:7179/api/squirrels/openSiska/${coneId}`, {
+        const response = await fetch(`https://squirrels-backend.onrender.com/openSiska/${coneId}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -147,7 +147,7 @@ function closeHatchModal() {
 
 async function readMoney() {
     try {
-        const response = await fetch(`https://localhost:7179/api/squirrels/readMoney`,
+        const response = await fetch(`https://squirrels-backend.onrender.com/readMoney`,
         {
             headers:
             {
