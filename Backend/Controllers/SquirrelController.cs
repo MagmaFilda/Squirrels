@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,14 +12,16 @@ namespace SquirrelsBackend.Controllers
     public class SquirrelsController : ControllerBase
     {
         private readonly AppDbContext dbData;
+        private readonly IConfiguration configuration;
         private Services services;
         private PasswordHasher<User> hasher;
 
-        public SquirrelsController(AppDbContext context)
+        public SquirrelsController(AppDbContext context, IConfiguration configuration)
         {
             dbData = context;
             services = new Services();
             hasher = new();
+            this.configuration = configuration;
         }
 
         [HttpGet("catalog")]
@@ -27,9 +29,12 @@ namespace SquirrelsBackend.Controllers
         {
             return Ok(dbData.Squirrels);
         }
-        [HttpGet("inventory/{userId}")]
-        public async Task<IActionResult> GetInventory(int userId)
+        [Authorize]
+        [HttpGet("inventory")]
+        public async Task<IActionResult> GetInventory()
         {
+            int userId = int.Parse(User.FindFirst("UserId")!.Value);
+
             var users = await dbData.Users.Include(u => u.Squirrels).ToListAsync();
             var user = users.Find(u => u.Id == userId);
             if (user == null)
@@ -47,9 +52,12 @@ namespace SquirrelsBackend.Controllers
 
             return Ok(returnData);
         }
-        [HttpGet("readMoney/{userId}")]
-        public async Task<IActionResult> ReadMoney(int userId)
+        [Authorize]
+        [HttpGet("readMoney")]
+        public async Task<IActionResult> ReadMoney()
         {
+            int userId = int.Parse(User.FindFirst("UserId")!.Value);
+
             var user = await dbData.Users.FindAsync(userId);
             if (user == null)
             {
@@ -106,16 +114,20 @@ namespace SquirrelsBackend.Controllers
             var result = hasher.VerifyHashedPassword(user, user.Password, loginData.Password);
             if (result == PasswordVerificationResult.Success)
             {
-                return Ok(user.Id);
+                string token = services.GenerateToken(user, configuration);
+                return Ok(new{token = token});
             }
             else
             {
                 return BadRequest();
             }               
         }
-        [HttpPost("openSiska/{siskaId}/{userId}")]
-        public async Task<IActionResult> OpenSiska(int siskaId, int userId)
+        [Authorize]
+        [HttpPost("openSiska/{siskaId}")]
+        public async Task<IActionResult> OpenSiska(int siskaId)
         {
+            int userId = int.Parse(User.FindFirst("UserId")!.Value);
+
             var user = await dbData.Users.FindAsync(userId);
             var openingSiska = await dbData.Sisky.FindAsync(siskaId);
             if (openingSiska == null || user == null)
@@ -156,9 +168,12 @@ namespace SquirrelsBackend.Controllers
 
             
         }
-        [HttpDelete("sell/{userId}/{squirrelId}/{count}")]
-        public async Task<IActionResult> SellSquirrel(int userId, int squirrelId, int count)
+        [Authorize]
+        [HttpDelete("sell/{squirrelId}/{count}")]
+        public async Task<IActionResult> SellSquirrel(int squirrelId, int count)
         {
+            int userId = int.Parse(User.FindFirst("UserId")!.Value);
+
             var user = await dbData.Users.FindAsync(userId);
             var squirrel = await dbData.Squirrels.FindAsync(squirrelId);
             var inventorySlot = await dbData.UserSquirrels.FindAsync(userId, squirrelId);
