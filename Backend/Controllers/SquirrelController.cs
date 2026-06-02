@@ -122,6 +122,15 @@ namespace SquirrelsBackend.Controllers
                 return BadRequest();
             }               
         }
+        [HttpPost]
+        public async Task<IActionResult> NewSquirrel(string name, string desc, Rarity rarity, int str, int speed, int hlt, int cost)
+        {
+            Squirrel squirrel = new Squirrel(name, desc, rarity, str, speed, hlt, cost);
+            dbData.Squirrels.Add(squirrel);
+
+            await dbData.SaveChangesAsync();
+            return Ok(squirrel);
+        }
         [Authorize]
         [HttpPost("openSiska/{siskaId}")]
         public async Task<IActionResult> OpenSiska(int siskaId)
