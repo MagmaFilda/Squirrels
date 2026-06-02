@@ -2,7 +2,6 @@ function getLoggedUser() {
     return localStorage.getItem("username");
 }
 
-
 function getToken() {
     return localStorage.getItem("token");
 }

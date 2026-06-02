@@ -24,7 +24,7 @@ if (isLoggedIn()) {
 
 } else {
     // když není přihlášený, zobrazí login button
-    loginBtn.href = "./../html/login.html";
+    loginBtn.href = "html/login.html";
 
     // schová logout
     logoutBtn.style.display = "none";
