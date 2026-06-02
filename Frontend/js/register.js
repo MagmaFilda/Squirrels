@@ -1,3 +1,4 @@
+const API_BASE_URL = "https://squirrels-backend.onrender.com/api/squirrels";
 const registerForm = document.getElementById("registerForm");
 const message = document.getElementById("message");
 const registerButton = document.getElementById("RegisterButton");
@@ -34,7 +35,7 @@ registerForm.addEventListener("submit", async function (event) {
     }
 
     try {
-        const response = await fetch("https://squirrels-backend.onrender.com/api/squirrels/register", {
+        const response = await fetch(`${API_BASE_URL}/register`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

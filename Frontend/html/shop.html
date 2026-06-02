@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Squirrels Game - Shop</title>
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pixelify+Sans:wght@400..700&family=VT323&display=swap" rel="stylesheet">
@@ -16,49 +15,38 @@
     <link rel="stylesheet" href="./../styles/shop.css">
 </head>
 <body>
-    
     <audio id="bgMusic" src="../sounds/music menu.wav" loop></audio>
-
 
     <header class="shop-header">
         <a href="../index.html" class="mini-logo">
             <img src="../images/shop.png" alt="Squirrels Mini Logo">
         </a>
-
         <div class="page-title">
             <img src="../images/shoptext.png" alt="Shop">
         </div>
-
         <a href="../index.html" class="nav-btn">
             <img src="../images/backtext.png" alt="Back">
         </a>
-        
     </header>
+
     <div class="volume-container">
         <span class="volume-icon">MUSIC</span>
         <input type="range" id="volumeSlider" class="volume-slider" min="0" max="1" step="0.05" value="0.3">
     </div>
     
-
     <main class="shop-container">
         <div class="shop-window" id="shopWindow">
-            
             <div class="player-currency">
                 <span class="currency-label">PLAYER NUTS:</span>
                 <div class="currency-value">🌰 <span id="nut-count"></span></div>
             </div>
-
             <h2 class="exchange-title">THE SQUIRREL'S EXCHANGE</h2>
-
             <div class="cones-grid">
-                
                 <div class="cone-card frame-common" id="card-1">
                     <h3>FOREST FIND</h3>
                     <span class="rarity common">BASIC</span>
-                    
                     <div class="cone-display">
                         <img src="../images/basic-pi.png" alt="Common Cone" class="cone-img" draggable="false">
-                        
                         <div class="egg-info-box">
                             <h4>CHANCE:</h4>
                             <hr>
@@ -68,17 +56,14 @@
                             </ul>
                         </div>
                     </div>
-                    
                     <div class="price-tag"> FREE </div>
                     <button class="buy-btn" onclick="startHatching(1)">BUY</button>
                 </div>
-
                 <div class="cone-card frame-uncommon" id="card-2">
                     <h3>RIVER JEWEL</h3>
                     <span class="rarity uncommon">SILVER</span>
                     <div class="cone-display">
                         <img src="../images/silver-pi.png" alt="Uncommon Cone" class="cone-img">
-                    
                         <div class="egg-info-box">
                             <h4>CHANCE:</h4>
                             <hr>
@@ -92,13 +77,11 @@
                     <div class="price-tag">🌰 60 </div>
                     <button class="buy-btn" onclick="startHatching(2)">BUY</button>
                 </div>
-
                 <div class="cone-card frame-rare" id="card-3">
                     <h3>SUN GLOW</h3>
                     <span class="rarity rare">GOLD</span>
                     <div class="cone-display">
                         <img src="../images/golden-pi.png" alt="Rare Cone" class="cone-img">
-                    
                         <div class="egg-info-box">
                             <h4>CHANCE:</h4>
                             <hr>
@@ -112,7 +95,6 @@
                     <div class="price-tag">🌰 200</div>
                     <button class="buy-btn" onclick="startHatching(3)">BUY</button>
                 </div>
-
             </div>
         </div>
     </main>
@@ -122,11 +104,9 @@
             <h2 id="hatch-status-text">CLICK TO HATCH!</h2>
             <p id="hatch-rarity-text" class="rarity-text"></p>
             <p id="hatch-clicks-left">CLICKS: 4</p>
-            
             <div class="hatch-stage">
                 <img id="hatching-item" src="" alt="Líhnutí" onclick="registerHatchClick()">
             </div>
-
             <button id="modal-close-btn" class="modal-done-btn" onclick="closeHatchModal()" style="display: none;">GREAT!</button>
         </div>
     </div>
@@ -134,8 +114,8 @@
     <div class="alert-content">
         <p>NOT ENOUGH NUTS! 🌰</p>
     </div>
-</div>
-<script src="../js/auth.js"></script>
-<script src="../js/shop.js"></script>
+    
+    <script src="../js/auth.js"></script>
+    <script src="../js/shop.js"></script>
 </body>
 </html>

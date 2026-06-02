@@ -4,8 +4,33 @@
     margin-top: -0px;
 }
 
+.about-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    height: 120px;
+}
+
+.about-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 0px; /* Posune container mírně nahoru, aby to opticky sedělo */
+}
+
 .about-board {
     margin-top: 75px;
+    position: relative;
+    width: 210vh;
+    height: 80vh;
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('../images/paper.png') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
 }
 
 .about-tabs {

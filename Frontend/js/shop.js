@@ -1,3 +1,4 @@
+const API_BASE_URL = "https://squirrels-backend.onrender.com/api/squirrels";
 const nutsCount = document.getElementById("nut-count");
 const shopWindow = document.getElementById("shopWindow");
 const shopContainer = document.querySelector(".shop-container");
@@ -51,7 +52,7 @@ async function startHatching(coneId) {
     isOpening = true;
     
     try {
-        const response = await fetch(`https://squirrels-backend.onrender.com/api/squirrels/openSiska/${coneId}`, {
+        const response = await fetch(`${API_BASE_URL}/openSiska/${coneId}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -147,7 +148,7 @@ function closeHatchModal() {
 
 async function readMoney() {
     try {
-        const response = await fetch(`https://squirrels-backend.onrender.com/api/squirrels/readMoney`,
+        const response = await fetch(`${API_BASE_URL}/readMoney`,
         {
             headers:
             {

@@ -1,6 +1,6 @@
+const API_BASE_URL = "https://squirrels-backend.onrender.com/api/squirrels";
 const inventoryGrid = document.getElementById('inventoryGrid');
 const nutsCount = document.getElementById("nut-count");
-    
 let selectedSquirrelId = null;
 
 if (!isLoggedIn()) {
@@ -12,7 +12,7 @@ if (!isLoggedIn()) {
 
 async function readMoney() {
     try {
-        const response = await fetch(`https://squirrels-backend.onrender.com/api/squirrels/readMoney`,
+        const response = await fetch(`${API_BASE_URL}/readMoney`,
         {
             headers:
 
@@ -33,7 +33,7 @@ async function readMoney() {
 
 async function loadInventory() {
     try {
-        const response = await fetch(`https://squirrels-backend.onrender.com/api/squirrels/inventory`,
+        const response = await fetch(`${API_BASE_URL}/inventory`,
         {
             headers:
             {
@@ -149,7 +149,7 @@ sellAllBtn.addEventListener("click", sellAllSquirrels);
 
 async function sellOneSquirrel() {
     try {
-        const response = await fetch(`https://squirrels-backend.onrender.com/api/squirrels/sell/${selectedSquirrelId}/1`, {
+        const response = await fetch(`${API_BASE_URL}/sell/${selectedSquirrelId}/1`, {
             method: "DELETE",
             headers:
             {
@@ -172,7 +172,7 @@ async function sellOneSquirrel() {
 
 async function sellTenSquirrel() {
     try {
-        const response = await fetch(`https://squirrels-backend.onrender.com/api/squirrels/sell/${selectedSquirrelId}/10`, {
+        const response = await fetch(`${API_BASE_URL}/sell/${selectedSquirrelId}/10`, {
             method: "DELETE",
             headers:
             {
@@ -195,7 +195,7 @@ async function sellTenSquirrel() {
 
 async function sellAllSquirrels() {
     try {
-        const response = await fetch(`https://squirrels-backend.onrender.com/api/squirrels/sell/${selectedSquirrelId}/${selectedSquirrelCount}`, {
+        const response = await fetch(`${API_BASE_URL}/sell/${selectedSquirrelId}/${selectedSquirrelCount}`, {
             method: "DELETE",
             headers:
             {
