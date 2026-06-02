@@ -17,5 +17,15 @@ namespace SquirrelsBackend.Models
         public int Cost { get; private set; }
 
         public Squirrel() { }
+        public Squirrel(string? name, string? description, Rarity rarity, int strength, int speed, int durability, int cost)
+        {
+            Name = name;
+            Description = description;
+            Rarity = rarity;
+            Strength = strength;
+            Speed = speed;
+            Durability = durability;
+            Cost = cost;
+        }
     }
 }
