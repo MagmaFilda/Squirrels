@@ -37,7 +37,7 @@ loginForm.addEventListener("submit", async function (event) {
         localStorage.setItem("username", username);
 
         const params = new URLSearchParams(window.location.search);
-        const redirectPage = params.get("redirect") || "index.html";
+        const redirectPage = params.get("redirect") || "../index.html";
 
         window.location.href = redirectPage;
     } catch (error) {

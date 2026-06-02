@@ -2,7 +2,7 @@ const catalogGrid = document.getElementById('catalog-grid');
 
 async function loadCatalog() {
     try {
-        const response = await fetch("https://localhost:7179/api/squirrels/api/squirrels/catalog");
+        const response = await fetch("https://squirrels-backend.onrender.com/api/squirrels/catalog");
 
         if (!response.ok) {
             throw new Error("Failed to load catalog.");
