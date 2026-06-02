@@ -1,10 +1,17 @@
-﻿namespace SquirrelsBackend.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SquirrelsBackend.Models
 {
     public enum Rarity { Common, Rare, Epic, Legendary}
     public class Squirrel
     {
+        [Key]
         public int Id { get; private set; }
+        [Required]
+        [MaxLength(30)]
         public string Name { get; private set; }
+        [Required]
+        [MaxLength(120)]
         public string Description { get; private set; }
         public Rarity Rarity { get; private set; }
         // Stats
