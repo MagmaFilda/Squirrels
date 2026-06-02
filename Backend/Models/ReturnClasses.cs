@@ -23,4 +23,14 @@
         public string Username { get; set; }
         public string Password { get; set; }
     }
+    public class NewSquirrelRequest
+    {
+        public List<string> names { get; set; }
+        public List<string> descs { get; set; }
+        public List<Rarity> rarities { get; set; }
+        public List<int> strengths { get; set; }
+        public List<int> speeds { get; set; }
+        public List<int> healths { get; set; }
+        public List<int> costs { get; set; }
+    }
 }
