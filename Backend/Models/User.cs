@@ -5,16 +5,9 @@ namespace SquirrelsBackend.Models
 {
     public class User
     {
-        [Key]
         public int Id { get; private set; }
-        [Required]
-        [MaxLength(12)]
         public string Name { get; private set; }
-        [Required]
-        [MaxLength(256)]
         public string Password { get; private set; }
-        [Required]
-        [MaxLength(55)]
         public string Email { get; private set; }
         public int Money { get; set; }
         public List<UserSquirrel> Squirrels { get; private set; }
