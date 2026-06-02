@@ -123,13 +123,17 @@ namespace SquirrelsBackend.Controllers
             }               
         }
         [HttpPost]
-        public async Task<IActionResult> NewSquirrel(string name, string desc, Rarity rarity, int str, int speed, int hlt, int cost)
+        public async Task<IActionResult> NewSquirrel(NewSquirrelRequest squirrelData)
         {
-            Squirrel squirrel = new Squirrel(name, desc, rarity, str, speed, hlt, cost);
-            dbData.Squirrels.Add(squirrel);
+            for (int i = 0; i < squirrelData.names.Count; i++)
+            {
+                Squirrel squirrel = new Squirrel(squirrelData.names[i], squirrelData.descs[i], squirrelData.rarities[i],
+                    squirrelData.strengths[i], squirrelData.speeds[i], squirrelData.healths[i], squirrelData.costs[i]);
+                dbData.Squirrels.Add(squirrel);
+            }
 
             await dbData.SaveChangesAsync();
-            return Ok(squirrel);
+            return Ok();
         }
         [Authorize]
         [HttpPost("openSiska/{siskaId}")]
