@@ -34,7 +34,7 @@ registerForm.addEventListener("submit", async function (event) {
     }
 
     try {
-        const response = await fetch("https://squirrels-backend.onrender.com/register", {
+        const response = await fetch("https://squirrels-backend.onrender.com/api/squirrels/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
