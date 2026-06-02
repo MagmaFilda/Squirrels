@@ -15,5 +15,16 @@ namespace SquirrelsBackend.Models
         public int Legendary { get; private set; }
 
         public Siska() { }
+
+        public Siska(string name, string desc, int cost, int com, int rare, int epic, int leg)
+        {
+            Name = name;
+            Description = desc;
+            Cost = cost;
+            Common = com;
+            Rare = rare;
+            Epic = epic;
+            Legendary = leg;
+        }
     }
 }
