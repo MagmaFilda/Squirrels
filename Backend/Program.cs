@@ -20,7 +20,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSquirrels",
-        policy => policy.WithOrigins("https://squirrels-frontend.onrender.com/")
+        policy => policy.WithOrigins("https://squirrels-frontend.onrender.com")
                         .AllowAnyMethod()
                         .AllowAnyHeader());
 });
@@ -63,10 +63,10 @@ app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
+app.UseCors("AllowSquirrels");
+
 app.UseAuthentication();
 app.UseAuthorization();
-
-app.UseCors("AllowSquirrels");
 
 app.MapControllers();
 
