@@ -3,23 +3,33 @@ const logoutBtn = document.getElementById("logoutBtn");
 
 function fitUsernameToButton(button, textElement) {
     const maxFontSize = 24;
-    const minFontSize = 8;
+    const minFontSize = 6;
 
     let fontSize = maxFontSize;
 
-    textElement.style.fontSize = `${fontSize}px`;
     textElement.style.whiteSpace = "nowrap";
-    textElement.style.display = "inline-block";
-    textElement.style.maxWidth = "100%";
+    textElement.style.display = "block";
+    textElement.style.textAlign = "center";
+    textElement.style.lineHeight = "1";
     textElement.style.overflow = "hidden";
     textElement.style.textOverflow = "ellipsis";
 
-    const availableWidth = button.clientWidth * 0.75;
+    // reálná šířka buttonu
+    const buttonWidth = button.getBoundingClientRect().width;
+
+    // kolik místa má text uvnitř buttonu
+    const availableWidth = buttonWidth * 0.55;
+
+    textElement.style.fontSize = `${fontSize}px`;
 
     while (textElement.scrollWidth > availableWidth && fontSize > minFontSize) {
         fontSize--;
         textElement.style.fontSize = `${fontSize}px`;
     }
+
+    console.log("buttonWidth:", buttonWidth);
+    console.log("textWidth:", textElement.scrollWidth);
+    console.log("fontSize:", fontSize);
 }
 
 if (isLoggedIn()) {
@@ -31,18 +41,28 @@ if (isLoggedIn()) {
 
     loginBtn.appendChild(usernameText);
 
-    requestAnimationFrame(() => {
-        fitUsernameToButton(loginBtn, usernameText);
-    });
-
-    window.addEventListener("resize", () => {
-        fitUsernameToButton(loginBtn, usernameText);
-    });
-
     loginBtn.removeAttribute("href");
     loginBtn.style.cursor = "default";
 
     logoutBtn.style.display = "flex";
+
+    // počká na vykreslení stránky
+    requestAnimationFrame(() => {
+        fitUsernameToButton(loginBtn, usernameText);
+    });
+
+    // počká na načtení fontů
+    if (document.fonts) {
+        document.fonts.ready.then(() => {
+            fitUsernameToButton(loginBtn, usernameText);
+        });
+    }
+
+    // při změně velikosti okna
+    window.addEventListener("resize", () => {
+        fitUsernameToButton(loginBtn, usernameText);
+    });
+
 } else {
     loginBtn.href = "html/login.html";
     logoutBtn.style.display = "none";
