@@ -161,7 +161,6 @@ namespace SquirrelsBackend.Controllers
             {
                 return NotFound();
             }
-            if (user.Squirrels == null) { return NotFound(user.Squirrels); } 
 
             if (openingSiska.Cost <= user.Money)
             {
@@ -178,6 +177,7 @@ namespace SquirrelsBackend.Controllers
                     squirrelInInventory = new UserSquirrel(userId, realSquirrelId);
                     dbData.UserSquirrels.Add(squirrelInInventory);
 
+                    if (user.Squirrels == null) { return NotFound(user.Squirrels); } 
                     user.Squirrels.Add(squirrelInInventory);
                 }
                 else
