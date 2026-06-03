@@ -83,6 +83,7 @@ body {
 .nav-btn {
     height: auto;
     width: 18vw;
+    margin-bottom: -5vh;
     min-width: 160px;
     aspect-ratio: 360 / 185;
     background: url('../images/button.png') no-repeat center center/contain;
@@ -113,13 +114,14 @@ body {
 }
 
 .main-logo img {
-    width: 50vw;
+    width: 45vw;
     height: auto;
     display: block;
 }
 
 .footer {
     width: 100%;
+    margin-bottom: -5vh;
     display: flex;
     justify-content: center; 
     gap: 3vw;
@@ -216,7 +218,7 @@ body {
     }
 
     .nav-btn {
-        width: 28vw;
+        width: 38vw;
         min-width: 110px;
     }
 
@@ -228,10 +230,11 @@ body {
     .footer {
         flex-wrap: wrap;
         gap: 15px;
+        margin-bottom: 25%;
     }
 
     .foot-btn {
-        width: 40vw;
+        width: 50vw;
         min-width: 140px;
     }
     

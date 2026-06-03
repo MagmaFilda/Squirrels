@@ -41,16 +41,18 @@ namespace SquirrelsBackend.Controllers
             {
                 return NotFound();
             }
+            if (user.Squirrels == null) { return NotFound(); }
 
             List<ReturnInventory> returnData = new List<ReturnInventory>();
             foreach (var item in user.Squirrels)
             {
-                Squirrel squirrel = await dbData.Squirrels.FindAsync(item.SquirrelId);
+                Squirrel? squirrel = await dbData.Squirrels.FindAsync(item.SquirrelId);
+                if (squirrel == null) { return NotFound(); }
                 ReturnInventory returnSquirrel = new ReturnInventory(squirrel, item.Count);
                 returnData.Add(returnSquirrel);
             }
 
-            return Ok(returnData);
+            return Ok(returnData.OrderBy(s => s.ReturningSquirrel.Id));
         }
         [Authorize]
         [HttpGet("readMoney")]
@@ -88,6 +90,7 @@ namespace SquirrelsBackend.Controllers
             {
                 return NotFound();
             }
+            if (registerData.Username == null || registerData.Password == null || registerData.Email == null) { return NotFound(); }
 
             var checkingUser = await dbData.Users.FirstOrDefaultAsync(u => u.Name == registerData.Username);
 
@@ -111,6 +114,8 @@ namespace SquirrelsBackend.Controllers
             {
                 return NotFound();
             }
+            if (user.Password == null || loginData.Password == null) { return NotFound(); }
+
             var result = hasher.VerifyHashedPassword(user, user.Password, loginData.Password);
             if (result == PasswordVerificationResult.Success)
             {
@@ -135,15 +140,15 @@ namespace SquirrelsBackend.Controllers
         //    await dbData.SaveChangesAsync();
         //    return Ok();
         //}
-        [HttpPost("addSiska")]
-        public async Task<IActionResult> NewSiska(string name, int cost, int common, int rare, int epic, int legendary)
-        {
-            Siska siska = new Siska(name, "", cost, common, rare, epic, legendary);
-            dbData.Sisky.Add(siska);
+        //[HttpPost("addSiska")]
+        //public async Task<IActionResult> NewSiska(string name, int cost, int common, int rare, int epic, int legendary)
+        //{
+        //    Siska siska = new Siska(name, "", cost, common, rare, epic, legendary);
+        //    dbData.Sisky.Add(siska);
 
-            await dbData.SaveChangesAsync();
-            return Ok(siska);
-        }
+        //    await dbData.SaveChangesAsync();
+        //    return Ok(siska);
+        //}
         [Authorize]
         [HttpPost("openSiska/{siskaId}")]
         public async Task<IActionResult> OpenSiska(int siskaId)
@@ -156,6 +161,8 @@ namespace SquirrelsBackend.Controllers
             {
                 return NotFound();
             }
+            if (user.Squirrels == null) { return NotFound(); } 
+
             if (openingSiska.Cost <= user.Money)
             {
                 Rarity openedRarity = services.GetRandomRarity(openingSiska);
@@ -178,6 +185,8 @@ namespace SquirrelsBackend.Controllers
                     squirrelInInventory.Count++;
                 }
                 var returningSquirrel = await dbData.Squirrels.FindAsync(realSquirrelId);
+                if (returningSquirrel == null) { return NotFound(); }
+
                 user.Money -= openingSiska.Cost;
                 await dbData.SaveChangesAsync();
 

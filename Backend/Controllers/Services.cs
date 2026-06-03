@@ -14,7 +14,7 @@ namespace SquirrelsBackend.Controllers
             Random random = new Random();
             Rarity rarity = Rarity.Common;
 
-            int roll = random.Next(0, 101);
+            int roll = random.Next(1, 101);
             float actualChance = 0f;
 
             for (int i = 0; i < siskaChances.Count; i++)
@@ -31,6 +31,8 @@ namespace SquirrelsBackend.Controllers
 
         public string GenerateToken(User user, IConfiguration configuration)
         {
+            if (user.Name == null) { return(""); }
+
             var claims = new List<Claim> 
             {
                 new Claim("UserId", user.Id.ToString()),

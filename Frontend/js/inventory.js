@@ -2,8 +2,8 @@ const API_BASE_URL = "https://squirrels-backend.onrender.com/api/squirrels";
 const inventoryGrid = document.getElementById('inventoryGrid');
 const nutsCount = document.getElementById("nut-count");
 const playerCurrency = document.getElementById("playerCurrency");
-
 let selectedSquirrelId = null;
+let selectedSquirrelCount = 0;
 
 if (!isLoggedIn()) {
     inventoryGrid.innerHTML = '<p>You must <a href="login.html?redirect=invertory.html">log in</a> to see your inventory.</p>';
@@ -104,10 +104,15 @@ async function loadInventory() {
             });
 
             inventoryGrid.appendChild(slot);
+
+            
         });
+
+        return squirrels;
 
     } catch (error) {
         console.error("Chyba:", error);
+        return [];
     }
 }
 
@@ -164,9 +169,7 @@ async function sellOneSquirrel() {
             throw new Error("Failed to sell one squirrel.");
         }
 
-        modal.classList.remove("active");
-        loadInventory();
-        readMoney();
+        await refreshAfterSell();
 
     } catch (error) {
         console.error("Chyba:", error);
@@ -187,9 +190,7 @@ async function sellTenSquirrel() {
             throw new Error("Failed to sell ten squirrels.");
         }
 
-        modal.classList.remove("active");
-        loadInventory();
-        readMoney();
+        await refreshAfterSell();
 
     } catch (error) {
         console.error("Chyba:", error);
@@ -211,14 +212,32 @@ async function sellAllSquirrels() {
             throw new Error("Failed to sell all squirrels.");
         }
 
-        modal.classList.remove("active");
-        loadInventory();
-        readMoney();
+        await refreshAfterSell();
 
     } catch (error) {
         console.error("Chyba:", error);
     }
 }
+
+async function refreshAfterSell() {
+    const squirrels = await loadInventory();
+    await readMoney();
+
+    const currentSquirrel = squirrels.find(squirrel =>
+        squirrel.returningSquirrel.id === selectedSquirrelId
+    );
+
+    if (!currentSquirrel || currentSquirrel.count <= 0) {
+        modal.classList.remove("active");
+        selectedSquirrelId = null;
+        selectedSquirrelCount = 0;
+        return;
+    }
+
+    selectedSquirrelCount = currentSquirrel.count;
+}
+
+
 
 document.addEventListener("DOMContentLoaded", function() {
         const regexCisla = /([0-9%]+)/g;
