@@ -355,12 +355,6 @@ html, body, img, .item-slot, .back-btn {
     font-weight: bold;
 }
 
-.sell-container:hover {
-    background: #7a583c;
-    transform: scale(1.05);
-    cursor: pointer;
-}
-
 @media (max-width: 780px) {
     .page-title {
     max-height: 200px;

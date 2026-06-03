@@ -34,6 +34,32 @@ registerForm.addEventListener("submit", async function (event) {
         return;
     }
 
+    if(username.length < 3) {
+        alertMessage.textContent = "Username must be at least 3 characters long.";
+        alertBox.classList.add("alert-show");
+        
+        setTimeout(() => {
+            alertBox.classList.remove("alert-show");
+            registerButton.disabled = false;
+            registerButton.textContent = "REGISTER";
+        }, 2000);
+
+        return;
+    }
+
+    if(username.length > 12) {
+        alertMessage.textContent = "Username must be no more than 12 characters long.";
+        alertBox.classList.add("alert-show");
+        
+        setTimeout(() => {
+            alertBox.classList.remove("alert-show");
+            registerButton.disabled = false;
+            registerButton.textContent = "REGISTER";
+        }, 2000);
+
+        return;
+    }
+
     try {
         const response = await fetch(`${API_BASE_URL}/register`, {
             method: "POST",
@@ -65,7 +91,7 @@ registerForm.addEventListener("submit", async function (event) {
             }, 2000);
             return;
         }
-        alertMessage.textContent = "An error occurred during registration.";
+        alertMessage.textContent = "An error with database occurred.";
         alertBox.classList.add("alert-show");
         
         setTimeout(() => {
