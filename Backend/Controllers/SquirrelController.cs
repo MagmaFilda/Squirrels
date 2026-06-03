@@ -50,7 +50,7 @@ namespace SquirrelsBackend.Controllers
                 returnData.Add(returnSquirrel);
             }
 
-            return Ok(returnData);
+            return Ok(returnData.OrderBy(s => s.ReturningSquirrel.Id));
         }
         [Authorize]
         [HttpGet("readMoney")]
@@ -135,15 +135,15 @@ namespace SquirrelsBackend.Controllers
         //    await dbData.SaveChangesAsync();
         //    return Ok();
         //}
-        [HttpPost("addSiska")]
-        public async Task<IActionResult> NewSiska(string name, int cost, int common, int rare, int epic, int legendary)
-        {
-            Siska siska = new Siska(name, "", cost, common, rare, epic, legendary);
-            dbData.Sisky.Add(siska);
+        //[HttpPost("addSiska")]
+        //public async Task<IActionResult> NewSiska(string name, int cost, int common, int rare, int epic, int legendary)
+        //{
+        //    Siska siska = new Siska(name, "", cost, common, rare, epic, legendary);
+        //    dbData.Sisky.Add(siska);
 
-            await dbData.SaveChangesAsync();
-            return Ok(siska);
-        }
+        //    await dbData.SaveChangesAsync();
+        //    return Ok(siska);
+        //}
         [Authorize]
         [HttpPost("openSiska/{siskaId}")]
         public async Task<IActionResult> OpenSiska(int siskaId)
