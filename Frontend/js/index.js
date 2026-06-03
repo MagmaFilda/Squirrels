@@ -1,32 +1,50 @@
 const loginBtn = document.getElementById("loginBtn");
 const logoutBtn = document.getElementById("logoutBtn");
 
+function fitUsernameToButton(button, textElement) {
+    const maxFontSize = 24;
+    const minFontSize = 8;
+
+    let fontSize = maxFontSize;
+
+    textElement.style.fontSize = `${fontSize}px`;
+    textElement.style.whiteSpace = "nowrap";
+    textElement.style.display = "inline-block";
+    textElement.style.maxWidth = "100%";
+    textElement.style.overflow = "hidden";
+    textElement.style.textOverflow = "ellipsis";
+
+    const availableWidth = button.clientWidth * 0.75;
+
+    while (textElement.scrollWidth > availableWidth && fontSize > minFontSize) {
+        fontSize--;
+        textElement.style.fontSize = `${fontSize}px`;
+    }
+}
+
 if (isLoggedIn()) {
-    // místo login obrázku zobrazí username
     loginBtn.innerHTML = "";
 
     const usernameText = document.createElement("span");
     usernameText.textContent = getLoggedUser();
     usernameText.classList.add("username-text");
 
-    const length = usernameText.textContent.length;
-    const fontSize = Math.max(12, Math.min(24, 36 - length * 2));
-
-    usernameText.style.fontSize = `${fontSize}px`;
-
     loginBtn.appendChild(usernameText);
 
-    // aby username nebylo klikací na login
+    requestAnimationFrame(() => {
+        fitUsernameToButton(loginBtn, usernameText);
+    });
+
+    window.addEventListener("resize", () => {
+        fitUsernameToButton(loginBtn, usernameText);
+    });
+
     loginBtn.removeAttribute("href");
+    loginBtn.style.cursor = "default";
 
-    // zobrazí logout
     logoutBtn.style.display = "flex";
-
 } else {
-    // když není přihlášený, zobrazí login button
     loginBtn.href = "html/login.html";
-
-    // schová logout
     logoutBtn.style.display = "none";
 }
 
