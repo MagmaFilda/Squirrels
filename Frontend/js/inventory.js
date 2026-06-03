@@ -2,7 +2,6 @@ const API_BASE_URL = "https://squirrels-backend.onrender.com/api/squirrels";
 const inventoryGrid = document.getElementById('inventoryGrid');
 const nutsCount = document.getElementById("nut-count");
 const playerCurrency = document.getElementById("playerCurrency");
-
 let selectedSquirrelId = null;
 
 if (!isLoggedIn()) {
@@ -164,7 +163,6 @@ async function sellOneSquirrel() {
             throw new Error("Failed to sell one squirrel.");
         }
 
-        modal.classList.remove("active");
         loadInventory();
         readMoney();
 
@@ -187,7 +185,6 @@ async function sellTenSquirrel() {
             throw new Error("Failed to sell ten squirrels.");
         }
 
-        modal.classList.remove("active");
         loadInventory();
         readMoney();
 
@@ -211,7 +208,6 @@ async function sellAllSquirrels() {
             throw new Error("Failed to sell all squirrels.");
         }
 
-        modal.classList.remove("active");
         loadInventory();
         readMoney();
 
