@@ -161,7 +161,7 @@ namespace SquirrelsBackend.Controllers
             {
                 return NotFound();
             }
-            if (user.Squirrels == null) { return NotFound(); } 
+            //if (user.Squirrels == null) { return NotFound(); } 
 
             if (openingSiska.Cost <= user.Money)
             {
