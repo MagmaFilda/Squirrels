@@ -7,14 +7,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/about.css">
     <link rel="icon" type="image/png" href="../images/gamer.png">
+    <link rel="stylesheet" href="../styles/login.css">
+    <link rel="stylesheet" href="../styles/about.css">
 </head>
 <body>
-
     <audio id="bgMusic" src="../sounds/music.mp3" loop></audio>
 
-    <header class="login-header">
+    <header class="about-header">
         <a href="../index.html" class="mini-logo">
             <img src="../images/logo.png" alt="Squirrels Mini Logo">
         </a>
@@ -23,8 +23,7 @@
         </a>
     </header>
 
-    <main class="login-container about-main">
-        
+    <main class="about-container about-main">
         <div class="about-tabs">
             <button class="tab-btn active" data-section="inventory">
                 <img src="../images/invtext.png" alt="Inventory">
@@ -36,14 +35,11 @@
                 <img src="../images/shoptext.png" alt="Shop">
             </button>
         </div>
-
-        <div class="login-board about-board">
-            
+        <div class="about-board">
             <div class="pixel-decor bubbles-left"><img src="../images/blizzard.png" alt="Veverka vlevo"></div>
             <div class="pixel-decor bubbles-right"></div>
             <div class="pixel-decor acorn-left"></div>
             <div class="pixel-decor acorn-right"><img src="../images/chef.png" alt="Veverka vpravo"></div>
-
             <div class="scroll-paper">
                 <div class="about-text-container" id="aboutContent">
                     <h2>INVENTORY</h2>
@@ -52,11 +48,8 @@
                     </div>
                 </div>
             </div>  
-
         </div>
     </main>
-
-    
 
     <script src="../js/about.js"></script>
 </body>

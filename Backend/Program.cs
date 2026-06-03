@@ -14,19 +14,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection"),
-        sqlOptions => sqlOptions.EnableRetryOnFailure()
+    options.UseNpgsql(
+        builder.Configuration.GetConnectionString("DefaultConnection")
     ));
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowFrontend",
-        policy =>
-        {
-            policy.AllowAnyOrigin()
-                  .AllowAnyHeader()
-                  .AllowAnyMethod();
-        });
+    options.AddPolicy("AllowSquirrels",
+        policy => policy.WithOrigins("https://squirrels-frontend.onrender.com")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
 });
 builder.Services.AddAuthentication(options =>
 {
@@ -62,19 +58,15 @@ builder.Services.AddAuthentication(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
+app.UseCors("AllowSquirrels");
+
 app.UseAuthentication();
 app.UseAuthorization();
-
-app.UseCors("AllowFrontend");
 
 app.MapControllers();
 

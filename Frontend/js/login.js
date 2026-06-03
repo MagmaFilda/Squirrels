@@ -1,3 +1,4 @@
+const API_BASE_URL = "https://squirrels-backend.onrender.com/api/squirrels";
 const loginForm = document.getElementById("loginForm");
 const message = document.getElementById("message");
 const loginButton = document.getElementById("loginButton");
@@ -19,7 +20,7 @@ loginForm.addEventListener("submit", async function (event) {
     }
 
     try {
-        const response = await fetch("https://squirrels-backend.onrender.com/login", {
+        const response = await fetch(`${API_BASE_URL}/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -37,7 +38,7 @@ loginForm.addEventListener("submit", async function (event) {
         localStorage.setItem("username", username);
 
         const params = new URLSearchParams(window.location.search);
-        const redirectPage = params.get("redirect") || "index.html";
+        const redirectPage = params.get("redirect") || "../index.html";
 
         window.location.href = redirectPage;
     } catch (error) {

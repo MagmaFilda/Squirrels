@@ -7,9 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/login.css">
     <link rel="icon" type="image/png" href="../images/gamer.png">
-
+    <link rel="stylesheet" href="../styles/login.css">
 </head>
 <body>
     <audio id="bgMusic" src="../sounds/music menu.wav" loop></audio>
@@ -18,7 +17,6 @@
         <a href="../index.html" class="mini-logo">
             <img src="../images/logo.png" alt="Squirrels Mini Logo">
         </a>
-
         <a href="../index.html" class="nav-btn">
             <img src="../images/backtext.png" alt="Back">
         </a>
@@ -26,15 +24,12 @@
 
     <main class="login-container">
         <div class="login-board">
-            
             <div class="pixel-decor bubbles-left" ><img src="../images/nutty.png" alt="Squirrels Mini Logo"></div>
             <div class="pixel-decor bubbles-right"></div>
             <div class="pixel-decor acorn-left"></div>
             <div class="pixel-decor acorn-right"><img src="../images/gamer.png" alt="Squirrels Mini Logo"></div>
-
             <div class="scroll-paper">
                 <h1 class="login-title">LOG IN</h1>
-
                 <form class="login-form" id="loginForm">
                     <div class="input-group">
                         <label for="username">USERNAME</label>
@@ -43,7 +38,6 @@
                             <input type="text" id="username" placeholder="Enter Username" required>
                         </div>
                     </div>
-
                     <div class="input-group">
                         <label for="password">PASSWORD</label>
                         <div class="input-field">
@@ -53,26 +47,20 @@
                     </div>
 
                     <button type="submit" class="login-submit-btn" id="loginButton">LOGIN</button>
-
                     <p id="message"></p>
-
                 </form>
                 <div class="login-footer-links">
                     <a href="../html/register.html" class="signup-link">Don't have an account? <span>REGISTER</span></a>
                 </div>
-
-                
             </div>
-
         </div>
-
         <div id="custom-alert" class="alert-hidden">
         <div class="alert-content">
             <p id="alert-message"></p>
         </div>
     </main>
+
     <script src="../js/auth.js"></script>
     <script src="../js/login.js"></script>
-    
 </body>
 </html>
