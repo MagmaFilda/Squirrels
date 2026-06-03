@@ -1,10 +1,13 @@
 const API_BASE_URL = "https://squirrels-backend.onrender.com/api/squirrels";
 const inventoryGrid = document.getElementById('inventoryGrid');
 const nutsCount = document.getElementById("nut-count");
+const playerCurrency = document.getElementById("playerCurrency");
+
 let selectedSquirrelId = null;
 
 if (!isLoggedIn()) {
     inventoryGrid.innerHTML = '<p>You must <a href="login.html?redirect=invertory.html">log in</a> to see your inventory.</p>';
+    playerCurrency.style.display = "none";
 } else {
     loadInventory();
     readMoney();

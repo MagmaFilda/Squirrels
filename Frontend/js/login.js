@@ -55,7 +55,8 @@ loginForm.addEventListener("submit", async function (event) {
             }, 2000);
             return;
         }
-        alertMessage.textContent = "An error occurred during login.";
+        
+        alertMessage.textContent = "An error with database occurred.";
         alertBox.classList.add("alert-show");
             
             setTimeout(() => {
