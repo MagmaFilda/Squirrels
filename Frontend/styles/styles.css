@@ -218,7 +218,7 @@ body {
     }
 
     .nav-btn {
-        width: 28vw;
+        width: 38vw;
         min-width: 110px;
     }
 
@@ -230,10 +230,11 @@ body {
     .footer {
         flex-wrap: wrap;
         gap: 15px;
+        margin-bottom: 25%;
     }
 
     .foot-btn {
-        width: 40vw;
+        width: 50vw;
         min-width: 140px;
     }
     
