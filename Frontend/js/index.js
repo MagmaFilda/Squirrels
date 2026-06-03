@@ -18,7 +18,7 @@ function fitUsernameToButton(button, textElement) {
     const buttonWidth = button.getBoundingClientRect().width;
 
     // kolik místa má text uvnitř buttonu
-    const availableWidth = buttonWidth * 0.55;
+    const availableWidth = buttonWidth * 0.45;
 
     textElement.style.fontSize = `${fontSize}px`;
 
@@ -27,9 +27,6 @@ function fitUsernameToButton(button, textElement) {
         textElement.style.fontSize = `${fontSize}px`;
     }
 
-    console.log("buttonWidth:", buttonWidth);
-    console.log("textWidth:", textElement.scrollWidth);
-    console.log("fontSize:", fontSize);
 }
 
 if (isLoggedIn()) {
