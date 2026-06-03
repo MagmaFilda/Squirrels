@@ -45,7 +45,7 @@ namespace SquirrelsBackend.Controllers
             List<ReturnInventory> returnData = new List<ReturnInventory>();
             foreach (var item in user.Squirrels)
             {
-                Squirrel squirrel = await dbData.Squirrels.FindAsync(item.SquirrelId);
+                Squirrel? squirrel = await dbData.Squirrels.FindAsync(item.SquirrelId);
                 ReturnInventory returnSquirrel = new ReturnInventory(squirrel, item.Count);
                 returnData.Add(returnSquirrel);
             }
