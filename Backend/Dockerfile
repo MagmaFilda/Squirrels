@@ -8,7 +8,7 @@ RUN dotnet restore
 
 # Copy all source files and publish
 COPY . .
-RUN dotnet publish -c Release -o /app
+RUN dotnet publish "SquirrelsBackend.csproj" -c Release -o /app
 
 # ── Stage 2: Runtime ───────────────────────────────────────────
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
