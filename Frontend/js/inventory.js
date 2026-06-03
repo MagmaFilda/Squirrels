@@ -105,8 +105,10 @@ async function loadInventory() {
 
             inventoryGrid.appendChild(slot);
 
-            return squirrels;
+            
         });
+
+        return squirrels;
 
     } catch (error) {
         console.error("Chyba:", error);
