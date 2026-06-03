@@ -185,7 +185,6 @@ namespace SquirrelsBackend.Controllers
                     squirrelInInventory.Count++;
                 }
                 var returningSquirrel = await dbData.Squirrels.FindAsync(realSquirrelId);
-                if (returningSquirrel == null) { return NotFound(); }
 
                 user.Money -= openingSiska.Cost;
                 await dbData.SaveChangesAsync();
