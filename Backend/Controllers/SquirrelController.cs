@@ -161,7 +161,7 @@ namespace SquirrelsBackend.Controllers
             {
                 return NotFound();
             }
-            //if (user.Squirrels == null) { return NotFound(); } 
+            if (user.Squirrels == null) { return NotFound(user.Squirrels); } 
 
             if (openingSiska.Cost <= user.Money)
             {
@@ -189,6 +189,7 @@ namespace SquirrelsBackend.Controllers
                 user.Money -= openingSiska.Cost;
                 await dbData.SaveChangesAsync();
 
+                if (returningSquirrel == null) { return NotFound(returningSquirrel); }
                 return Ok(returningSquirrel.Name);
             }
             else
