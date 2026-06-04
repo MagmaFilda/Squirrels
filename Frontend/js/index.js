@@ -116,6 +116,7 @@ const closeLeaderboardBtn = document.getElementById('close-leaderboard-btn');
 
 openLeaderboardBtn.addEventListener('click', () => {
     leaderboardOverlay.classList.add('active');
+    loadLeaderboard();
 });
 
 closeLeaderboardBtn.addEventListener('click', () => {
@@ -127,3 +128,49 @@ leaderboardOverlay.addEventListener('click', (e) => {
         leaderboardOverlay.classList.remove('active');
     }
 });
+
+const leaderboardData = document.getElementById("leaderboard-data");
+const leaderboardOverlay = document.getElementById("leaderboard-overlay");
+
+async function loadLeaderboard() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/leaderboard`);
+
+        if (!response.ok) {
+            throw new Error("Failed to load leaderboard.");
+        }
+
+        const leaderboard = await response.json();
+
+        leaderboardData.innerHTML = "";
+
+        leaderboard.slice(0, 10).forEach((player, index) => {
+            const row = document.createElement("tr");
+
+            if (index === 0) {
+                row.classList.add("rank-1");
+            } else if (index === 1) {
+                row.classList.add("rank-2");
+            } else if (index === 2) {
+                row.classList.add("rank-3");
+            }
+
+            row.innerHTML = `
+                <td>#${index + 1}</td>
+                <td>${player.username}</td>
+                <td class="game-number">${player.count}</td>
+            `;
+
+            leaderboardData.appendChild(row);
+        });
+
+    } catch (error) {
+        console.error("Chyba:", error);
+
+        leaderboardData.innerHTML = `
+            <tr>
+                <td colspan="3">Failed to load leaderboard.</td>
+            </tr>
+        `;
+    }
+}
