@@ -369,7 +369,7 @@ html, body, img, .item-slot, .back-btn {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: repeat(7, 1fr);
-        gap: 30px;
+        gap: 20px;
         width: 100%;
         margin: 0 ;
         padding: 0;
@@ -418,8 +418,8 @@ html, body, img, .item-slot, .back-btn {
         width: auto;
     }
     .item-slot img {
-        max-height: 81.5%;
-        max-width: 81.5%;
+        max-height: 80%;
+        max-width: 40%;
         object-fit: contain;
     }
 
@@ -432,4 +432,6 @@ html, body, img, .item-slot, .back-btn {
         flex-direction: row;
         flex-wrap: nowrap;
     }
+
+
 }
