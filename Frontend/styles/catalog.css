@@ -9,7 +9,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    overflow: hidden;
+    overflow-y: auto;
     animation: pixelSlideLoad 1s steps(4) forwards;
     font-family: "GameGlobalNumbers", "Pixelify Sans", sans-serif;
 
@@ -433,6 +433,13 @@ html, body, img, .item-slot, .back-btn {
         flex-direction: row;
         flex-wrap: nowrap;
     }
+    .catalog-container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 20px 20px 0px; 
+    }
 
 }
 @media (max-width: 470px) {
@@ -504,12 +511,19 @@ html, body, img, .item-slot, .back-btn {
     }
 
     .catalog-header {
-        width: 100%;
+        width: 80%;
         display: flex;
         justify-content: space-between;
         align-items: center;
         height: 120px;
         flex-direction: row;
         flex-wrap: nowrap;
+    }
+    .catalog-container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 20px 20px 0px; 
     }
 }
