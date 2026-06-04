@@ -376,6 +376,7 @@ html, body, img, .item-slot, .back-btn {
     background: #5c3a21;
     padding: 12px;
     border: 2px solid #000;
+    flex-wrap: wrap;
 }
 
 .sell-btn {
@@ -502,8 +503,10 @@ html, body, img, .item-slot, .back-btn {
     width: 100%;
     margin: 8px 0 0 0;
     color: #f4eccf;
-    font-size: 20px;
     text-align: center;
+    flex-basis: 100%;
+    font-size: 22px;
+    font-weight: bold;
 }
 
 
