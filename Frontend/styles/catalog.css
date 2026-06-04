@@ -356,6 +356,13 @@ html, body, img, .item-slot, .back-btn {
     font-weight: bold;
 }
 
+@media (max-width: 1024px){
+    .page-title img {
+        height: 100px;
+        width:auto
+    }
+}
+
 @media (max-width: 780px) {
     
     .page-title {
@@ -372,11 +379,11 @@ html, body, img, .item-slot, .back-btn {
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: repeat(7, 1fr);
         gap: 20px;
-        width: auto;
+        width: 60vh;
         margin: 0;
         padding: 0;
         height: 40vh; 
-        margin-top: -400px;
+        margin-top: -450px;
     }
     .item-slot.common {
         background: url('../images/back.png') no-repeat center center/80px 80px; 
@@ -387,7 +394,7 @@ html, body, img, .item-slot, .back-btn {
         padding: 0;
         transition: background-color 0.15s ease;
         height: 100%;
-        width: 100%;
+        width: 20vh;
     }
     .item-slot.epic {
         background: url('../images/back-epic.png') no-repeat center center/80px 80px; 
@@ -421,7 +428,7 @@ html, body, img, .item-slot, .back-btn {
     }
     .item-slot img {
         max-height: 80%;
-        max-width: 40%;
+        max-width: 50%;
         object-fit: contain;
     }
 
@@ -439,7 +446,7 @@ html, body, img, .item-slot, .back-btn {
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 10px 20px 20px 0px; 
+        padding: 0; 
     }
 
 }
@@ -462,7 +469,7 @@ html, body, img, .item-slot, .back-btn {
         margin: 0;
         padding: 0;
         height: 40vh; 
-        margin-top: -400px;
+        margin-top: -450px;
     }
     .item-slot.common {
         background: url('../images/back.png') no-repeat center center/80px 80px; 
@@ -506,17 +513,17 @@ html, body, img, .item-slot, .back-btn {
         width: 100%;
     }
     .item-slot img {
-        max-height: 80%;
-        max-width: 40%;
+        max-height: 100%;
+        max-width: 60%;
         object-fit: contain;
     }
 
     .catalog-header {
-        width: 80%;
+        width: 35vh;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        height: 120px;
+        height: 10vh;
         flex-direction: row;
         flex-wrap: nowrap;
     }
