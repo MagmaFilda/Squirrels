@@ -117,107 +117,59 @@ async function loadInventory() {
 }
 
 
-const modal = document.getElementById('info-modal'); // [cite: 32]
-const modalTitle = document.getElementById('modal-title'); // [cite: 32]
-const modalDesc = document.getElementById('modal-desc'); // [cite: 32]
-const modalImg = document.getElementById('modal-img'); // [cite: 32]
-const modalPrice = document.getElementById('modal-price'); // [cite: 32]
+const modal = document.getElementById('info-modal');
+const modalTitle = document.getElementById('modal-title');
+const modalDesc = document.getElementById('modal-desc');
+const modalImg = document.getElementById('modal-img');
+const modalPrice = document.getElementById('modal-price');
+const modalCount = document.getElementById('modal-count');
+const sellStatus = document.getElementById("sell-status");
 
-const barStr = document.getElementById('bar-str'); // [cite: 33]
-const barSpd = document.getElementById('bar-spd'); // [cite: 33]
-const barDur = document.getElementById('bar-dur'); // [cite: 33]
-const closeBtn = document.querySelector('.close-btn'); // [cite: 33]
 
-function openModal(data) { // [cite: 34]
+const barStr = document.getElementById('bar-str');
+const barSpd = document.getElementById('bar-spd');
+const barDur = document.getElementById('bar-dur');
+const closeBtn = document.querySelector('.close-btn');
+
+function openModal(data) {
     selectedSquirrelId = data.squirrelId;
     selectedSquirrelCount = data.count;
-    modalTitle.innerText = data.name; // [cite: 34]
-    modalDesc.innerText = data.desc; // [cite: 34]
-    modalPrice.innerText = data.price; // [cite: 34]
-    modalImg.setAttribute('src', data.img); // [cite: 34]
+    modalTitle.innerText = data.name;
+    modalDesc.innerText = data.desc;
+    modalPrice.innerText = data.price;
+    modalImg.setAttribute('src', data.img);
+    modalCount.innerText = data.count;
+    sellStatus.innerText = "";
 
-    barStr.style.width = data.str + '%'; // [cite: 35]
-    barSpd.style.width = data.spd + '%'; // [cite: 35]
-    barDur.style.width = data.dur + '%'; // [cite: 35]
+    barStr.style.width = data.str + '%';
+    barSpd.style.width = data.spd + '%';
+    barDur.style.width = data.dur + '%';
 
-    modal.classList.add('active'); // [cite: 35]
-} // [cite: 35]
+    modal.classList.add('active');
+}
 
-closeBtn.addEventListener('click', () => modal.classList.remove('active')); // [cite: 35]
+closeBtn.addEventListener('click', () => modal.classList.remove('active'));
 
-modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); }); // [cite: 36]
+modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
 
 const sellOneBtn = document.getElementById('sell-one-btn');
 const sellAllBtn = document.getElementById('sell-all-btn');
 const sellTenBtn = document.getElementById('sell-ten-btn');
 
-sellOneBtn.addEventListener("click", sellOneSquirrel);
-sellTenBtn.addEventListener("click", sellTenSquirrel);
-sellAllBtn.addEventListener("click", sellAllSquirrels);
+sellOneBtn.addEventListener("click", function () {
+    sellSelectedSquirrel(1);
+});
 
-async function sellOneSquirrel() {
-    try {
-        const response = await fetch(`${API_BASE_URL}/sell/${selectedSquirrelId}/1`, {
-            method: "DELETE",
-            headers:
-            {
-                "Authorization": `Bearer ${getToken()}`
-            }
-        });
+sellTenBtn.addEventListener("click", function () {
+    sellSelectedSquirrel(10);
+});
 
-        if (!response.ok) {
-            throw new Error("Failed to sell one squirrel.");
-        }
-
-        await refreshAfterSell();
-
-    } catch (error) {
-        console.error("Chyba:", error);
-    }
-}
-
-async function sellTenSquirrel() {
-    try {
-        const response = await fetch(`${API_BASE_URL}/sell/${selectedSquirrelId}/10`, {
-            method: "DELETE",
-            headers:
-            {
-                "Authorization": `Bearer ${getToken()}`
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error("Failed to sell ten squirrels.");
-        }
-
-        await refreshAfterSell();
-
-    } catch (error) {
-        console.error("Chyba:", error);
-    }
-}
-
-async function sellAllSquirrels() {
-    try {
-        const response = await fetch(`${API_BASE_URL}/sell/${selectedSquirrelId}/${selectedSquirrelCount}`, {
-            method: "DELETE",
-            headers:
-            {
-                "Authorization": `Bearer ${getToken()}`
-            }
-        });
+sellAllBtn.addEventListener("click", function () {
+    sellSelectedSquirrel(selectedSquirrelCount);
+});
 
 
-        if (!response.ok) {
-            throw new Error("Failed to sell all squirrels.");
-        }
 
-        await refreshAfterSell();
-
-    } catch (error) {
-        console.error("Chyba:", error);
-    }
-}
 
 async function refreshAfterSell() {
     const squirrels = await loadInventory();
@@ -235,7 +187,47 @@ async function refreshAfterSell() {
     }
 
     selectedSquirrelCount = currentSquirrel.count;
+    modalCount.innerText = currentSquirrel.count;
 }
+
+
+async function sellSelectedSquirrel(amount) {
+    try {
+        sellStatus.innerText = "Selling...";
+        setSellButtonsDisabled(true);
+
+        const response = await fetch(`${API_BASE_URL}/sell/${selectedSquirrelId}/${amount}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${getToken()}`
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to sell squirrel.");
+        }
+
+        await refreshAfterSell();
+
+        if (modal.classList.contains("active")) {
+            sellStatus.innerText = "Sold successfully!";
+        }
+
+    } catch (error) {
+        console.error("Chyba:", error);
+        sellStatus.innerText = "Selling failed.";
+    } finally {
+        setSellButtonsDisabled(false);
+    }
+}
+
+function setSellButtonsDisabled(disabled) {
+    sellOneBtn.disabled = disabled;
+    sellTenBtn.disabled = disabled;
+    sellAllBtn.disabled = disabled;
+}
+
+
 
 
 
