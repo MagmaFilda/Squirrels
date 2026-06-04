@@ -16,6 +16,8 @@ namespace SquirrelsBackend.Controllers
         private Services services;
         private PasswordHasher<User> hasher;
 
+        private int adminId = 6;
+
         public SquirrelsController(AppDbContext context, IConfiguration configuration)
         {
             dbData = context;
@@ -34,7 +36,7 @@ namespace SquirrelsBackend.Controllers
         {
             List<User> users = await dbData.Users.Include(u => u.Squirrels).ToListAsync();
 
-            List<int> legendarySquirrels = dbData.Squirrels.Where(s => s.Rarity == Rarity.Legendary).Select(s => s.Id).ToList();
+            List<int> legendarySquirrels = await dbData.Squirrels.Where(s => s.Rarity == Rarity.Legendary).Select(s => s.Id).ToListAsync();
             List<LeaderboardReturn> returnData = users.Select(u => new LeaderboardReturn(u.Name!, 
                 u.Squirrels!.Where(us => legendarySquirrels.Contains(us.SquirrelId)).Sum(us => us.Count)
                 )).OrderByDescending(x => x.Count).Take(10).ToList();
@@ -208,6 +210,7 @@ namespace SquirrelsBackend.Controllers
                 if (inventorySlot.Count == count)
                 {
                     dbData.UserSquirrels.Remove(inventorySlot);
+                    if (user.Squirrels != null) { user.Squirrels.Remove(inventorySlot); }                
                 }
                 else
                 {
@@ -226,14 +229,63 @@ namespace SquirrelsBackend.Controllers
         }
         //Admin endpoints
         [Authorize]
-        [HttpPost("addSquirrel")]
-        public async Task<IActionResult> NewSquirrel(NewSquirrelRequest squirrelData)
+        [HttpGet("isAdmin")]
+        public async Task<IActionResult> IsAdmin()
         {
             int userId = int.Parse(User.FindFirst("UserId")!.Value);
             var user = await dbData.Users.FindAsync(userId);
             if (user == null) { return NotFound(); }
 
-            if (userId == 6)
+            if (userId == adminId)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+        [Authorize]
+        [HttpGet("getUsers")]
+        public async Task<IActionResult> ReadAllUsers()
+        {
+            int userId = int.Parse(User.FindFirst("UserId")!.Value);
+            var user = await dbData.Users.FindAsync(userId);
+            if (user == null) { return NotFound(); }
+
+            if (userId == adminId)
+            {
+                List<UserReturn> allUsers = await dbData.Users.Select(u => new UserReturn(u.Name, u.Money, u.Squirrels))
+                    .OrderByDescending(x => x.Money).ToListAsync();
+                return Ok(allUsers);
+            }
+            return BadRequest();
+        }
+        [Authorize]
+        [HttpPut("changeMoney/{targetUserName}/{amount}")]
+        public async Task<IActionResult> ChangeMoney(string targetUserName, int amount)
+        {
+            int userId = int.Parse(User.FindFirst("UserId")!.Value);
+            var user = await dbData.Users.FindAsync(userId);
+            if (user == null) { return NotFound(); }
+
+            if (userId == adminId)
+            {
+                var targetUser = await dbData.Users.FirstOrDefaultAsync(u => u.Name == targetUserName);
+                if (targetUser == null) { return NotFound(); }
+
+                targetUser.Money += amount;
+                if (user.Money < 0) {  targetUser.Money = 0; }
+                return Ok(targetUser.Money);
+            }
+            return BadRequest();
+        }
+        [Authorize]
+        [HttpPost("addSquirrelToDatabase")]
+        public async Task<IActionResult> NewSquirrelInDatabase(NewSquirrelRequest squirrelData)
+        {
+            int userId = int.Parse(User.FindFirst("UserId")!.Value);
+            var user = await dbData.Users.FindAsync(userId);
+            if (user == null) { return NotFound(); }
+
+            if (userId == adminId)
             {
                 Squirrel newSquirrel = new Squirrel(squirrelData.name, squirrelData.desc, squirrelData.rarity,
                     squirrelData.strength, squirrelData.speed, squirrelData.health, squirrelData.cost);
@@ -243,6 +295,47 @@ namespace SquirrelsBackend.Controllers
                 return Ok();
             } 
             return BadRequest();           
+        }
+        [Authorize]
+        [HttpDelete("changeUserSquirrels/{targetUserName}/{squirrelId}/{amount}")]
+        public async Task<IActionResult> AddSquirrelToUser(string targetUserName, int squirrelId, int amount)
+        {
+            int userId = int.Parse(User.FindFirst("UserId")!.Value);
+            var user = await dbData.Users.FindAsync(userId);
+            if (user == null) { return NotFound(); }
+
+            if (userId == adminId)
+            {
+                var targetUser = await dbData.Users.FirstOrDefaultAsync(u => u.Name == targetUserName);
+                if (targetUser == null) { return NotFound(targetUserName); }
+
+                var squirrelInInventory = await dbData.UserSquirrels.FindAsync(targetUser.Id, squirrelId);
+
+                if (squirrelInInventory == null)
+                {
+                    if (amount <= 0) { return BadRequest(); }
+
+                    squirrelInInventory = new UserSquirrel(targetUser.Id, squirrelId);
+                    squirrelInInventory.Count = amount;
+                    dbData.UserSquirrels.Add(squirrelInInventory);
+
+                    if (targetUser.Squirrels == null) { return NotFound(targetUser.Squirrels); }
+                    targetUser.Squirrels.Add(squirrelInInventory);
+                }
+                else
+                {
+                    if (squirrelInInventory.Count + amount > 0)
+                    {
+                        squirrelInInventory.Count += amount;
+                    }
+                    else
+                    {
+                        dbData.UserSquirrels.Remove(squirrelInInventory);
+                        if (targetUser.Squirrels != null) { targetUser.Squirrels.Remove(squirrelInInventory); }
+                    }
+                }
+            }
+            return BadRequest();
         }
     }
 }
