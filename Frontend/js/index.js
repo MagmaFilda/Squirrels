@@ -1,3 +1,4 @@
+const API_BASE_URL = "https://squirrels-backend.onrender.com/api/squirrels";
 const loginBtn = document.getElementById("loginBtn");
 const logoutBtn = document.getElementById("logoutBtn");
 
