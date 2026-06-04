@@ -10,6 +10,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     overflow-y: auto;
+    overflow-x: hidden;
     animation: pixelSlideLoad 1s steps(4) forwards;
     font-family: "GameGlobalNumbers", "Pixelify Sans", sans-serif;
 
