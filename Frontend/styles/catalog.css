@@ -360,19 +360,21 @@ html, body, img, .item-slot, .back-btn {
     max-height: 200px;
     }
     .page-title img {
-        height: 90px;
-        width: auto;
+        height: auto;
+        width: 100%;
     }
+
+
     .catalog-grid {
         display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        grid-template-rows: repeat(3, 1fr);
-        gap: 12px;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(7, 1fr);
+        gap: 30px;
         width: 100%;
         margin: 0 ;
         padding: 0;
         height: 40vh; 
-        margin-top: -150px;
+        margin-top: -300px;
     }
     .item-slot.common {
         background: url('../images/back.png') no-repeat center center/80px 80px; 
@@ -383,7 +385,7 @@ html, body, img, .item-slot, .back-btn {
         padding: 0;
         transition: background-color 0.15s ease;
         height: 100%;
-        width: auto;
+        width: 100%;
     }
     .item-slot.epic {
         background: url('../images/back-epic.png') no-repeat center center/80px 80px; 
@@ -419,5 +421,15 @@ html, body, img, .item-slot, .back-btn {
         max-height: 81.5%;
         max-width: 81.5%;
         object-fit: contain;
+    }
+
+    .catalog-header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 120px;
+        flex-direction: row;
+        flex-wrap: nowrap;
     }
 }
