@@ -9,6 +9,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    overflow-x: hidden;
     overflow-y: auto;
     animation: pixelSlideLoad 1s steps(4) forwards;
     font-family: "GameGlobalNumbers", "Pixelify Sans", sans-serif;
@@ -442,7 +443,7 @@ html, body, img, .item-slot, .back-btn {
     }
 
 }
-@media (max-width: 470px) {
+@media (max-width: 490px) {
 
    .page-title {
     max-height: 200px;
