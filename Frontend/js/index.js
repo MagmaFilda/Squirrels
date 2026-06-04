@@ -109,3 +109,21 @@ document.addEventListener("DOMContentLoaded", function () {
         document.addEventListener("click", spustitHudbuPoKliknuti);
     }
 });
+
+const leaderboardOverlay = document.getElementById('leaderboard-overlay');
+const openLeaderboardBtn = document.getElementById('open-leaderboard-btn');
+const closeLeaderboardBtn = document.getElementById('close-leaderboard-btn');
+
+openLeaderboardBtn.addEventListener('click', () => {
+    leaderboardOverlay.classList.add('active');
+});
+
+closeLeaderboardBtn.addEventListener('click', () => {
+    leaderboardOverlay.classList.remove('active');
+});
+
+leaderboardOverlay.addEventListener('click', (e) => {
+    if (e.target === leaderboardOverlay) {
+        leaderboardOverlay.classList.remove('active');
+    }
+});
