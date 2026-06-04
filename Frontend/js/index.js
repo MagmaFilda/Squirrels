@@ -130,7 +130,6 @@ leaderboardOverlay.addEventListener('click', (e) => {
 });
 
 const leaderboardData = document.getElementById("leaderboard-data");
-const leaderboardOverlay = document.getElementById("leaderboard-overlay");
 
 async function loadLeaderboard() {
     try {
