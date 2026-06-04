@@ -508,6 +508,27 @@ html, body, img, .item-slot, .back-btn {
         width: 14%;
         margin-left: 4%;
     }
+    .modal-content {
+        width: 70vw;
+        height: 90vh;
+    }
+    .sell-row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: normal;
+    }
+    .modal-overlay {
+        height: 110vh;
+    }
+    .body {
+        height: 120%;
+    }
+    .sell-container {
+        max-height: 30vh;
+    }
 }
 
 #sell-status {
