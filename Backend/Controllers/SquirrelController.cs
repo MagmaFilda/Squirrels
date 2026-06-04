@@ -29,6 +29,18 @@ namespace SquirrelsBackend.Controllers
         {
             return Ok(dbData.Squirrels);
         }
+        [HttpGet("leaderboard")]
+        public async Task<IActionResult> LoadLeaderboard()
+        {
+            List<User> users = await dbData.Users.Include(u => u.Squirrels).ToListAsync();
+
+            List<int> legendarySquirrels = dbData.Squirrels.Where(s => s.Rarity == Rarity.Legendary).Select(s => s.Id).ToList();
+            List<LeaderboardReturn> returnData = users.Select(u => new LeaderboardReturn(u.Name!, 
+                u.Squirrels!.Where(us => legendarySquirrels.Contains(us.SquirrelId)).Sum(us => us.Count)
+                )).OrderByDescending(x => x.Count).Take(10).ToList();
+
+            return Ok(returnData);
+        }
         [Authorize]
         [HttpGet("inventory")]
         public async Task<IActionResult> GetInventory()
@@ -127,28 +139,6 @@ namespace SquirrelsBackend.Controllers
                 return BadRequest();
             }               
         }
-        //[HttpPost("addSquirrel")]
-        //public async Task<IActionResult> NewSquirrel(NewSquirrelRequest squirrelData)
-        //{
-        //    for (int i = 0; i < squirrelData.names.Count; i++)
-        //    {
-        //        Squirrel squirrel = new Squirrel(squirrelData.names[i], squirrelData.descs[i], squirrelData.rarities[i],
-        //            squirrelData.strengths[i], squirrelData.speeds[i], squirrelData.healths[i], squirrelData.costs[i]);
-        //        dbData.Squirrels.Add(squirrel);
-        //    }
-
-        //    await dbData.SaveChangesAsync();
-        //    return Ok();
-        //}
-        //[HttpPost("addSiska")]
-        //public async Task<IActionResult> NewSiska(string name, int cost, int common, int rare, int epic, int legendary)
-        //{
-        //    Siska siska = new Siska(name, "", cost, common, rare, epic, legendary);
-        //    dbData.Sisky.Add(siska);
-
-        //    await dbData.SaveChangesAsync();
-        //    return Ok(siska);
-        //}
         [Authorize]
         [HttpPost("openSiska/{siskaId}")]
         public async Task<IActionResult> OpenSiska(int siskaId)
@@ -177,7 +167,7 @@ namespace SquirrelsBackend.Controllers
                     squirrelInInventory = new UserSquirrel(userId, realSquirrelId);
                     dbData.UserSquirrels.Add(squirrelInInventory);
 
-                    if (user.Squirrels == null) { return NotFound(user.Squirrels); } 
+                    if (user.Squirrels == null) { return NotFound(user.Squirrels); }
                     user.Squirrels.Add(squirrelInInventory);
                 }
                 else
@@ -233,6 +223,26 @@ namespace SquirrelsBackend.Controllers
             {
                 return BadRequest();
             }
+        }
+        //Admin endpoints
+        [Authorize]
+        [HttpPost("addSquirrel")]
+        public async Task<IActionResult> NewSquirrel(NewSquirrelRequest squirrelData)
+        {
+            int userId = int.Parse(User.FindFirst("UserId")!.Value);
+            var user = await dbData.Users.FindAsync(userId);
+            if (user == null) { return NotFound(); }
+
+            if (userId == 6)
+            {
+                Squirrel newSquirrel = new Squirrel(squirrelData.name, squirrelData.desc, squirrelData.rarity,
+                    squirrelData.strength, squirrelData.speed, squirrelData.health, squirrelData.cost);
+                dbData.Squirrels.Add(newSquirrel);
+                
+                await dbData.SaveChangesAsync();
+                return Ok();
+            } 
+            return BadRequest();           
         }
     }
 }

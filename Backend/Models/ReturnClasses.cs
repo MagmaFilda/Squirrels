@@ -23,14 +23,25 @@
         public string? Username { get; set; }
         public string? Password { get; set; }
     }
+    public class LeaderboardReturn
+    {
+        public string? Username { get; private set; }
+        public int Count { get; private set; }
+
+        public LeaderboardReturn(string username, int count)
+        {
+            Username = username;
+            Count = count;
+        }
+    }
     public class NewSquirrelRequest
     {
-        public List<string>? names { get; set; }
-        public List<string>? descs { get; set; }
-        public List<Rarity>? rarities { get; set; }
-        public List<int>? strengths { get; set; }
-        public List<int>? speeds { get; set; }
-        public List<int>? healths { get; set; }
-        public List<int>? costs { get; set; }
+        public string? name { get; set; }
+        public string? desc { get; set; }
+        public Rarity rarity { get; set; }
+        public int strength { get; set; }
+        public int speed { get; set; }
+        public int health { get; set; }
+        public int cost { get; set; }
     }
 }
