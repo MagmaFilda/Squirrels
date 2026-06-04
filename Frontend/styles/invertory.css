@@ -283,7 +283,7 @@ html, body, img, .item-slot, .back-btn {
     background: #c4bda4;
     border: 4px solid #5c3a21;
     padding: 30px;
-    width: 100%;
+    width: 100vw;
     height: 80vh;
     max-width: 660px;
     text-align: center;
@@ -368,6 +368,7 @@ html, body, img, .item-slot, .back-btn {
     color: #fff;
     font-size: 1rem;
     font-weight: bold;
+    min-width: 8vw;
 }
 
 .sell-container {
@@ -378,6 +379,7 @@ html, body, img, .item-slot, .back-btn {
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    max-height: 8vh;
 }
 
 .sell-row {
