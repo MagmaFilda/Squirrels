@@ -485,19 +485,25 @@ html, body, img, .item-slot, .back-btn {
         grid-template-columns: repeat(7, 1fr);
         grid-template-rows: repeat(4, 1fr);
         gap: 0; 
-        
         width: 1500px;
-        
         height: 50vh; 
     }
     .player-currency {
-    background: #f4eccf;
-    padding: 4px 12px;
-    border: 2px solid #5c3a21;
-    box-shadow: -2px 0 #5c3a21, 2px 0 #5c3a21, 0 -2px #5c3a21, 0 2px #5c3a21;
-    width: 14%;
-    margin-left: 4%;
+        background: #f4eccf;
+        padding: 4px 12px;
+        border: 2px solid #5c3a21;
+        box-shadow: -2px 0 #5c3a21, 2px 0 #5c3a21, 0 -2px #5c3a21, 0 2px #5c3a21;
+        width: 14%;
+        margin-left: 4%;
+    }
 }
+
+#sell-status {
+    width: 100%;
+    margin: 8px 0 0 0;
+    color: #f4eccf;
+    font-size: 20px;
+    text-align: center;
 }
 
 
