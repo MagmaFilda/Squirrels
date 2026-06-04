@@ -44,38 +44,4 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
-
-    // =================================================================
-    // 2. HUDBA NA POZADÍ A UKLÁDÁNÍ HLASITOSTI (localStorage)
-    // =================================================================
-    const bgMusic = document.getElementById("bgMusic");
-    const volumeSlider = document.getElementById("volumeSlider");
-
-    if (bgMusic && volumeSlider) {
-        // Načtení uložené hlasitosti z paměti prohlížeče
-        const savedVolume = localStorage.getItem("gameVolume");
-        
-        if (savedVolume !== null) {
-            bgMusic.volume = savedVolume;
-            volumeSlider.value = savedVolume;
-        } else {
-            bgMusic.volume = volumeSlider.value; // Výchozí hodnota z HTML (0.3)
-        }
-
-        // Okamžitá změna hlasitosti při posunu jezdce a uložení do paměti
-        volumeSlider.addEventListener("input", function () {
-            bgMusic.volume = volumeSlider.value;
-            localStorage.setItem("gameVolume", volumeSlider.value);
-        });
-
-        // Ochrana: Spuštění hudby po prvním kliknutí (Autoplay Policy)
-        function spustitHudbu() {
-            bgMusic.play().then(() => {
-                document.removeEventListener("click", spustitHudbu);
-            }).catch(err => {
-                console.log("Prohlížeč blokuje audio, čekám na interakci uživatele.");
-            });
-        }
-        document.addEventListener("click", spustitHudbu);
-    }
 });

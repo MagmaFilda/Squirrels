@@ -227,10 +227,6 @@ function setSellButtonsDisabled(disabled) {
     sellAllBtn.disabled = disabled;
 }
 
-
-
-
-
 document.addEventListener("DOMContentLoaded", function() {
         const regexCisla = /([0-9%]+)/g;
 
