@@ -182,17 +182,25 @@ document.addEventListener("DOMContentLoaded", function () {
     const volumeSlider = document.getElementById("volumeSlider");
 
     if (bgMusic && volumeSlider) {
-        
-        bgMusic.volume = volumeSlider.value;
+        const savedVolume = localStorage.getItem("musicVolume");
+
+        if (savedVolume !== null) {
+            bgMusic.volume = savedVolume;
+            volumeSlider.value = savedVolume;
+        } else {
+            bgMusic.volume = volumeSlider.value;
+            localStorage.setItem("musicVolume", volumeSlider.value);
+        }
 
         volumeSlider.addEventListener("input", function () {
             bgMusic.volume = volumeSlider.value;
+            localStorage.setItem("musicVolume", volumeSlider.value);
         });
 
         function spustitHudbuPoKliknuti() {
             bgMusic.play().then(() => {
                 document.removeEventListener("click", spustitHudbuPoKliknuti);
-            }).catch(error => {
+            }).catch(() => {
                 console.log("Prohlížeč ještě blokuje audio, čekám na kliknutí.");
             });
         }
