@@ -9,8 +9,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
     animation: pixelSlideLoad 1s steps(4) forwards;
     font-family: "GameGlobalNumbers", "Pixelify Sans", sans-serif;
 
@@ -435,17 +434,15 @@ html, body, img, .item-slot, .back-btn {
         flex-wrap: nowrap;
     }
 
-
-
 }
 @media (max-width: 470px) {
-    .page-title img{
+
+   .page-title {
+    max-height: 200px;
+    }
+    .page-title img {
         height: auto;
         width: 100%;
-    }
-    
-    .page-title {
-    max-height: 200px;
     }
 
     .catalog-grid {
@@ -457,20 +454,8 @@ html, body, img, .item-slot, .back-btn {
         margin: 0;
         padding: 0;
         height: 40vh; 
-        margin-top: -400px;
+        margin-top: -450px;
     }
-
-    .catalog-header {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: 120px;
-        flex-direction: column;
-        flex-wrap: nowrap;
-        
-    }
-
     .item-slot.common {
         background: url('../images/back.png') no-repeat center center/80px 80px; 
         border-radius: 0px;
@@ -479,40 +464,52 @@ html, body, img, .item-slot, .back-btn {
         align-items: center;
         padding: 0;
         transition: background-color 0.15s ease;
-        height: 100vh;
+        height: 10vh;
         width: 100%;
     }
-
-    .item-slot.epic{
-        background: url('../images/back-epic.png') no-repeat center center/60px 60px; 
+    .item-slot.epic {
+        background: url('../images/back-epic.png') no-repeat center center/80px 80px; 
         border-radius: 0px;
         display: flex;
         justify-content: center;
         align-items: center;
-        width: auto;
-        height: 10vh;
     }
-    .item-slot.rare{
-        background: url('../images/back-rare.png') no-repeat center center/60px 60px; 
-        border-radius: 0px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 10vh;
-        height: 100%;
-        padding: 10px;
-        flex-direction: column;
 
-    }
-    .item-slot.legendary{
-        background: url('../images/back-legendary1.png') no-repeat center center/60px 60px; 
+    .item-slot.legendary {
+        background: url('../images/back-legendary1.png') no-repeat center center/80px 80px; 
         border-radius: 0px;
         display: flex;
         justify-content: center;
         align-items: center;
-        width: auto;
-        height: 100%;
         padding: 0;
+        transition: background-color 0.15s ease;
+        height: 10vh;
+        width: 100%;
+    }
+    .item-slot.rare {
+        background: url('../images/back-rare.png') no-repeat center center/80px 80px; 
+        border-radius: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        transition: background-color 0.15s ease;
+        height: 100vh;
+        width: 10vh;
+    }
+    .item-slot img {
+        max-height: 80%;
+        max-width: 40%;
+        object-fit: contain;
     }
 
+    .catalog-header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 120px;
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
 }
