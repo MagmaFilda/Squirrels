@@ -16,7 +16,7 @@ namespace SquirrelsBackend.Controllers
         private Services services;
         private PasswordHasher<User> hasher;
 
-        private int adminId = 1;
+        private int adminId = 28;
 
         public SquirrelsController(AppDbContext context, IConfiguration configuration)
         {
