@@ -242,7 +242,7 @@ namespace SquirrelsBackend.Controllers
             }
             return BadRequest();
         }
-        [Authorize]
+        //[Authorize]
         [HttpGet("getUsers")]
         public async Task<IActionResult> ReadAllUsers()
         {
