@@ -11,6 +11,26 @@ if (!isLoggedIn()) {
     isAdmin();
 }
 
+async function isAdmin() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/isAdmin`,
+        {
+            headers:
+            {
+                "Authorization": `Bearer ${getToken()}`
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to check admin status.");
+        }
+
+    } catch (error) {
+        console.error("Chyba:", error);
+        window.location.href = "../index.html";
+    }
+}
+
 addSquirrelForm.addEventListener("submit", async function (event) {
     event.preventDefault();
 
