@@ -460,7 +460,7 @@ html, body, img, .item-slot, .back-btn {
     }
 
     .item-slot.rare {
-        background: url('../images/back-rare.png') no-repeat center center/100px 100px; 
+        background: url('../images/back-rare.png') no-repeat center center/80px 80px; 
         border-radius: 0px;
         display: flex;
         justify-content: center;
@@ -472,7 +472,7 @@ html, body, img, .item-slot, .back-btn {
     }
 
     .item-slot.epic {
-        background: url('../images/back-epic.png') no-repeat center center/100px 100px; 
+        background: url('../images/back-epic.png') no-repeat center center/80px 80px; 
         border-radius: 0px;
         display: flex;
         justify-content: center;
@@ -480,7 +480,7 @@ html, body, img, .item-slot, .back-btn {
     }
 
     .item-slot.legendary {
-        background: url('../images/back-legendary1.png') no-repeat center center/100px 100px; 
+        background: url('../images/back-legendary1.png') no-repeat center center/80px 80px; 
         border-radius: 0px;
         display: flex;
         justify-content: center;
@@ -507,6 +507,11 @@ html, body, img, .item-slot, .back-btn {
         width: 1500px;
         height: 50vh; 
     }
+    
+    .inventory-container {
+        overflow: auto;
+    }
+
     .player-currency {
         background: #f4eccf;
         padding: 4px 12px;
@@ -596,10 +601,10 @@ html, body, img, .item-slot, .back-btn {
 #sell-status {
     margin: 0;
     text-align: center;
-    color: #f4eccf;
-    font-size: 22px;
+    color: #000000;
+    font-size: 18px;
     font-weight: bold;
-    min-height: 26px;
+    min-height: 15px;
 }
 
 
