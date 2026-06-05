@@ -242,7 +242,7 @@ namespace SquirrelsBackend.Controllers
             }
             return BadRequest();
         }
-        [Authorize]
+    [Authorize]
     [HttpGet("getUsers")]
     public async Task<IActionResult> ReadAllUsers()
     {
@@ -296,7 +296,7 @@ namespace SquirrelsBackend.Controllers
                 await dbData.SaveChangesAsync();
                 return Ok();
             } 
-            return BadRequest();           
+           return BadRequest(new List<int>{ userId, adminId});         
         }
         [Authorize]
         [HttpDelete("changeUserSquirrels/{targetUserName}/{squirrelId}/{amount}")]
