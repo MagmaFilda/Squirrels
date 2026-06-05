@@ -539,7 +539,10 @@ html, body, img, .item-slot, .back-btn {
         height: 150%;
     }
     .sell-container {
-        max-height: 30vh;
+        min-height: 30vh;
+    }
+    .sell-btn {
+        padding: 0;
     }
     .mini-logo {
         display: none;
@@ -552,6 +555,10 @@ html, body, img, .item-slot, .back-btn {
     .nav-btn {
        margin-top: 20vh;
     }
+    .pixel-bar {
+        height: 4px;
+    }
+
 }
 
 @media (max-width: 500px) {
