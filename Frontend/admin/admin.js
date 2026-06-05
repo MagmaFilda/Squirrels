@@ -5,8 +5,8 @@ const addSquirrelForm = document.getElementById("addSquirrelForm");
 const addSquirrelButton = document.getElementById("addSquirrelButton");
 
 if (!isLoggedIn()) {
-    //window.location.href = "../index.html";
-    //alert("You must log in to access the admin panel.");
+    window.location.href = "../index.html";
+    alert("You must log in to access the admin panel.");
 } else {
     isAdmin();
     allUsers();
@@ -22,6 +22,8 @@ async function isAdmin() {
                 "Authorization": `Bearer ${getToken()}`
             }
         });
+
+        console.log(response);
 
         if (!response.ok) {
             throw new Error("Failed to check admin status.");
@@ -47,6 +49,8 @@ async function allUsers() {
         }
 
         const users = await response.json();
+
+        console.log(users);
 
         usersTableBody.innerHTML = "";
 
@@ -85,6 +89,8 @@ async function allSquirrels() {
         }
 
         const squirrels = await response.json();
+
+        console.log(squirrels);
 
         squirrelsTableBody.innerHTML = "";
 
