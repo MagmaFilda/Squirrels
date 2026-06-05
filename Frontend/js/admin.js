@@ -36,6 +36,7 @@ async function isAdmin() {
 async function allUsers() {
     try {
         const response = await fetch(`${API_BASE_URL}/getUsers`, {
+            method: "GET",
             headers: {
                 "Authorization": `Bearer ${getToken()}`
             }

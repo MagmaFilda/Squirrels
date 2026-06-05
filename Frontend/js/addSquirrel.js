@@ -3,7 +3,6 @@ const API_BASE_URL = "https://squirrels-backend.onrender.com/api/squirrels";
 const addSquirrelForm = document.getElementById("addSquirrelForm");
 const addSquirrelButton = document.getElementById("addSquirrelButton");
 
-
 if (!isLoggedIn()) {
     window.location.href = "../index.html";
     alert("You must log in to access the admin panel.");
@@ -34,8 +33,8 @@ async function isAdmin() {
 addSquirrelForm.addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    addSquirrelButton.disabled = false;
-    addSquirrelButton.textContent = "Add Squirrel";
+    addSquirrelButton.disabled = true;
+    addSquirrelButton.textContent = "Adding Squirrel...";
 
     const squirrelName = document.getElementById("squirrelName").value;
     const squirrelDescription = document.getElementById("squirrelDescription").value;
@@ -59,7 +58,8 @@ addSquirrelForm.addEventListener("submit", async function (event) {
         const response = await fetch(`${API_BASE_URL}/addSquirrelToDatabase`, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${getToken()}`
             },
             body: JSON.stringify(newSquirrelData)
         });
