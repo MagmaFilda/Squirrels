@@ -31,10 +31,9 @@ async function isAdmin() {
 
     } catch (error) {
         console.error("Chyba:", error);
-        //window.location.href = "../index.html";
+        window.location.href = "../index.html";
     }
 }
-
 
 async function allUsers() {
     try {
@@ -88,8 +87,6 @@ async function allSquirrels() {
         }
 
         const squirrels = await response.json();
-
-        console.log(squirrels);
 
         squirrelsTableBody.innerHTML = "";
 
