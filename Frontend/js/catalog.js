@@ -10,7 +10,7 @@ async function loadCatalog() {
         }
 
         const squirrels = await response.json();
-        console.log(squirrels);
+        //console.log(squirrels);
         catalogGrid.innerHTML = "";
 
         squirrels.forEach(squirrel => {
