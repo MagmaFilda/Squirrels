@@ -63,7 +63,10 @@ async function allUsers() {
             moneyCell.textContent = user.money;
 
             const squirrelsCell = document.createElement("td");
-            squirrelsCell.textContent = user.squirrels;
+            const showSquirrelsBtn = document.createElement("button");
+            showSquirrelsBtn.textContent = "Show squirrels";
+            showSquirrelsBtn.classList.add("btn", "btn-sm", "btn-primary");
+            squirrelsCell.appendChild(showSquirrelsBtn);
 
             row.appendChild(usernameCell);
             row.appendChild(moneyCell);
