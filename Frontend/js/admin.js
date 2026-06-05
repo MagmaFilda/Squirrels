@@ -15,6 +15,7 @@ if (!isLoggedIn()) {
 
 async function isAdmin() {
     try {
+        
         const response = await fetch(`${API_BASE_URL}/isAdmin`,
         {
             headers:
@@ -56,13 +57,13 @@ async function allUsers() {
             const row = document.createElement("tr");
 
             const usernameCell = document.createElement("td");
-            usernameCell.textContent = user.Name;
+            usernameCell.textContent = user.name;
 
             const moneyCell = document.createElement("td");
-            moneyCell.textContent = user.Money;
+            moneyCell.textContent = user.money;
 
             const squirrelsCell = document.createElement("td");
-            squirrelsCell.textContent = user.Squirrels;
+            squirrelsCell.textContent = user.squirrels;
 
             row.appendChild(usernameCell);
             row.appendChild(moneyCell);
