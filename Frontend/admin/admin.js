@@ -31,7 +31,7 @@ async function isAdmin() {
 
     } catch (error) {
         console.error("Chyba:", error);
-        window.location.href = "../index.html";
+        //window.location.href = "../index.html";
     }
 }
 
