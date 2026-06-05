@@ -23,8 +23,6 @@ async function isAdmin() {
             }
         });
 
-        console.log(response);
-
         if (!response.ok) {
             throw new Error("Failed to check admin status.");
         }
@@ -94,16 +92,16 @@ async function allSquirrels() {
             const row = document.createElement("tr");
 
             const idCell = document.createElement("td");
-            idCell.textContent = squirrel.Id;
+            idCell.textContent = squirrel.id;
 
             const nameCell = document.createElement("td");
-            nameCell.textContent = squirrel.Name;
+            nameCell.textContent = squirrel.name;
 
             const priceCell = document.createElement("td");
-            priceCell.textContent = squirrel.Cost;
+            priceCell.textContent = squirrel.cost;
 
             const rarityCell = document.createElement("td");
-            rarityCell.textContent = squirrel.Rarity;
+            rarityCell.textContent = squirrel.rarity;
 
             row.appendChild(idCell);
             row.appendChild(nameCell);
