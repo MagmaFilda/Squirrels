@@ -602,9 +602,10 @@ html, body, img, .item-slot, .back-btn {
     margin: 0;
     text-align: center;
     color: #000000;
-    font-size: 18px;
+    font-size: 30px;
     font-weight: bold;
-    min-height: 15px;
+    min-height: 25px;
+    margin-top: 1vh;
 }
 
 
