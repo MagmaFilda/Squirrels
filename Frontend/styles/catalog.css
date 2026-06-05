@@ -361,6 +361,13 @@ html, body, img, .item-slot, .back-btn {
         height: 100px;
         width:auto
     }
+
+    .catalog-grid{
+        gap: 20px;
+        width: 100%;
+        max-width: 1400px;
+        height: 60vh; 
+    }
 }
 
 @media (max-width: 780px) {
@@ -383,7 +390,7 @@ html, body, img, .item-slot, .back-btn {
         margin: 0;
         padding: 0;
         height: 40vh; 
-        margin-top: -450px;
+        margin-top: -400px;
     }
     .item-slot.common {
         background: url('../images/back.png') no-repeat center center/80px 80px; 
@@ -468,8 +475,8 @@ html, body, img, .item-slot, .back-btn {
         width: auto;
         margin: 0;
         padding: 0;
-        height: 40vh; 
-        margin-top: -450px;
+        height: 50vh; 
+        margin-top: -330px;
     }
     .item-slot.common {
         background: url('../images/back.png') no-repeat center center/80px 80px; 
@@ -519,7 +526,7 @@ html, body, img, .item-slot, .back-btn {
     }
 
     .catalog-header {
-        width: 35vh;
+        width: 50vh;
         display: flex;
         justify-content: space-between;
         align-items: center;
