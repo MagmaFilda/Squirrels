@@ -75,7 +75,6 @@ async function allUsers() {
 
     } catch (error) {
         console.error("Chyba:", error);
-        window.location.href = "../index.html";
     }
 }
 
@@ -119,7 +118,6 @@ async function allSquirrels() {
 
     } catch (error) {
         console.error("Chyba:", error);
-        window.location.href = "../index.html";
     }
 }
 
