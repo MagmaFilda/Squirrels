@@ -242,24 +242,24 @@ namespace SquirrelsBackend.Controllers
             }
             return BadRequest();
         }
-    [Authorize]
-    [HttpGet("getUsers")]
-    public async Task<IActionResult> ReadAllUsers()
-    {
-        int userId = int.Parse(User.FindFirst("UserId")!.Value);
-        var user = await dbData.Users.FindAsync(userId);
-        if (user == null) { return NotFound(); }
-
-        if (userId == adminId)
+        [Authorize]
+        [HttpGet("getUsers")]
+        public async Task<IActionResult> ReadAllUsers()
         {
-            var users = await dbData.Users.Include(u => u.Squirrels).ToListAsync();
+            int userId = int.Parse(User.FindFirst("UserId")!.Value);
+            var user = await dbData.Users.FindAsync(userId);
+            if (user == null) { return NotFound(); }
 
-            List<UserReturn> allUsers = users.Select(u => new UserReturn(u.Name, u.Money, u.Squirrels))
-                .OrderByDescending(x => x.Money).ToList();
-            return Ok(allUsers);
+            if (userId == adminId)
+            {
+                var users = await dbData.Users.Include(u => u.Squirrels).ToListAsync();
+
+                List<UserReturn> allUsers = users.Select(u => new UserReturn(u.Name, u.Money, u.Squirrels))
+                    .OrderByDescending(x => x.Money).ToList();
+                return Ok(allUsers);
+            }
+            return BadRequest();
         }
-        return BadRequest();
-    }
         [Authorize]
         [HttpPut("changeMoney/{targetUserName}/{amount}")]
         public async Task<IActionResult> ChangeMoney(string targetUserName, int amount)
@@ -296,7 +296,7 @@ namespace SquirrelsBackend.Controllers
                 await dbData.SaveChangesAsync();
                 return Ok();
             } 
-           return BadRequest(new List<int>{ userId, adminId});         
+           return BadRequest(adminId);         
         }
         [Authorize]
         [HttpDelete("changeUserSquirrels/{targetUserName}/{squirrelId}/{amount}")]
