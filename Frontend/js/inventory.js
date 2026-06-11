@@ -167,12 +167,10 @@ sellOneBtn.addEventListener("click", function () {
 keepOneBtn.addEventListener("click", function () {
     //sellSelectedSquirrel(10);
     if(selectedSquirrelCount <= 1) {
-        alertMessage.textContent = "Invalid username or password.";
+        alertMessage.textContent = "You have only one squirrel.";
         alertBox.classList.add("alert-show");
             
         setTimeout(() => {
-            loginButton.textContent = "LOGIN";
-            loginButton.disabled = false;
             alertBox.classList.remove("alert-show");
         }, 2000);
         return;
