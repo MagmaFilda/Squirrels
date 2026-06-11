@@ -177,7 +177,7 @@ keepOneBtn.addEventListener("click", function () {
         }, 2000);
         return;
     }
-    selectedSquirrel(selectedSquirrelCount - 1);
+    sellSelectedSquirrel(selectedSquirrelCount - 1);
 });
 
 sellAllBtn.addEventListener("click", function () {
