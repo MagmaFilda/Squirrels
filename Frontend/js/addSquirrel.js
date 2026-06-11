@@ -48,14 +48,14 @@ addSquirrelForm.addEventListener("submit", async function (event) {
         name: squirrelName,
         description: squirrelDescription,
         cost: squirrelCost,
-        rarity: squirrelRarity,
+        rarity: parseInt(squirrelRarity),
         strength: squirrelStrength,
         speed: squirrelSpeed,
         durability: squirrelDurability
     }
 
     console.log(newSquirrelData);
-    
+
     try {
         const response = await fetch(`${API_BASE_URL}/addSquirrelToDatabase`, {
             method: "POST",
