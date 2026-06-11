@@ -165,7 +165,7 @@ sellOneBtn.addEventListener("click", function () {
 });
 
 keepOneBtn.addEventListener("click", function () {
-    if(selectedSquirrelCount === "1") {
+    if(selectedSquirrelCount <= 1) {
         alertMessage.textContent = "You have only one squirrel.";
         alertBox.classList.add("alert-show");
             

@@ -54,6 +54,8 @@ addSquirrelForm.addEventListener("submit", async function (event) {
         durability: squirrelDurability
     }
 
+    console.log(newSquirrelData);
+    
     try {
         const response = await fetch(`${API_BASE_URL}/addSquirrelToDatabase`, {
             method: "POST",
