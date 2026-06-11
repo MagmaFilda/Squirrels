@@ -2,6 +2,10 @@ const API_BASE_URL = "https://squirrels-backend.onrender.com/api/squirrels";
 const inventoryGrid = document.getElementById('inventoryGrid');
 const nutsCount = document.getElementById("nut-count");
 const playerCurrency = document.getElementById("playerCurrency");
+
+const alertBox = document.getElementById("custom-alert");
+const alertMessage = document.getElementById("alert-message");
+
 let selectedSquirrelId = null;
 let selectedSquirrelCount = 0;
 
@@ -154,14 +158,26 @@ modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList
 
 const sellOneBtn = document.getElementById('sell-one-btn');
 const sellAllBtn = document.getElementById('sell-all-btn');
-const sellTenBtn = document.getElementById('sell-ten-btn');
+const keepOneBtn = document.getElementById('keep-one-btn');
 
 sellOneBtn.addEventListener("click", function () {
     sellSelectedSquirrel(1);
 });
 
-sellTenBtn.addEventListener("click", function () {
-    sellSelectedSquirrel(10);
+keepOneBtn.addEventListener("click", function () {
+    //sellSelectedSquirrel(10);
+    if(selectedSquirrelCount <= 1) {
+        alertMessage.textContent = "Invalid username or password.";
+        alertBox.classList.add("alert-show");
+            
+        setTimeout(() => {
+            loginButton.textContent = "LOGIN";
+            loginButton.disabled = false;
+            alertBox.classList.remove("alert-show");
+        }, 2000);
+        return;
+    }
+    selectedSquirrel(selectedSquirrelCount - 1);
 });
 
 sellAllBtn.addEventListener("click", function () {
@@ -223,7 +239,7 @@ async function sellSelectedSquirrel(amount) {
 
 function setSellButtonsDisabled(disabled) {
     sellOneBtn.disabled = disabled;
-    sellTenBtn.disabled = disabled;
+    keepOneBtn.disabled = disabled;
     sellAllBtn.disabled = disabled;
 }
 
