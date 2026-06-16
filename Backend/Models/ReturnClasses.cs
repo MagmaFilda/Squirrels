@@ -47,6 +47,17 @@
             Squirrels = squirrels;
         }
     }
+    public class OpenSquirrelReturn
+    {
+        public string? Name { get; private set; }
+        public Rarity Rarity { get; private set; }
+
+        public OpenSquirrelReturn(string? name, Rarity rarity)
+        {
+            Name = name;
+            Rarity = rarity;
+        }
+    }
     public class NewSquirrelRequest
     {
         public string? name { get; set; }

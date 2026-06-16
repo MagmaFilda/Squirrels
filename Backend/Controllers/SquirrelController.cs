@@ -177,12 +177,14 @@ namespace SquirrelsBackend.Controllers
                     squirrelInInventory.Count++;
                 }
                 var returningSquirrel = await dbData.Squirrels.FindAsync(realSquirrelId);
-
+                
                 user.Money -= openingSiska.Cost;
                 await dbData.SaveChangesAsync();
 
                 if (returningSquirrel == null) { return NotFound(returningSquirrel); }
-                return Ok(returningSquirrel.Name);
+                OpenSquirrelReturn returnSquirrelData = new OpenSquirrelReturn(returningSquirrel.Name, returningSquirrel.Rarity);
+
+                return Ok(returnSquirrelData);
             }
             else
             {
