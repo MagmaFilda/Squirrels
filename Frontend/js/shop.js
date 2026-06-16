@@ -47,7 +47,7 @@ const hatchClicksLeft = document.getElementById('hatch-clicks-left');
 const modalCloseBtn = document.getElementById('modal-close-btn');
 const nutCountDisplay = document.getElementById('nut-count');
 
-async function startHatching(coneId) {
+function startHatching(coneId) {
     if (isOpening) return;
     isOpening = true;
 
@@ -91,7 +91,7 @@ function registerHatchClick() {
     }
 }
 
-function revealSquirrel() {
+async function revealSquirrel() {
     hatchSound.currentTime = 0;
     hatchSound.play();
 
