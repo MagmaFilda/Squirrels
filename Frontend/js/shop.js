@@ -50,44 +50,6 @@ const nutCountDisplay = document.getElementById('nut-count');
 async function startHatching(coneId) {
     if (isOpening) return;
     isOpening = true;
-    
-    try {
-        const response = await fetch(`${API_BASE_URL}/openSiska/${coneId}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${getToken()}`
-            }
-        });
-        
-
-        if (!response.ok) {
-            throw new Error("Failed to open siska.");
-
-        }
-
-        await readMoney();
-
-        squirrelName = await response.Name;
-        squirrelRarity = await response.Rarity;
-
-        squirrelPath = `./../images/${squirrelName}.png`;
-        
-
-    } catch (error) {
-        isOpening = false;
-        console.error("Chyba:", error);
-        
-        const alertBox = document.getElementById("custom-alert");
-        
-        alertBox.classList.add("alert-show");
-        
-        setTimeout(() => {
-            alertBox.classList.remove("alert-show");
-        }, 2000);
-
-        return;
-    }
 
     document.getElementById("hatch-rarity-text").style.display = "none";
 
@@ -132,6 +94,45 @@ function registerHatchClick() {
 function revealSquirrel() {
     hatchSound.currentTime = 0;
     hatchSound.play();
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/openSiska/${coneId}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${getToken()}`
+            }
+        });
+        
+
+        if (!response.ok) {
+            throw new Error("Failed to open siska.");
+
+        }
+
+        await readMoney();
+
+        const data = await response.json();
+        squirrelName = data.name;
+        squirrelRarity = data.rarity;
+
+        squirrelPath = `./../images/${squirrelName}.png`;
+        
+
+    } catch (error) {
+        isOpening = false;
+        console.error("Chyba:", error);
+        
+        const alertBox = document.getElementById("custom-alert");
+        
+        alertBox.classList.add("alert-show");
+        
+        setTimeout(() => {
+            alertBox.classList.remove("alert-show");
+        }, 2000);
+
+        return;
+    }
 
     hatchClicksLeft.style.display = "none";
     hatchStatusText.innerText = `YOU GOT A ${squirrelName.replaceAll("_", " ").toUpperCase()}!`;
