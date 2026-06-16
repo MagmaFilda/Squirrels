@@ -134,9 +134,38 @@ function revealSquirrel() {
         return;
     }
 
+    hatchSound.currentTime = 0;
+    hatchSound.play();
+
     hatchClicksLeft.style.display = "none";
     hatchStatusText.innerText = `YOU GOT A ${squirrelName.replaceAll("_", " ").toUpperCase()}!`;
     
+    const rarityText = document.getElementById("hatch-rarity-text");
+    let rarityName = "";
+    let rarityColor = "";
+
+    const nameLower = squirrelName.toLowerCase();
+
+    if (squirrelRarity === 0) {
+        rarityName = "COMMON";
+        rarityColor = "#bf6c65"; 
+    } else if (squirrelRarity === 1) {
+        rarityName = "RARE";
+        rarityColor = "#159cab";
+    } else if (squirrelRarity === 2) {
+        rarityName = "EPIC";
+        rarityColor = "#68419d";
+    } else if (squirrelRarity === 3) {
+        rarityName = "LEGENDARY";
+        rarityColor = "#aaaf1b";
+    }
+
+    if (rarityText) {
+        rarityText.innerText = `${rarityName}`;
+        rarityText.style.color = rarityColor;
+        rarityText.style.display = "block";
+    }
+
     hatchingItem.src = squirrelPath;
     hatchingItem.className = "squirrel-revealed-animation";
 
@@ -213,105 +242,69 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-    document.addEventListener("DOMContentLoaded", function() {
-        function retroCisla(uzel) {
-            if (uzel.nodeType === Node.TEXT_NODE) {
-                const hledat = /([0-9%]+)/g;
-                if (uzel.nodeValue.match(hledat)) {
-                    const span = document.createElement('span');
-                    span.innerHTML = uzel.nodeValue.replace(hledat, '<span class="game-number">$1</span>');
-                    uzel.parentNode.insertBefore(span, uzel);
-                    uzel.parentNode.removeChild(uzel);
-                }
-            } else if (uzel.nodeType === Node.ELEMENT_NODE && uzel.nodeName !== 'SCRIPT' && uzel.nodeName !== 'STYLE') {
-                for (let i = uzel.childNodes.length - 1; i >= 0; i--) {
-                    retroCisla(uzel.childNodes[i]);
-                }
+document.addEventListener("DOMContentLoaded", function() {
+    function retroCisla(uzel) {
+        if (uzel.nodeType === Node.TEXT_NODE) {
+            const hledat = /([0-9%]+)/g;
+            if (uzel.nodeValue.match(hledat)) {
+                const span = document.createElement('span');
+                span.innerHTML = uzel.nodeValue.replace(hledat, '<span class="game-number">$1</span>');
+                uzel.parentNode.insertBefore(span, uzel);
+                uzel.parentNode.removeChild(uzel);
+            }
+        } else if (uzel.nodeType === Node.ELEMENT_NODE && uzel.nodeName !== 'SCRIPT' && uzel.nodeName !== 'STYLE') {
+            for (let i = uzel.childNodes.length - 1; i >= 0; i--) {
+                retroCisla(uzel.childNodes[i]);
             }
         }
-        retroCisla(document.body);
-    });
+    }
+    retroCisla(document.body);
+});
 
 
-    document.addEventListener("DOMContentLoaded", function() {
-        const regexCisla = /([0-9%]+)/g;
+document.addEventListener("DOMContentLoaded", function() {
+    const regexCisla = /([0-9%]+)/g;
 
-        function zpracujTextovyUzel(uzel) {
-            if (uzel.nodeType === Node.TEXT_NODE) {
-                if (uzel.nodeValue.match(regexCisla) && uzel.parentNode && !uzel.parentNode.classList.contains('game-number')) {
-                    const span = document.createElement('span');
-                    span.innerHTML = uzel.nodeValue.replace(regexCisla, '<span class="game-number">$1</span>');
-                    uzel.parentNode.insertBefore(span, uzel);
-                    uzel.parentNode.removeChild(uzel);
-                }
-            } else if (uzel.nodeType === Node.ELEMENT_NODE && uzel.nodeName !== 'SCRIPT' && uzel.nodeName !== 'STYLE') {
-                for (let i = uzel.childNodes.length - 1; i >= 0; i--) {
-                    zpracujTextovyUzel(uzel.childNodes[i]);
-                }
+    function zpracujTextovyUzel(uzel) {
+        if (uzel.nodeType === Node.TEXT_NODE) {
+            if (uzel.nodeValue.match(regexCisla) && uzel.parentNode && !uzel.parentNode.classList.contains('game-number')) {
+                const span = document.createElement('span');
+                span.innerHTML = uzel.nodeValue.replace(regexCisla, '<span class="game-number">$1</span>');
+                uzel.parentNode.insertBefore(span, uzel);
+                uzel.parentNode.removeChild(uzel);
+            }
+        } else if (uzel.nodeType === Node.ELEMENT_NODE && uzel.nodeName !== 'SCRIPT' && uzel.nodeName !== 'STYLE') {
+            for (let i = uzel.childNodes.length - 1; i >= 0; i--) {
+                zpracujTextovyUzel(uzel.childNodes[i]);
             }
         }
+    }
 
-        zpracujTextovyUzel(document.body);
+    zpracujTextovyUzel(document.body);
 
-        const hlidacZmen = new MutationObserver(function(mutace) {
-            mutace.forEach(function(mutace) {
-                mutace.addedNodes.forEach(function(uzel) {
-                    zpracujTextovyUzel(uzel);
-                });
-                if (mutace.type === 'characterData') {
-                    const rodic = mutace.target.parentNode;
-                    if (rodic && !rodic.classList.contains('game-number')) {
-                        const nejblizsiElement = rodic.closest('div, span, p, li, td');
-                        if (nejblizsiElement) {
-                            zpracujTextovyUzel(nejblizsiElement);
-                        }
+    const hlidacZmen = new MutationObserver(function(mutace) {
+        mutace.forEach(function(mutace) {
+            mutace.addedNodes.forEach(function(uzel) {
+                zpracujTextovyUzel(uzel);
+            });
+            if (mutace.type === 'characterData') {
+                const rodic = mutace.target.parentNode;
+                if (rodic && !rodic.classList.contains('game-number')) {
+                    const nejblizsiElement = rodic.closest('div, span, p, li, td');
+                    if (nejblizsiElement) {
+                        zpracujTextovyUzel(nejblizsiElement);
                     }
                 }
-            });
-        });
-
-        hlidacZmen.observe(document.body, {
-            childList: true,
-            subtree: true,
-            characterData: true
+            }
         });
     });
 
-    function revealSquirrel() {
-    hatchSound.currentTime = 0;
-    hatchSound.play();
+    hlidacZmen.observe(document.body, {
+        childList: true,
+        subtree: true,
+        characterData: true
+    });
+});
 
-    hatchClicksLeft.style.display = "none";
-    hatchStatusText.innerText = `YOU GOT A ${squirrelName.replaceAll("_", " ").toUpperCase()}!`;
     
-    const rarityText = document.getElementById("hatch-rarity-text");
-    let rarityName = "";
-    let rarityColor = "";
-
-    const nameLower = squirrelName.toLowerCase();
-
-    if (squirrelRarity === 0) {
-        rarityName = "COMMON";
-        rarityColor = "#bf6c65"; 
-    } else if (squirrelRarity === 1) {
-        rarityName = "RARE";
-        rarityColor = "#159cab";
-    } else if (squirrelRarity === 2) {
-        rarityName = "EPIC";
-        rarityColor = "#68419d";
-    } else if (squirrelRarity === 3) {
-        rarityName = "LEGENDARY";
-        rarityColor = "#aaaf1b";
-    }
-
-    if (rarityText) {
-        rarityText.innerText = `${rarityName}`;
-        rarityText.style.color = rarityColor;
-        rarityText.style.display = "block";
-    }
-
-    hatchingItem.src = squirrelPath;
-    hatchingItem.className = "squirrel-revealed-animation";
-
-    modalCloseBtn.style.display = "inline-block";
-}
+    
