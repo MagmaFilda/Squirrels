@@ -174,7 +174,7 @@ keepOneBtn.addEventListener("click", function () {
         }, 2000);
         return;
     }
-    sellSelectedSquirrel(selectedSquirrelCount - 1);
+    sellSelectedSquirrel(selectedSquirrelCount - 1, true);
 });
 
 sellAllBtn.addEventListener("click", function () {
@@ -204,7 +204,7 @@ async function refreshAfterSell() {
 }
 
 
-async function sellSelectedSquirrel(amount) {
+async function sellSelectedSquirrel(amount, closeModal = false) {
     try {
         sellStatus.innerText = "Selling...";
         setSellButtonsDisabled(true);
@@ -221,6 +221,11 @@ async function sellSelectedSquirrel(amount) {
         }
 
         await refreshAfterSell();
+
+        if (closeModal) {
+            modal.classList.remove("active");
+            return;
+        }
 
         if (modal.classList.contains("active")) {
             sellStatus.innerText = "Sold successfully!";
