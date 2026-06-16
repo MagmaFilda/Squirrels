@@ -96,7 +96,7 @@ async function revealSquirrel() {
     hatchSound.play();
 
     try {
-        const response = await fetch(`${API_BASE_URL}/openSiska/${coneId}`, {
+        const response = await fetch(`${API_BASE_URL}/openSiska/${currentConeId}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
