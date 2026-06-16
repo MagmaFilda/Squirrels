@@ -29,28 +29,6 @@ body {
     height: 100vh;
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/background.png') no-repeat center center/cover;
     overflow: hidden;
-    animation: pixelSlideLoad 1s steps(4) forwards;
-}
-
-@keyframes pixelSlideLoad {
-    0% {
-        opacity: 0;
-        transform: translateY(-4vh);
-        filter: brightness(60%);
-    }
-    33% {
-        opacity: 0.5;
-        transform: translateY(-2.5vh);
-    }
-    66% {
-        opacity: 0.8;
-        transform: translateY(-1vh);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-        filter: brightness(100%);
-    }
 }
 
 .game-number {

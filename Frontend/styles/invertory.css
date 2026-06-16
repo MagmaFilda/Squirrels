@@ -10,18 +10,13 @@ body {
     flex-direction: column;
     min-height: 100vh;
     overflow: hidden;
-    animation: pixelSlideLoad 1s steps(4) forwards;
-
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/background.png') no-repeat center center/cover;
-
     font-family: "GameGlobalNumbers", "Pixelify Sans", sans-serif;
-
     font-optical-sizing: auto;
     font-weight: 800;
     font-style: normal;
     user-select: none; 
     font-variant-numeric: tabular-nums lining-nums;
-    
 }
 
 .game-number {
@@ -33,34 +28,10 @@ body {
 
 }
 
-
-
-@keyframes pixelSlideLoad {
-    0% {
-        opacity: 0;
-        transform: translateY(-40px);
-        filter: brightness(60%);
-    }
-    33% {
-        opacity: 0.5;
-        transform: translateY(-25px);
-    }
-    66% {
-        opacity: 0.8;
-        transform: translateY(-10px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-        filter: brightness(100%);
-    }
-}
-
 html, body, img, .item-slot, .back-btn {
     image-rendering: pixelated !important;
     image-rendering: crisp-edges !important;
 }
-
 
 .inventory-header {
     width: 100%;
