@@ -68,7 +68,9 @@ async function startHatching(coneId) {
 
         await readMoney();
 
-        squirrelName = await response.text();
+        squirrelName = await response.Name;
+        squirrelRarity = await response.Rarity;
+
         squirrelPath = `./../images/${squirrelName}.png`;
         
 
@@ -282,20 +284,23 @@ document.addEventListener("DOMContentLoaded", function () {
     hatchStatusText.innerText = `YOU GOT A ${squirrelName.replaceAll("_", " ").toUpperCase()}!`;
     
     const rarityText = document.getElementById("hatch-rarity-text");
-    let rarityName = "COMMON";
-    let rarityColor = "#bf6c65"; 
+    let rarityName = "";
+    let rarityColor = "";
 
     const nameLower = squirrelName.toLowerCase();
 
-    if (nameLower === "king_midas" || nameLower === "druid" || nameLower === "blizzard") {
-        rarityName = "EPIC";
-        rarityColor = "#68419d"; 
-    } else if (nameLower === "angel" || nameLower === "inferno") {
-        rarityName = "LEGENDARY";
-        rarityColor = "#aaaf1b"; 
-    } else if (["rogue", "chef", "explorer", "gamer", "knight", "phoenix"].includes(nameLower)) {
+    if (squirrelRarity === 0) {
+        rarityName = "COMMON";
+        rarityColor = "#bf6c65"; 
+    } else if (squirrelRarity === 1) {
         rarityName = "RARE";
-        rarityColor = "#159cab"; 
+        rarityColor = "#159cab";
+    } else if (squirrelRarity === 2) {
+        rarityName = "EPIC";
+        rarityColor = "#68419d";
+    } else if (squirrelRarity === 3) {
+        rarityName = "LEGENDARY";
+        rarityColor = "#aaaf1b";
     }
 
     if (rarityText) {
