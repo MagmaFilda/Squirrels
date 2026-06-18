@@ -92,8 +92,8 @@ function registerHatchClick() {
 }
 
 async function revealSquirrel() {
-    hatchSound.currentTime = 0;
-    hatchSound.play();
+    hatchStatusText.innerText = "loading...";
+    hatchClicksLeft.innerText = "";
 
     try {
         const response = await fetch(`${API_BASE_URL}/openSiska/${currentConeId}`, {
@@ -141,7 +141,7 @@ async function revealSquirrel() {
 
     hatchClicksLeft.style.display = "none";
     hatchStatusText.innerText = `YOU GOT A ${squirrelName.replaceAll("_", " ").toUpperCase()}!`;
-    
+
     const rarityText = document.getElementById("hatch-rarity-text");
     let rarityName = "";
     let rarityColor = "";
