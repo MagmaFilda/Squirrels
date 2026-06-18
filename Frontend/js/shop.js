@@ -92,7 +92,7 @@ function registerHatchClick() {
 }
 
 async function revealSquirrel() {
-    hatchStatusText.innerText = "loading...";
+    hatchStatusText.innerText = "Hatching...";
     hatchClicksLeft.innerText = "";
 
     try {
@@ -169,8 +169,13 @@ async function revealSquirrel() {
     }
 
     hatchingItem.src = squirrelPath;
-    hatchingItem.className = "squirrel-revealed-animation";
 
+    hatchingItem.addEventListener('error', () => {
+        hatchingItem.src = "./../images/default.png";
+    
+    });
+    
+    hatchingItem.className = "squirrel-revealed-animation";
     modalCloseBtn.style.display = "inline-block";
 }
 
