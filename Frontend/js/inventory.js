@@ -53,7 +53,7 @@ async function loadInventory() {
         }
 
         const squirrels = await response.json();
-        //console.log(squirrels);
+        
         inventoryGrid.innerHTML = "";
 
         squirrels.forEach(squirrel => {
@@ -78,6 +78,11 @@ async function loadInventory() {
 
             const img = document.createElement("img");
             img.src = `../images/${squirrel.returningSquirrel.name}.png`;
+
+            img.addEventListener('error', () => {
+                img.src = "./../images/default.png";
+            });
+
             img.alt = displayName;
 
             const count = document.createElement("span");

@@ -35,6 +35,11 @@ async function loadCatalog() {
 
             const img = document.createElement("img");
             img.src = `../images/${squirrel.name}.png`;
+
+            img.addEventListener('error', () => {
+                img.src = "./../images/default.png";
+            });
+
             img.alt = displayName;
 
             slot.appendChild(img);
