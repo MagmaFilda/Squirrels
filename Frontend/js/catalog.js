@@ -34,10 +34,12 @@ async function loadCatalog() {
             }
 
             const img = document.createElement("img");
-            img.src = `../images/${squirrel.name}.png`;
+            const squirrelPath = `../images/${squirrel.name}.png`;
+            img.src = squirrelPath;
 
             img.addEventListener('error', () => {
                 img.src = "./../images/default.png";
+                squirrelPath = "./../images/default.png";
             });
 
             img.alt = displayName;
@@ -52,7 +54,7 @@ async function loadCatalog() {
                 spd: squirrel.speed,
                 dur: squirrel.durability,
                 price: squirrel.cost,
-                img: `../images/${squirrel.name}.png`,
+                img: squirrelPath,
                 rarity: squirrel.rarity
             }
 

@@ -77,10 +77,12 @@ async function loadInventory() {
             }
 
             const img = document.createElement("img");
-            img.src = `../images/${squirrel.returningSquirrel.name}.png`;
+            const squirrelPath = `../images/${squirrel.returningSquirrel.name}.png`;
+            img.src = squirrelPath;
 
             img.addEventListener('error', () => {
                 img.src = "./../images/default.png";
+                squirrelPath = "./../images/default.png";
             });
 
             img.alt = displayName;
@@ -100,7 +102,7 @@ async function loadInventory() {
                 spd: squirrel.returningSquirrel.speed,
                 dur: squirrel.returningSquirrel.durability,
                 price: squirrel.returningSquirrel.cost,
-                img: `../images/${squirrel.returningSquirrel.name}.png`,
+                img: squirrelPath,
                 rarity: squirrel.returningSquirrel.rarity,
                 count: squirrel.count
             }
