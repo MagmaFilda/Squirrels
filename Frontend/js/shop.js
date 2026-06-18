@@ -131,6 +131,8 @@ async function revealSquirrel() {
             alertBox.classList.remove("alert-show");
         }, 2000);
 
+        closeHatchModal();
+
         return;
     }
 
