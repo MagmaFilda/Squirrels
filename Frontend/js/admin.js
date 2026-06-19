@@ -66,6 +66,14 @@ async function allUsers() {
             const showSquirrelsBtn = document.createElement("button");
             showSquirrelsBtn.textContent = "Show squirrels";
             showSquirrelsBtn.classList.add("btn", "btn-sm", "btn-primary");
+
+            showSquirrelsBtn.setAttribute("data-bs-toggle", "modal");
+            showSquirrelsBtn.setAttribute("data-bs-target", "#squirrelsModal");
+            showSquirrelsBtn.setAttribute("data-username", user.name);
+
+            const userSquirrels = user.squirrels || [];
+            showSquirrelsBtn.setAttribute("data-squirrels", JSON.stringify(userSquirrels));
+
             squirrelsCell.appendChild(showSquirrelsBtn);
 
             row.appendChild(usernameCell);
@@ -132,6 +140,65 @@ async function allSquirrels() {
 
 
 
+
+// Obsluha modalu po kliknutí na tlačítko "Show squirrels"
+const squirrelsModal = document.getElementById('squirrelsModal');
+if (squirrelsModal) {
+    squirrelsModal.addEventListener('show.bs.modal', function (event) {
+        const button = event.relatedTarget;
+        
+        const username = button.getAttribute('data-username');
+        const squirrels = JSON.parse(button.getAttribute('data-squirrels') || '[]');
+
+        document.getElementById('modal-username').textContent = username;
+        
+        const listContainer = document.getElementById('modal-squirrels-list');
+        listContainer.innerHTML = ''; 
+
+        if (squirrels.length === 0) {
+            listContainer.innerHTML = '<li class="list-group-item text-muted text-center py-4">Tento uživatel nemá žádné veverky. 🐿️❌</li>';
+        } else {
+            squirrels.forEach(squirrel => {
+                // 1. Zformátování jména
+                const displayName = squirrel.returningSquirrel.name
+                    .split("_")
+                    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                    .join(" ");
+
+                // 2. Určení textu rarit (stejně jako to máš v allSquirrels)
+                let rarityText = "";
+                const rarityValue = squirrel.returningSquirrel.rarity;
+                
+                if (rarityValue === 0) {
+                    rarityText = "Common";
+                } else if (rarityValue === 1) {
+                    rarityText = "Rare";
+                } else if (rarityValue === 2) {
+                    rarityText = "Epic";
+                } else if (rarityValue === 3) {
+                    rarityText = "Legendary";
+                }
+
+                // 3. Počet kusů
+                const count = squirrel.count;
+
+                // Vytvoření řádku v modalu (Jméno - Rarita - Počet)
+                const li = document.createElement('li');
+                li.className = 'list-group-item d-flex justify-content-between align-items-center';
+                
+                li.innerHTML = `
+                    <div>
+                        <span class="fw-bold">🐿️ ${displayName}</span>
+                        <span class="text-muted ms-2">(${rarityText})</span>
+                    </div>
+                    <span class="badge bg-primary rounded-pill">Počet: ${count}</span>
+                `;
+                
+                listContainer.appendChild(li);
+            });
+        }
+    });
+}
 
 
 
