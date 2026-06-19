@@ -187,12 +187,14 @@ if (squirrelsModal) {
                 li.innerHTML = `
                     <div>
                         <span class="fw-bold">🐿️ ${displayName}</span>
-                        // <span class="text-muted ms-2">(${rarityText})</span>
+                        
                     </div>
                     <span class="badge bg-primary rounded-pill">Počet: ${count}</span>
                 `;
                 
                 listContainer.appendChild(li);
+
+                // <span class="text-muted ms-2">(${rarityText})</span>
             });
         }
     });
