@@ -227,7 +227,7 @@ if (squirrelsModal) {
                         // ====================================================================
                         // 2. ODESLÁNÍ NA BACKEND - ZDE SI UPRAV URL A BODY PODLE SVÉHO API!
                         // ====================================================================
-                        const response = await fetch(`${API_BASE_URL}/changeUserSquirrels/${username}/${squirrelId}/${amountToAdd}`, {
+                        const response = await fetch(`${API_BASE_URL}/changeUserSquirrels/${username}/${displayName}/${amountToAdd}`, {
                             method: "POST", // Zkontroluj, jestli tvůj backend čeká POST, PUT nebo něco jiného
                             headers: {
                                 "Authorization": `Bearer ${getToken()}`
