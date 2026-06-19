@@ -180,21 +180,82 @@ if (squirrelsModal) {
                 // 3. Počet kusů
                 const count = squirrel.count;
 
-                // Vytvoření řádku v modalu (Jméno - Rarita - Počet)
-                const li = document.createElement('li');
-                li.className = 'list-group-item d-flex justify-content-between align-items-center';
-                
-                li.innerHTML = `
-                    <div>
-                        <span class="fw-bold">🐿️ ${displayName}</span>
-                        
-                    </div>
-                    <span class="badge bg-primary text-white rounded-pill">Počet: ${count}</span>
-                `;
-                
-                listContainer.appendChild(li);
+                // Vytvoření řádku v modalu (Jméno - Input - Počet - Tlačítko)
+            const li = document.createElement('li');
+            li.className = 'list-group-item d-flex justify-content-between align-items-center';
 
-                // <span class="text-muted ms-2">(${rarityText})</span>
+            li.innerHTML = `
+                <div>
+                    <span class="fw-bold">🐿️ ${displayName}</span>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <input type="number" class="form-control form-control-sm add-amount-input" style="width: 70px;" value="1">
+                    
+                    <span class="badge bg-primary text-white rounded-pill current-count-badge">Počet: ${count}</span>
+                    
+                    <button class="btn btn-sm btn-outline-success btn-icon add-btn" title="Přidat">
+                        <span class="spinner-border spinner-border-sm d-none me-1 btn-spinner" role="status" aria-hidden="true"></span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check m-0 btn-icon-svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M5 12l5 5l10 -10"></path>
+                        </svg>
+                    </button>
+                </div>
+            `;
+
+            // Nalezení elementů v řádku
+            const inputEl = li.querySelector('.add-amount-input');
+            const badgeEl = li.querySelector('.current-count-badge');
+            const btnEl = li.querySelector('.add-btn');
+            const spinnerEl = li.querySelector('.btn-spinner');
+            const svgIconEl = li.querySelector('.btn-icon-svg');
+
+            let currentCount = count;
+
+            // Změněno na ASYNC funkci kvůli fetch
+            btnEl.addEventListener('click', async () => {
+                const amountToAdd = parseInt(inputEl.value, 10);
+
+                if (!isNaN(amountToAdd) && amountToAdd !== 0) {
+                    
+                    // 1. Vizuální indikace načítání (deaktivace tlačítka, zobrazení spinneru)
+                    btnEl.disabled = true;
+                    svgIconEl.classList.add('d-none');
+                    spinnerEl.classList.remove('d-none');
+
+                    try {
+                        // ====================================================================
+                        // 2. ODESLÁNÍ NA BACKEND - ZDE SI UPRAV URL A BODY PODLE SVÉHO API!
+                        // ====================================================================
+                        const response = await fetch(`${API_BASE_URL}/changeUserSquirrels/${username}/${squirrelId}/${amountToAdd}`, {
+                            method: "POST", // Zkontroluj, jestli tvůj backend čeká POST, PUT nebo něco jiného
+                            headers: {
+                                "Authorization": `Bearer ${getToken()}`
+                            }
+                        });
+
+                        if (!response.ok) {
+                            throw new Error("Nepodařilo se přidat veverku na backendu.");
+                        }
+
+                        // 3. Backend potvrdil uložení -> Můžeme aktualizovat číslo v UI
+                        currentCount += amountToAdd;
+                        badgeEl.textContent = `Počet: ${currentCount}`;
+                        inputEl.value = "1"; // Reset inputu
+
+                    } catch (error) {
+                        console.error("Chyba při přičítání:", error);
+                        alert("Něco se pokazilo při přidávání veverky!");
+                    } finally {
+                        // 4. Vrácení tlačítka do původního stavu
+                        btnEl.disabled = false;
+                        svgIconEl.classList.remove('d-none');
+                        spinnerEl.classList.add('d-none');
+                    }
+                }
+            });
+
+            listContainer.appendChild(li);
             });
         }
     });
