@@ -160,24 +160,24 @@ if (squirrelsModal) {
         } else {
             squirrels.forEach(squirrel => {
                 // 1. Zformátování jména
-                const displayName = squirrel.returningSquirrel.name
+                const displayName = squirrel.squirrelId
                     .split("_")
                     .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
                     .join(" ");
 
                 // 2. Určení textu rarit (stejně jako to máš v allSquirrels)
-                let rarityText = "";
-                const rarityValue = squirrel.returningSquirrel.rarity;
+                // let rarityText = "";
+                // const rarityValue = squirrel.returningSquirrel.rarity;
                 
-                if (rarityValue === 0) {
-                    rarityText = "Common";
-                } else if (rarityValue === 1) {
-                    rarityText = "Rare";
-                } else if (rarityValue === 2) {
-                    rarityText = "Epic";
-                } else if (rarityValue === 3) {
-                    rarityText = "Legendary";
-                }
+                // if (rarityValue === 0) {
+                //     rarityText = "Common";
+                // } else if (rarityValue === 1) {
+                //     rarityText = "Rare";
+                // } else if (rarityValue === 2) {
+                //     rarityText = "Epic";
+                // } else if (rarityValue === 3) {
+                //     rarityText = "Legendary";
+                // }
 
                 // 3. Počet kusů
                 const count = squirrel.count;
@@ -189,7 +189,7 @@ if (squirrelsModal) {
                 li.innerHTML = `
                     <div>
                         <span class="fw-bold">🐿️ ${displayName}</span>
-                        <span class="text-muted ms-2">(${rarityText})</span>
+                        // <span class="text-muted ms-2">(${rarityText})</span>
                     </div>
                     <span class="badge bg-primary rounded-pill">Počet: ${count}</span>
                 `;
