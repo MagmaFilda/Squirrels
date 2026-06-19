@@ -189,7 +189,7 @@ if (squirrelsModal) {
                         <span class="fw-bold">🐿️ ${displayName}</span>
                         
                     </div>
-                    <span class="badge bg-primary rounded-pill">Počet: ${count}</span>
+                    <span class="badge bg-primary text-white rounded-pill">Počet: ${count}</span>
                 `;
                 
                 listContainer.appendChild(li);
