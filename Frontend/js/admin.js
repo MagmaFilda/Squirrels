@@ -49,8 +49,6 @@ async function allUsers() {
 
         const users = await response.json();
 
-        console.log(users);
-
         usersTableBody.innerHTML = "";
 
         users.forEach(user => {
@@ -161,9 +159,9 @@ if (squirrelsModal) {
             squirrels.forEach(squirrel => {
                 // 1. Zformátování jména
                 const displayName = squirrel.squirrelId
-                    .split("_")
-                    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-                    .join(" ");
+                    // .split("_")
+                    // .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                    // .join(" ");
 
                 // 2. Určení textu rarit (stejně jako to máš v allSquirrels)
                 // let rarityText = "";
