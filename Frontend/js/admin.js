@@ -4,6 +4,8 @@ const squirrelsTableBody = document.getElementById("squirrels-table-body");
 const addSquirrelForm = document.getElementById("addSquirrelForm");
 const addSquirrelButton = document.getElementById("addSquirrelButton");
 
+let globalCatalog = [];
+
 if (!isLoggedIn()) {
     window.location.href = "../index.html";
     alert("You must log in to access the admin panel.");
@@ -97,6 +99,8 @@ async function allSquirrels() {
 
         const squirrels = await response.json();
 
+        globalCatalog = squirrels;
+
         squirrelsTableBody.innerHTML = "";
 
         squirrels.forEach(squirrel => {
@@ -137,8 +141,6 @@ async function allSquirrels() {
 }
 
 
-
-
 // Obsluha modalu po kliknutí na tlačítko "Show squirrels"
 const squirrelsModal = document.getElementById('squirrelsModal');
 if (squirrelsModal) {
@@ -146,47 +148,55 @@ if (squirrelsModal) {
         const button = event.relatedTarget;
         
         const username = button.getAttribute('data-username');
-        const squirrels = JSON.parse(button.getAttribute('data-squirrels') || '[]');
+        const userSquirrels = JSON.parse(button.getAttribute('data-squirrels') || '[]');
 
         document.getElementById('modal-username').textContent = username;
         
         const listContainer = document.getElementById('modal-squirrels-list');
         listContainer.innerHTML = ''; 
 
-        if (squirrels.length === 0) {
-            listContainer.innerHTML = '<li class="list-group-item text-muted text-center py-4">Tento uživatel nemá žádné veverky. 🐿️❌</li>';
-        } else {
-            squirrels.forEach(squirrel => {
-                // 1. Zformátování jména
-                const displayName = squirrel.squirrelId
-                    // .split("_")
-                    // .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-                    // .join(" ");
+        // Pokud ještě není katalog načtený ze serveru
+        if (globalCatalog.length === 0) {
+            listContainer.innerHTML = '<li class="list-group-item text-muted text-center py-4">Katalog veverek se ještě načítá... ⏳</li>';
+            return;
+        }
 
-                // 2. Určení textu rarit (stejně jako to máš v allSquirrels)
-                // let rarityText = "";
-                // const rarityValue = squirrel.returningSquirrel.rarity;
-                
-                // if (rarityValue === 0) {
-                //     rarityText = "Common";
-                // } else if (rarityValue === 1) {
-                //     rarityText = "Rare";
-                // } else if (rarityValue === 2) {
-                //     rarityText = "Epic";
-                // } else if (rarityValue === 3) {
-                //     rarityText = "Legendary";
-                // }
+        // Procházíme VŠECHNY veverky z katalogu
+        globalCatalog.forEach(catalogSquirrel => {
+            
+            // 1. Zjistíme, jestli uživatel tuto veverku má (hledáme shodu ID nebo jména)
+            const ownedData = userSquirrels.find(s => s.squirrelId === catalogSquirrel.id || s.squirrelId === catalogSquirrel.name);
+            
+            // 2. Počet (pokud ji má, vezmeme počet, jinak 0)
+            const count = ownedData ? ownedData.count : 0;
+            const displayName = catalogSquirrel.name;
 
-                // 3. Počet kusů
-                const count = squirrel.count;
+            // 3. Určení textu a barvy rarit pro hezčí UI
+            let rarityText = "Unknown";
+            let rarityColor = "secondary"; // Třída pro Bootstrap odznáček (badge)
 
-                // Vytvoření řádku v modalu (Jméno - Input - Počet - Tlačítko)
+            if (catalogSquirrel.rarity === 0) {
+                rarityText = "Common";
+                rarityColor = "secondary"; // Šedá
+            } else if (catalogSquirrel.rarity === 1) {
+                rarityText = "Rare";
+                rarityColor = "info";      // Světle modrá
+            } else if (catalogSquirrel.rarity === 2) {
+                rarityText = "Epic";
+                rarityColor = "danger";    // Červená / Případně si můžeš v CSS udělat vlastní 'bg-purple'
+            } else if (catalogSquirrel.rarity === 3) {
+                rarityText = "Legendary";
+                rarityColor = "warning";   // Žlutá/Zlatá
+            }
+
+            // Vytvoření řádku v modalu (Jméno + Rarita - Input - Počet - Tlačítko)
             const li = document.createElement('li');
             li.className = 'list-group-item d-flex justify-content-between align-items-center';
 
             li.innerHTML = `
                 <div>
                     <span class="fw-bold">🐿️ ${displayName}</span>
+                    <span class="badge bg-${rarityColor} ms-2">${rarityText}</span>
                 </div>
                 <div class="d-flex align-items-center gap-2">
                     <input type="number" class="form-control form-control-sm add-amount-input" style="width: 70px;" value="1">
@@ -203,49 +213,48 @@ if (squirrelsModal) {
                 </div>
             `;
 
-            // Nalezení elementů v řádku
+            // Nalezení elementů v řádku pro event listenery
             const inputEl = li.querySelector('.add-amount-input');
-            const badgeEl = li.querySelector('.current-count-badge');
             const btnEl = li.querySelector('.add-btn');
             const spinnerEl = li.querySelector('.btn-spinner');
             const svgIconEl = li.querySelector('.btn-icon-svg');
 
-            let currentCount = count;
-
-            // Změněno na ASYNC funkci kvůli fetch
             btnEl.addEventListener('click', async () => {
                 const amountToAdd = parseInt(inputEl.value, 10);
 
                 if (!isNaN(amountToAdd) && amountToAdd !== 0) {
                     
-                    // 1. Vizuální indikace načítání (deaktivace tlačítka, zobrazení spinneru)
+                    // Vizuální indikace načítání
                     btnEl.disabled = true;
                     svgIconEl.classList.add('d-none');
                     spinnerEl.classList.remove('d-none');
 
                     try {
+                        // Určení ID, které odesíláš na backend (přizpůsob si, pokud tvůj backend čeká ID místo jména)
+                        const squirrelIdToSend = ownedData ? ownedData.squirrelId : catalogSquirrel.name;
+
                         // ====================================================================
-                        // 2. ODESLÁNÍ NA BACKEND - ZDE SI UPRAV URL A BODY PODLE SVÉHO API!
+                        // ODESLÁNÍ NA BACKEND
                         // ====================================================================
-                        const response = await fetch(`${API_BASE_URL}/changeUserSquirrels/${username}/${displayName}/${amountToAdd}`, {
-                            method: "DELETE", // Zkontroluj, jestli tvůj backend čeká POST, PUT nebo něco jiného
+                        const response = await fetch(`${API_BASE_URL}/changeUserSquirrels/${username}/${squirrelIdToSend}/${amountToAdd}`, {
+                            method: "DELETE", // Zkontroluj si metodu! (DELETE pro přidávání je nezvyklé, většinou to je POST nebo PUT)
                             headers: {
                                 "Authorization": `Bearer ${getToken()}`
                             }
                         });
 
                         if (!response.ok) {
-                            throw new Error("Nepodařilo se přidat veverku na backendu.");
+                            throw new Error("Nepodařilo se upravit veverku na backendu.");
                         }
 
-                        // 3. Backend potvrdil uložení -> Můžeme aktualizovat číslo v UI
+                        // Backend potvrdil uložení -> reload
                         window.location.reload();
 
                     } catch (error) {
-                        console.error("Chyba při přičítání:", error);
-                        alert("Něco se pokazilo při přidávání veverky!");
+                        console.error("Chyba při upravení počtu:", error);
+                        alert("Něco se pokazilo při úpravě počtu veverky!");
                     } finally {
-                        // 4. Vrácení tlačítka do původního stavu
+                        // Vrácení tlačítka do původního stavu
                         btnEl.disabled = false;
                         svgIconEl.classList.remove('d-none');
                         spinnerEl.classList.add('d-none');
@@ -254,8 +263,7 @@ if (squirrelsModal) {
             });
 
             listContainer.appendChild(li);
-            });
-        }
+        });
     });
 }
 
