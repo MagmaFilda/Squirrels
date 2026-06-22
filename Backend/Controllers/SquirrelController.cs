@@ -278,6 +278,8 @@ namespace SquirrelsBackend.Controllers
 
                 targetUser.Money += amount;
                 if (user.Money < 0) {  targetUser.Money = 0; }
+
+                await dbData.SaveChangesAsync();
                 return Ok(targetUser.Money);
             }
             return BadRequest();
