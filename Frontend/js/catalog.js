@@ -34,7 +34,7 @@ async function loadCatalog() {
             }
 
             const img = document.createElement("img");
-            const squirrelPath = `../images/${squirrel.name}.png`;
+            let squirrelPath = `../images/${squirrel.name}.png`;
             img.src = squirrelPath;
 
             img.addEventListener('error', () => {
@@ -61,6 +61,7 @@ async function loadCatalog() {
             slot.addEventListener("click", () => {
                 
                 if (modalData) {
+                    modalData.img = img.getAttribute('src');
                     openModal(modalData);
                 }
             });
