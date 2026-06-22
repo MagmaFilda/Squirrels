@@ -59,8 +59,19 @@ async function allUsers() {
             const usernameCell = document.createElement("td");
             usernameCell.textContent = user.name;
 
+            // ZMĚNA ZDE: Vytvoření klikatelného elementu pro peníze
             const moneyCell = document.createElement("td");
-            moneyCell.textContent = user.money;
+            const editMoneyBtn = document.createElement("button");
+            editMoneyBtn.textContent = `${user.money} 💰`; // Ukáže částku a ikonku peněz
+            editMoneyBtn.classList.add("btn", "btn-sm", "btn-outline-warning", "fw-bold", "text-dark");
+            
+            // Nastavení atributů pro spuštění modalu
+            editMoneyBtn.setAttribute("data-bs-toggle", "modal");
+            editMoneyBtn.setAttribute("data-bs-target", "#editMoneyModal");
+            editMoneyBtn.setAttribute("data-username", user.name);
+            editMoneyBtn.setAttribute("data-money", user.money);
+            
+            moneyCell.appendChild(editMoneyBtn);
 
             const squirrelsCell = document.createElement("td");
             const showSquirrelsBtn = document.createElement("button");
@@ -270,3 +281,60 @@ if (squirrelsModal) {
 
 
 
+// Obsluha modalu pro úpravu peněz
+const editMoneyModal = document.getElementById('editMoneyModal');
+if (editMoneyModal) {
+    let currentEditingUsername = "";
+
+    // Při otevření modalu si natáhneme data z tlačítka
+    editMoneyModal.addEventListener('show.bs.modal', function (event) {
+        const button = event.relatedTarget;
+        
+        currentEditingUsername = button.getAttribute('data-username');
+        const currentMoney = button.getAttribute('data-money');
+
+        // Změníme nadpis, ať je jasné, komu peníze upravujeme
+        document.getElementById('editMoneyModalLabel').textContent = `Peníze: ${currentEditingUsername}`;
+        
+        // Nastavíme do inputu aktuální částku
+        const moneyInput = document.getElementById('edit-money-input');
+        moneyInput.value = currentMoney;
+    });
+
+    // Odeslání nové částky po kliku na fajfku
+    const saveBtn = document.getElementById('save-money-btn');
+    saveBtn.addEventListener('click', async () => {
+        const moneyInput = document.getElementById('edit-money-input');
+        const newAmount = parseInt(moneyInput.value, 10);
+
+        if (!isNaN(newAmount)) {
+            try {
+                // Zamkneme tlačítko proti dvojkliku
+                saveBtn.disabled = true;
+
+                // ====================================================================
+                // ODESLÁNÍ NA BACKEND - UPRAV SI URL A METODU PODLE SVÉHO API!
+                // ====================================================================
+                const response = await fetch(`${API_BASE_URL}/changeMoney/${currentEditingUsername}/${newAmount}`, {
+                    method: "PUT", // Zkontroluj, jakou metodu backend čeká (POST/PUT/PATCH)
+                    headers: {
+                        "Authorization": `Bearer ${getToken()}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error("Nepodařilo se upravit peníze na backendu.");
+                }
+
+                // Hotovo, obnovíme stránku pro zobrazení nových hodnot
+                window.location.reload();
+
+            } catch (error) {
+                console.error("Chyba při úpravě peněz:", error);
+                alert("Něco se pokazilo při úpravě peněz!");
+            } finally {
+                saveBtn.disabled = false;
+            }
+        }
+    });
+}
