@@ -230,14 +230,14 @@ if (squirrelsModal) {
                     spinnerEl.classList.remove('d-none');
 
                     try {
-                        // Určení ID, které odesíláš na backend (přizpůsob si, pokud tvůj backend čeká ID místo jména)
-                        const squirrelIdToSend = ownedData ? ownedData.squirrelId : catalogSquirrel.name;
+                        // OPRAVA: Vždy vezmeme ID přímo z objektu katalogu (catalogSquirrel)
+                        const squirrelIdToSend = catalogSquirrel.id; 
 
                         // ====================================================================
                         // ODESLÁNÍ NA BACKEND
                         // ====================================================================
                         const response = await fetch(`${API_BASE_URL}/changeUserSquirrels/${username}/${squirrelIdToSend}/${amountToAdd}`, {
-                            method: "DELETE", // Zkontroluj si metodu! (DELETE pro přidávání je nezvyklé, většinou to je POST nebo PUT)
+                            method: "DELETE", // Zkontroluj metodu na backendu (DELETE vs POST/PUT)
                             headers: {
                                 "Authorization": `Bearer ${getToken()}`
                             }
