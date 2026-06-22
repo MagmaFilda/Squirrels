@@ -239,9 +239,7 @@ if (squirrelsModal) {
                         }
 
                         // 3. Backend potvrdil uložení -> Můžeme aktualizovat číslo v UI
-                        currentCount += amountToAdd;
-                        badgeEl.textContent = `Počet: ${currentCount}`;
-                        inputEl.value = "1"; // Reset inputu
+                        window.location.reload();
 
                     } catch (error) {
                         console.error("Chyba při přičítání:", error);
