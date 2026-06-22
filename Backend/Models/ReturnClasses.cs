@@ -27,11 +27,13 @@
     {
         public string? Username { get; private set; }
         public int Count { get; private set; }
+        public bool HasCompletedInventory { get; private set; } = false;
 
-        public LeaderboardReturn(string username, int count)
+        public LeaderboardReturn(string username, int count, bool isCompleted)
         {
             Username = username;
             Count = count;
+            HasCompletedInventory = isCompleted;
         }
     }
     public class UserReturn
@@ -61,11 +63,11 @@
     public class NewSquirrelRequest
     {
         public string? name { get; set; }
-        public string? desc { get; set; }
+        public string? description { get; set; }
         public Rarity rarity { get; set; }
         public int strength { get; set; }
         public int speed { get; set; }
-        public int health { get; set; }
+        public int durability { get; set; }
         public int cost { get; set; }
     }
 }

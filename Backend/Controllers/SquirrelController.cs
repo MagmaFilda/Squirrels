@@ -29,17 +29,18 @@ namespace SquirrelsBackend.Controllers
         [HttpGet("catalog")]
         public IActionResult ReadSquirrelsToCatalog()
         {
-            return Ok(dbData.Squirrels);
+            return Ok(dbData.Squirrels.OrderBy(s => s.Rarity).ThenBy(s => s.Id));
         }
         [HttpGet("leaderboard")]
         public async Task<IActionResult> LoadLeaderboard()
         {
             List<User> users = await dbData.Users.Include(u => u.Squirrels).ToListAsync();
+            int squirrelCount = await dbData.Squirrels.CountAsync();
 
             List<int> legendarySquirrels = await dbData.Squirrels.Where(s => s.Rarity == Rarity.Legendary).Select(s => s.Id).ToListAsync();
             List<LeaderboardReturn> returnData = users.Select(u => new LeaderboardReturn(u.Name!, 
-                u.Squirrels!.Where(us => legendarySquirrels.Contains(us.SquirrelId)).Sum(us => us.Count)
-                )).OrderByDescending(x => x.Count).Take(10).ToList();
+                u.Squirrels!.Where(us => legendarySquirrels.Contains(us.SquirrelId)).Sum(us => us.Count),
+                u.Squirrels!.Count == squirrelCount)).OrderByDescending(x => x.Count).Take(10).ToList();
 
             return Ok(returnData);
         }
@@ -66,7 +67,7 @@ namespace SquirrelsBackend.Controllers
                 returnData.Add(returnSquirrel);
             }
 
-            return Ok(returnData.OrderBy(s => s.ReturningSquirrel.Id));
+            return Ok(returnData.OrderBy(s => s.ReturningSquirrel.Rarity).ThenBy(s => s.ReturningSquirrel.Id));
         }
         [Authorize]
         [HttpGet("readMoney")]
@@ -291,8 +292,8 @@ namespace SquirrelsBackend.Controllers
 
             if (userId == adminId)
             {
-                Squirrel newSquirrel = new Squirrel(squirrelData.name, squirrelData.desc, squirrelData.rarity,
-                    squirrelData.strength, squirrelData.speed, squirrelData.health, squirrelData.cost);
+                Squirrel newSquirrel = new Squirrel(squirrelData.name, squirrelData.description, squirrelData.rarity,
+                    squirrelData.strength, squirrelData.speed, squirrelData.durability, squirrelData.cost);
                 dbData.Squirrels.Add(newSquirrel);
                 
                 await dbData.SaveChangesAsync();
