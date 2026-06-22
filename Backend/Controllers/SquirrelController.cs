@@ -338,8 +338,10 @@ namespace SquirrelsBackend.Controllers
                         if (targetUser.Squirrels != null) { targetUser.Squirrels.Remove(squirrelInInventory); }
                     }
                 }
+                await dbData.SaveChangesAsync();
+                return Ok();
             }
-            return BadRequest(userId);
+            return BadRequest();
         }
     }
 }
