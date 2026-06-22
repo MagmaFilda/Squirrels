@@ -207,7 +207,7 @@ if (squirrelsModal) {
             li.innerHTML = `
                 <div>
                     <span class="fw-bold">🐿️ ${displayName}</span>
-                    <span class="badge bg-${rarityColor} ms-2 text-white">${rarityText}</span>
+                    <span class="badge ms-2 text-white" style="background-color: ${rarityColor} !important;">${rarityText}</span>
                 </div>
                 <div class="d-flex align-items-center gap-2">
                     <input type="number" class="form-control form-control-sm add-amount-input" style="width: 70px;" value="1">
