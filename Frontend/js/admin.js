@@ -188,16 +188,16 @@ if (squirrelsModal) {
 
             if (catalogSquirrel.rarity === 0) {
                 rarityText = "Common";
-                rarityColor = "secondary"; // Šedá
+                rarityColor = "#bf6c65";
             } else if (catalogSquirrel.rarity === 1) {
                 rarityText = "Rare";
-                rarityColor = "info";      // Světle modrá
+                rarityColor = "#159cab";
             } else if (catalogSquirrel.rarity === 2) {
                 rarityText = "Epic";
-                rarityColor = "danger";    // Červená / Případně si můžeš v CSS udělat vlastní 'bg-purple'
+                rarityColor = "#68419d";
             } else if (catalogSquirrel.rarity === 3) {
                 rarityText = "Legendary";
-                rarityColor = "warning";   // Žlutá/Zlatá
+                rarityColor = "#aaaf1b";
             }
 
             // Vytvoření řádku v modalu (Jméno + Rarita - Input - Počet - Tlačítko)
@@ -207,7 +207,7 @@ if (squirrelsModal) {
             li.innerHTML = `
                 <div>
                     <span class="fw-bold">🐿️ ${displayName}</span>
-                    <span class="badge bg-${rarityColor} ms-2">${rarityText}</span>
+                    <span class="badge bg-${rarityColor} ms-2 text-white">${rarityText}</span>
                 </div>
                 <div class="d-flex align-items-center gap-2">
                     <input type="number" class="form-control form-control-sm add-amount-input" style="width: 70px;" value="1">
@@ -298,7 +298,7 @@ if (editMoneyModal) {
         
         // Nastavíme do inputu aktuální částku
         const moneyInput = document.getElementById('edit-money-input');
-        moneyInput.value = currentMoney;
+        moneyInput.value = 0;
     });
 
     // Odeslání nové částky po kliku na fajfku
