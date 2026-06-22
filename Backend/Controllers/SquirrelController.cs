@@ -339,7 +339,7 @@ namespace SquirrelsBackend.Controllers
                     }
                 }
             }
-            return BadRequest();
+            return BadRequest(userId);
         }
     }
 }
