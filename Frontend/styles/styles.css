@@ -300,20 +300,8 @@ body {
 .leaderboard-table tbody tr.rank-2 { color: #828483; font-weight: 900; }
 .leaderboard-table tbody tr.rank-3 { color: #8b5a2b; font-weight: 900; }
 
-.pixel-glow-text {
-  text-shadow: 
-    -2px -2px 0px #f39c12,  
-     2px -2px 0px #f39c12,
-    -2px  2px 0px #f39c12,
-     2px  2px 0px #f39c12;
-}
-
 .pixel-glow-row {
-  box-shadow: 
-    0 -4px 0px #f1c40f,
-    0  4px 0px #f1c40f,
-   -4px  0 0px #f1c40f,
-    4px  0 0px #f1c40f;
+  border: solid 2px orange;
 }
 
 @media (max-width: 1100px) {
@@ -331,6 +319,34 @@ body {
     .lea-btn {
         left: 75vw;
         font-size: 0.6rem;
+    }
+}
+
+@media (max-width: 1000px) {
+    .leaderboard-content {
+        width: 90vw;
+        height: 80vh;
+        padding: 6vh 4vw 3vh 4vw;
+    }
+    .leaderboard-title {
+        font-size: 3.5vh;
+    }
+    .leaderboard-table {
+        font-size: 2vh;
+    }
+    .leaderboard-table th {
+        font-size: 0.8rem;
+    }
+    .close-btn {
+        top: 1vh;
+        right: 2vw;
+    }
+    .lea-btn {
+        top: auto;
+        left: 70vw;
+        width: 30vw;
+        min-width: 140px;
+        font-size: 0.4rem;
     }
 }
 
@@ -369,29 +385,5 @@ body {
         display: none;
     }
 
-    .leaderboard-content {
-        width: 90vw;
-        height: 80vh;
-        padding: 6vh 4vw 3vh 4vw;
-    }
-    .leaderboard-title {
-        font-size: 3.5vh;
-    }
-    .leaderboard-table {
-        font-size: 2vh;
-    }
-    .leaderboard-table th {
-        font-size: 0.8rem;
-    }
-    .close-btn {
-        top: 1vh;
-        right: 2vw;
-    }
-    .lea-btn {
-        top: auto;
-        left: 70vw;
-        width: 30vw;
-        min-width: 140px;
-        font-size: 0.4rem;
-    }
+    
 }

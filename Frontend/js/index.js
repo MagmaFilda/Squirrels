@@ -156,7 +156,6 @@ async function loadLeaderboard() {
             }
 
             if(player.hasCompletedInventory) {
-                row.classList.add("pixel-glow-text");
                 row.classList.add("pixel-glow-row");
             }
 
