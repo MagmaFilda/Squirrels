@@ -155,6 +155,11 @@ async function loadLeaderboard() {
                 row.classList.add("rank-3");
             }
 
+            if(player.hasCompletedInventory) {
+                row.classList.add("pixel-glow-text");
+                row.classList.add("pixel-glow-row");
+            }
+
             row.innerHTML = `
                 <td>#${index + 1}</td>
                 <td>${player.username}</td>
